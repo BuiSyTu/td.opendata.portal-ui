@@ -1,0 +1,21 @@
+.highcharts-title {
+    font-family:'roboto';
+    font-weight: 600 !important;
+    color: #009EF7 !important;
+}
+
+.highcharts-axis-title{
+    color: black !important;
+}
+.section-statistical {
+    background: #ebeef3;
+    padding: 30px 0 40px 0;
+    background-repeat: no-repeat;
+    background-position: center top 40px;
+    background-size: 95% auto;
+}
+.card-organization {
+    .highcharts-legend-item >span{
+        top: -3px !important
+    }
+}

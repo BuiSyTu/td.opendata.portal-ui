@@ -1,0 +1,41 @@
+.search {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #BDBDBD, 0 1px 2px 0 #BDBDBD;
+}
+
+.dataset-name {
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+        color: #1890ff;
+    }
+}
+
+.menu {
+    background-color: #fff;
+    border-radius: 5;
+    border-color: #BDBDBD;
+    border-width: 0.5;
+    border-style: solid;
+
+    .menu-item {
+        margin-bottom: 0;
+        margin-top: 0!important;
+
+        .menu-item-text {
+            height: auto;
+            font-weight: 600;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 0!important;
+            border-bottom: 1px solid #E0E0E0;
+        }
+    }
+}

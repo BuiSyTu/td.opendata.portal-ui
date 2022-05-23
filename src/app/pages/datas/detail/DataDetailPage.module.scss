@@ -1,0 +1,78 @@
+.card-datadetail {
+    .card-datadetail_title {
+        color: #2362ae !important;
+        min-height: 35px;
+    }
+    .ratings {
+        .rating-star {
+            color: orange
+        }
+    }
+    .ant-tabs {
+        &> .ant-tabs-nav {
+            margin-bottom: 0;
+
+            .ant-tabs-nav-wrap {
+                background: transparent;
+                border-bottom: 2px solid #ffc107;
+                padding-top: 10px;
+                padding-left: 15px;
+            }
+            .ant-tabs-ink-bar-animated {
+                background: #ffc107;
+                pointer-events: none;
+                bottom: 0px !important;
+                height: 0px !important;
+
+                &:before {
+                    position: absolute;
+                    content: '';
+                    left: calc(50% - 10px);
+                    bottom: 0;
+                    width: 10px;
+                    height: 10px;
+                    display: inline-block;
+                    border-left: 10px rgba(255, 255, 255, 0) solid;
+                    border-right: 10px rgba(35, 98, 174, 0) solid;
+                    border-bottom: 7px #ffc107 solid;
+                }
+            }
+        }
+        &>.ant-tabs-content-holder {
+            padding: 15px;
+            background: transparent;
+        }
+        * {
+            transition: all ease 0.3s
+        }
+        .ant-tabs-tab {
+            background: linear-gradient(#e1e7f3,#f7f9fc,#e1e7f3);
+            padding: 6px 13px;
+            border-radius: 3px 3px 0 0;
+            color: #2362ae;
+            border: 1px solid #dbe0ec;
+            border-bottom: 0px;
+
+            &:hover, &.ant-tabs-tab-active {
+                background: linear-gradient(#3d88e2, #4b95ed, #2362ae);
+                color: #fff;
+                border-color: #3983db;
+
+                span {
+                    color: #fff
+                }
+            }
+
+            & + .ant-tabs-tab {
+                margin-left: 5px;
+            }
+            span {
+                font-size: 14px;
+                font-weight: 500;
+                &.badge {
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+.toolbar-ads-top {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #fff;
+  .col-md-8 {
+    img {
+      width: 100%;
+    }
+  }
+  .qr-scan-guid {
+    i {
+      color: #333;
+    }
+  }
+  .img-prcode {
+    max-width: 115px;
+  }
+  h3.text-primary {
+    color: #054aaa !important;
+    font-size: 18px;
+  }
+}
+.qr-scan-guid {
+  overflow: hidden;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+@media(max-width: 1366px) {
+  .toolbar-ads-top {
+    .img-prcode {
+      max-width: 98px;
+    }
+    .qr-code-item {
+      max-width: 80px;
+    }
+    .group-qrcode {
+      padding-bottom: 3px !important;
+      padding-top: 5px !important;
+    }
+  }
+}
+@media(max-width: 991px) {
+  .toolbar-ads-top {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .qr-scan-guid {
+    display: none;
+  }
+}
+@media(min-width: 901px) and (max-width: 1199px) {
+  .toolbar-ads-top {
+    .img-prcode {
+      max-width: 80px;
+    }
+    .qr-code-item {
+      max-width: 70px;
+    }
+  }
+}
+@media(min-width: 768px) and (max-width: 900px) {
+  .toolbar-ads-top {
+    .img-prcode {
+      max-width: 65px;
+    }
+    .qr-code-item {
+      max-width: 60px;
+    }
+  }
+}
