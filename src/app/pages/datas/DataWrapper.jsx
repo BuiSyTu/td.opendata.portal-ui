@@ -12,14 +12,8 @@ const DataWrapper = () => {
             isActive: true,
             isSeparator: false
           },
-          {
-            title: 'Dữ liệu',
-            path: 'du-lieu',
-            isActive: false,
-            isSeparator: false
-          }
         ]}
-      >  Dữ liệu
+      >Dữ liệu
       </PageTitle>
       <DataListPage />
     </>

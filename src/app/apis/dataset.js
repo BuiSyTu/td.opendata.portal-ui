@@ -25,6 +25,47 @@ const getAll = async (listFilter) => {
     return null
   }
 }
+
+const getById = async (id) => {
+  try {    
+    const res = await axios({
+      method: 'GET',
+      url: `${baseUrl}/${id}`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error) {
+    console.error(error.response)
+    return null
+  }
+}
+
+const getData = async (id) => {
+  try {    
+    const res = await axios({
+      method: 'GET',
+      url: `${baseUrl}/${id}/data`,
+      headers: {
+        'Authorization': authorization,
+        'TDAuthorization': getCookie('token'),
+      },
+      timeout: 15000,
+    })
+
+    return res?.data
+  } catch (error) {
+    console.error(error.response)
+    return null
+  }
+}
+
 export const datasetApi = {
   getAll,
+  getById,
+  getData,
 }

@@ -104,11 +104,11 @@ const CardMostViewedDatas = () => {
                       ? `https://192.168.2.169:5001/${i?.category?.imageUrl}`
                       : ''}
                     alt="" />
-                  <span>{i?.category?.name}</span>
+                  <span>{i?.name}</span>
                 </div>
                 <div className="item-mostview-data_content">
-                  <Link to={'/Du-lieu/' + i.slug}>
-                    {i.name}
+                  <Link to='/Du-lieu-chi-tiet'>
+                    {i?.description ?? 'Xem thêm mô tả ...'}
                   </Link>
                 </div>
                 <div className="item-mostview-data_footer">
@@ -122,7 +122,13 @@ const CardMostViewedDatas = () => {
                   </div>
                   <div className="row row-bottom">
                     <div className="col-auto">
-                      <Link to={'/Du-lieu/' + i.slug} className="text-danger py-2 btn-viewdetail">Chi tiết <span className='far fa-long-arrow-right'></span></Link>
+                      <Link
+                        to={'/du-lieu-chi-tiet'}
+                        className="text-danger py-2 btn-viewdetail"
+                      >
+                        Chi tiết
+                        <span className='far fa-long-arrow-right'></span>
+                      </Link>
                     </div>
                     <div className="col text-end">
                       <span className="badge badge-primary" title='SMS'><i className='fas fa-sms fa-fw'></i></span>

@@ -1,6 +1,4 @@
-import classnames from 'classnames'
 import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 
 const Topbar: FC = () => {
   return (

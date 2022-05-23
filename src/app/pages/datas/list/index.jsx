@@ -1,6 +1,9 @@
 import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
+import { setCategoryId, setDatasetId } from 'src/setup/redux/dataset/Slice'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
+import { Link } from 'react-router-dom'
 import React from 'react'
 import { categoryApi } from 'src/app/apis/category'
 import classNames from 'classnames/bind'
@@ -19,7 +22,9 @@ const { Text } = Typography;
 const cx = classNames.bind(styles)
 
 const DataListPage = () => {
-  const [categoryId, setCategoryId] = useState('')
+  const dispatch = useDispatch()
+  const categoryId = useSelector(state => state.dataset.categoryId)
+
   const [categories, setCategories] = useState([])
   const [providerTypeId, setProviderTypeId] = useState('')
   const [providerTypes, setProviderTypes] = useState([])
@@ -86,10 +91,15 @@ const DataListPage = () => {
     fetchCategories()
     fetchProviderTypes()
     fetchOrganizations()
+
+    return () => {
+      dispatch(setCategoryId(''))
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleClick = () => {
-
+  const handleClickDatasetId = (datasetId) => {
+    dispatch(setDatasetId(datasetId))
   }
 
   const columns = [
@@ -103,14 +113,16 @@ const DataListPage = () => {
             className='pointer'
             key={record.Id}
             onClick={() => {
-              handleClick(record.id)
+              handleClickDatasetId(record.id)
             }}
             style={{ backgroundColor: 'transparent' }}
           >
             <Row style={{ alignItems: 'center', paddingLeft: 10 }}>
-              <Text className={cx('dataset-name')}>
-                {record.name}
-              </Text>
+              <Link to='/du-lieu-chi-tiet'>
+                <Text className={cx('dataset-name')}>
+                  {record.name}
+                </Text>
+              </Link>
             </Row>
             <Row style={{ alignItems: 'center', paddingLeft: 10, fontWeight: 400 }}>
               {
@@ -140,7 +152,7 @@ const DataListPage = () => {
   ]
 
   const handleChangeCategoryId = ({key}) => {
-    setCategoryId(key)
+    dispatch(setCategoryId(key))
     setUpdate(true)
   }
 
@@ -175,7 +187,6 @@ const DataListPage = () => {
     return `${range[0]}-${range[1]} của ${total} dữ liệu`;
   }
   
-
   return (
     <>
       <Row justify='center'>
@@ -222,7 +233,9 @@ const DataListPage = () => {
                     </div>
                   }
                   className={cx('menu-item-text')}
-                >Tất cả</Menu.Item>
+                >
+                  Tất cả
+                </Menu.Item>
                 {
                   categories.map(i => (
                       <Menu.Item

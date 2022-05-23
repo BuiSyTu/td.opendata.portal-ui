@@ -1,14 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import classnames from 'classnames'
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { KTSVG, toAbsoluteUrl } from '../../../helpers'
 import { useLayout } from '../../core'
-import { Header } from './Header'
 
 export function HeaderWrapper() {
-  const { config, classes, attributes } = useLayout()
-  const { header, aside } = config
+  const { classes, attributes } = useLayout()
 
   return (
     <div

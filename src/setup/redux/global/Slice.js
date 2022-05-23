@@ -55,7 +55,7 @@ export const globalSlice = createSlice({
     changeApp: (state, action) => {
       const payload = action.payload
       const _listApp = [...state.listApp]
-      _listApp.map((i) => {
+      _listApp.forEach((i) => {
         if(i.id === payload.id){
           i.enable = payload.enable
         }
