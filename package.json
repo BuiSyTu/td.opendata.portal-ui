@@ -3,6 +3,10 @@
   "version": "8.0.30",
   "private": true,
   "homepage": "/",
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
+  },
   "dependencies": {
     "@formatjs/intl-pluralrules": "^4.0.28",
     "@formatjs/intl-relativetimeformat": "^9.1.7",
@@ -58,7 +62,7 @@
     "react-multi-carousel": "^2.6.5",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.1",
     "react-toastify": "^8.1.0",
     "react-tsparticles": "^2.0.6",
     "redux": "^4.1.0",
