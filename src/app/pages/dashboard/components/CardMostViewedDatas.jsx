@@ -7,8 +7,11 @@ import { Link } from 'react-router-dom';
 import { datasetApi } from 'src/app/apis/dataset'
 import { getCurrentDate } from 'src/utils/common';
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
+import { useDispatch } from 'react-redux';
+import { setDatasetId } from 'src/setup/redux/dataset/Slice';
 
 const CardMostViewedDatas = () => {
+  const dispatch = useDispatch()
   const [listMostViewData, setListMostViewData] = useState([])
 
   useEffect(() => {
@@ -35,6 +38,8 @@ const CardMostViewedDatas = () => {
         <span className='fas fa-arrow-right'></span>
       </button>;
   }
+
+  const handleClickDatasetId = (datasetId) => dispatch(setDatasetId(datasetId))
 
   return (
     <>
@@ -125,6 +130,7 @@ const CardMostViewedDatas = () => {
                       <Link
                         to={'/du-lieu-chi-tiet'}
                         className="text-danger py-2 btn-viewdetail"
+                        onClick={() => handleClickDatasetId(i.id)}
                       >
                         Chi tiết
                         <span className='far fa-long-arrow-right'></span>
