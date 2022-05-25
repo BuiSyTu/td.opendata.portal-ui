@@ -4,7 +4,7 @@ import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from
 import { Link, useParams } from 'react-router-dom'
 
 import classNames from 'classnames/bind'
-import styles from './DataListPage.module.scss'
+import styles from './DataList.module.scss'
 
 import { categoryApi } from 'src/app/apis/category'
 import { datasetApi } from 'src/app/apis/dataset'
@@ -20,7 +20,7 @@ const { Text } = Typography;
 
 const cx = classNames.bind(styles)
 
-const DataListPage = () => {
+const DataList = () => {
   const [categories, setCategories] = useState([])
   const [providerTypeId, setProviderTypeId] = useState('')
   const [providerTypes, setProviderTypes] = useState([])
@@ -330,4 +330,4 @@ const DataListPage = () => {
   )
 }
 
-export default DataListPage
+export default DataList

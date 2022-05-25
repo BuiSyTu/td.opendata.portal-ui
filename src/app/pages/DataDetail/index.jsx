@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Tabs } from 'antd'
 
 import classNames from 'classnames/bind'
-import styles from './DataDetailPage.module.scss'
+import styles from './DataDetail.module.scss'
 
 import { PageTitle } from 'src/_metronic/layout/core'
 import TableList from 'src/components/TableList'
@@ -30,7 +30,7 @@ const metadataToColumns = (metadata) => {
     }
 }
 
-const DataDetailPage = () => {
+const DataDetail = () => {
     const [dataset, setDataset] = useState(null)
 
     const [update, setUpdate] = useState(false)
@@ -148,4 +148,4 @@ const DataDetailPage = () => {
     )
 }
 
-export default DataDetailPage
+export default DataDetail
