@@ -4,10 +4,12 @@
     background-size: 100% auto;
     background-color: #fff;
     padding: 10px 0 30px 0;
+
     .news-carousel-outer {
         margin-right: -0.75rem !important;
         margin-left: -0.75rem !important;
     }
+
     .title {
         font-size: 20px;
         text-align: center;
@@ -15,6 +17,7 @@
         color: #eb1100
     }
 }
+
 .item-new {
     background-color: #fff;
     border-radius: 0.475rem;
@@ -31,6 +34,7 @@
             border-radius: 0.475rem 0.475rem 0 0;
         }
     }
+
     &_content {
         a {
             color: #00469c;
@@ -49,6 +53,7 @@
                 color: #b70b00
             }
         }
+
         p {
             color: #666;
             font-size: 14px;
@@ -60,6 +65,7 @@
 
         }
     }
+
     &_footer {
         padding: 10px;
         border-top: 1px solid #DBDFEF;
@@ -67,6 +73,7 @@
 
         a {
             color: #b70b00 !important;
+
             &:hover {
                 color: red !important
             }

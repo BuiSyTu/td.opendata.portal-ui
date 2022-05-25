@@ -4,7 +4,7 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 import {AboutWrapper} from '../pages/about/AboutWrapper'
 import {BanDoWrapper} from '../pages/ban-do/BanDoWrapper'
 import {DangKyWrapper} from '../pages/auth/DangKyWrapper'
-import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
+import HomePage from 'src/app/pages/Home'
 import DataDetailPage from 'src/app/pages/DataDetail'
 import DataListPage from 'src/app/pages/DataList'
 import {FallbackView} from '../../_metronic/partials'
@@ -19,7 +19,7 @@ export function PrivateRoutes() {
   return (
     <Suspense fallback={<FallbackView />}>
       <Switch>
-        <Route path='/home' component={DashboardWrapper} />
+        <Route path='/home' component={HomePage} />
         <Route path='/gioi-thieu' component={AboutWrapper} />
         <Route path='/du-lieu/:id?' component={DataListPage} />
         <Route path='/du-lieu-chi-tiet/:id' component={DataDetailPage} />
@@ -28,7 +28,7 @@ export function PrivateRoutes() {
         <Route path='/thong-ke' component={StatisticalWrapper} />
         <Route path='/huong-dan' component={GuideWrapper} />
         <Route path='/phan-anh-ca-nhan' component={MyFaqWrapper} />
-        <Route path='/phan-anh-moi' component={DashboardWrapper} />
+        <Route path='/phan-anh-moi' component={HomePage} />
         <Route path='/thong-ke' component={ThongKeWrapper} />
         <Route path='/dang-ky' component={DangKyWrapper} />
         <Route path='/tuong-tac/:id' component={InteractWrapper} />

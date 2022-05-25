@@ -26,7 +26,12 @@
 
     .menu-item {
         margin-bottom: 0;
-        margin-top: 0!important;
+        margin-top: 0 !important;
+
+        .menu-item-icon {
+            resize: both;
+            display: inherit;
+        }
 
         .menu-item-text {
             height: auto;
@@ -34,8 +39,26 @@
             padding-top: 10px;
             padding-bottom: 10px;
             margin-top: 0;
-            margin-bottom: 0!important;
+            margin-bottom: 0 !important;
             border-bottom: 1px solid #E0E0E0;
         }
     }
+}
+
+.menu-header {
+    background-color: #1E88E5;
+    text-align: center;
+    padding: 5px 0;
+
+    .menu-header-text {
+        font-size: 18px;
+        font-weight: 500;
+        color: #fff;
+    }
+}
+
+.filter-text {
+    font-size: 13;
+    font-weight: 600;
+    color: #616161;
 }

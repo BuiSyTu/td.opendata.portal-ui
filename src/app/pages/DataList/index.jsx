@@ -196,19 +196,15 @@ const DataList = () => {
       <Row gutter={[30, 20]} justify='center' style={{ marginBottom: 30 }} >
         <Col xl={6} lg={6} md={24} xs={24}  >
           <div className={cx('menu')}>
-            <div style={{ backgroundColor: '#1E88E5 ', textAlign: 'center', padding: '5px 0' }}>
-              <Text style={{
-                fontSize: 18,
-                fontWeight: '500',
-                color: '#fff'
-              }}>Nhóm danh mục</Text>
+            <div className={cx('menu-header')}>
+              <Text className={cx('menu-header-text')}>Nhóm danh mục</Text>
             </div>
-            <div style={{}}>
+            <div>
               <Menu
                 className={cx('menu-item')}
                 defaultSelectedKeys={['0']}
                 selectedKeys={[`${categoryId}`]}
-                mode="inline"
+                mode='inline'
               >
                 <Menu.Item
                   key={''}
@@ -216,7 +212,7 @@ const DataList = () => {
                     <div>
                       <Image
                         src={`${toAbsoluteUrl('/media/logos/Tất cả.png')}`}
-                        style={{ resize: 'both', display: 'inherit' }}
+                        className={cx('menu-item-icon')}
                         height={50}
                         width={50}
                         preview={false}
@@ -236,7 +232,7 @@ const DataList = () => {
                           <div>
                             <Image
                               src={`https://192.168.2.169:5001/${i.imageUrl}`}
-                              style={{ resize: 'both', display: 'inherit' }}
+                              className={cx('menu-item-icon')}
                               height={50}
                               width={50}
                               preview={false}
@@ -262,7 +258,7 @@ const DataList = () => {
                 marginBottom: 20
               }}>
               <Col xl={10} md={10} xs={24}>
-                <Text style={{ fontSize: 13, fontWeight: '600', color: '#616161' }}>Tổ chức: </Text>
+                <Text className={cx('filter-text')}>Tổ chức: </Text>
                 <Select
                   style={{ width: '100%' }}
                   defaultValue=''
@@ -280,7 +276,7 @@ const DataList = () => {
               </Col>
 
               <Col xl={6} md={10} xs={24}>
-                <Text style={{ fontSize: 13, fontWeight: '600', color: '#616161' }} >Hình thức cung cấp: </Text>
+                <Text className={cx('filter-text')} >Hình thức cung cấp: </Text>
                 <Select
                   style={{ width: '100%' }}
                   defaultValue=''

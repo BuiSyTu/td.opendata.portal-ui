@@ -1,3 +1,9 @@
+.section-mostview {
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+}
+
 .item-mostview-data {
   border-radius: 5px;
   transition: all ease 0.3s;
@@ -10,12 +16,12 @@
     display: flex;
     align-items: center;
     padding: 10px 15px 5px 15px;
-    // border-bottom: 1px solid #dbdfef;
 
     img {
       width: 40px;
       height: 40px;
     }
+
     span {
       font-size: 15px;
       color: #00479e;
@@ -23,6 +29,7 @@
       margin-left: 8px;
     }
   }
+
   &_content {
     padding: 5px 15px 10px 15px;
     min-height: 60px;
@@ -37,6 +44,7 @@
       }
     }
   }
+
   &_footer {
     width: 100%;
     display: block;
@@ -50,16 +58,20 @@
       border-bottom: 1px solid #DBDFEF;
       font-size: 13px;
       color: #666;
+
       .col-date {
         text-align: right;
+
         span {
           margin-left: 5px;
         }
       }
+
       span {
         color: #eb1100
       }
     }
+
     .row-bottom {
       padding-top: 10px;
       padding-bottom: 12px;
@@ -94,55 +106,32 @@
         font-size: 12px;
         border-radius: 3px;
         font-weight: 500;
+
         i {
           color: #fff;
-          font-size: 12px; 
+          font-size: 12px;
         }
+
         color: #fff;
       }
     }
   }
 }
+
 .card-mostview-data {
   padding-top: 10px;
   padding-bottom: 20px;
+
   .title {
     color: #eb1100;
     font-weight: 500;
     padding-top: 10px;
   }
-  .react-multi-carousel-list {
+
+  .carousel-wrapper {
     padding-top: 30px;
     padding-bottom: 60px;
     margin-right: -0.75rem !important;
     margin-left: -0.75rem !important;
-  }
-  .react-multiple-carousel__arrow {
-    bottom: 5px;
-    background-color: #fff;
-    box-shadow: 0px 2px 5px rgba(#000, 0.1);
-    min-height: 25px;
-    padding-top: 5px;
-
-    &::before {
-      display: none;
-    }
-    &:hover {
-      background-color: #b70b00;
-      span {
-        color: #fff
-      }
-    }
-    span {
-      color: #b70b00;
-      font-size: 20px;
-    }
-
-    &--left {
-      left: calc(50% - 45px)
-    }
-    &--right {
-      right: calc(50% - 45px)
-    }
   }
 }
