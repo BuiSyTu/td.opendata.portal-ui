@@ -1,15 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Tabs } from 'antd'
+
+import classNames from 'classnames/bind'
+import styles from './DataDetailPage.module.scss'
 
 import { PageTitle } from 'src/_metronic/layout/core'
 import TableList from 'src/components/TableList'
-import { Tabs } from 'antd'
-import classNames from 'classnames/bind'
 import { datasetApi } from 'src/app/apis/dataset'
-import { setDatasetId } from 'src/setup/redux/dataset/Slice'
-import styles from './DataDetailPage.module.scss'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
-import { useEffect } from 'react'
-import { useState } from 'react'
 
 const { TabPane } = Tabs
 const cx = classNames.bind(styles)
@@ -24,15 +23,14 @@ const metadataToColumns = (metadata) => {
             width: `${100/metadataJSON.length}%`
         }))
 
-        return cl;
+        return cl
     } catch (error) {
         console.error(error)
+        return null
     }
 }
 
 const DataDetailPage = () => {
-    const dispatch = useDispatch()
-    const datasetId = useSelector(state => state.dataset.datasetId)
     const [dataset, setDataset] = useState(null)
 
     const [update, setUpdate] = useState(false)
@@ -42,6 +40,8 @@ const DataDetailPage = () => {
     const [size, setSize] = useState(10)
     const [count, setCount] = useState(0)
     const [offset, setOffset] = useState(0)
+
+    const { id: datasetId } = useParams()
 
     useEffect(() => {
         setUpdate(true)
@@ -56,7 +56,7 @@ const DataDetailPage = () => {
             setDataset(data)
 
             const { metadata } = data
-            const _columns = metadataToColumns(metadata)
+            const _columns = metadataToColumns(metadata) ?? []
             setColumns(_columns)
             setCount(res?.data.length)
             setLoading(false)    
@@ -69,10 +69,6 @@ const DataDetailPage = () => {
 
         fetchDatasetField()
         fetchDatasetData()
-        
-        return () => {
-            dispatch(setDatasetId(''))
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [update])
 

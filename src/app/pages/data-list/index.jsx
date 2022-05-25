@@ -106,7 +106,7 @@ const DataListPage = () => {
             style={{ backgroundColor: 'transparent' }}
           >
             <Row style={{ alignItems: 'center', paddingLeft: 10 }}>
-              <Link to='/du-lieu-chi-tiet'>
+              <Link to={`/du-lieu-chi-tiet/${record.id}`}>
                 <Text className={cx('dataset-name')}>
                   {record.name}
                 </Text>

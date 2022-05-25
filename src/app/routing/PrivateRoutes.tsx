@@ -22,7 +22,7 @@ export function PrivateRoutes() {
         <Route path='/home' component={DashboardWrapper} />
         <Route path='/gioi-thieu' component={AboutWrapper} />
         <Route path='/du-lieu/:id?' component={DataListPage} />
-        <Route path='/du-lieu-chi-tiet' component={DataDetailPage} />
+        <Route path='/du-lieu-chi-tiet/:id' component={DataDetailPage} />
         <Route path='/thong-tin-phan-anh/:id' component={FaqDetailWrapper} />
         <Route path='/ban-do' component={BanDoWrapper} />
         <Route path='/thong-ke' component={StatisticalWrapper} />

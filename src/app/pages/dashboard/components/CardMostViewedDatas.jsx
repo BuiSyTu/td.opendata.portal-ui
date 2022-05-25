@@ -128,9 +128,8 @@ const CardMostViewedDatas = () => {
                   <div className="row row-bottom">
                     <div className="col-auto">
                       <Link
-                        to={'/du-lieu-chi-tiet'}
+                        to={`/du-lieu-chi-tiet/${i.id}`}
                         className="text-danger py-2 btn-viewdetail"
-                        onClick={() => handleClickDatasetId(i.id)}
                       >
                         Chi tiết
                         <span className='far fa-long-arrow-right'></span>
