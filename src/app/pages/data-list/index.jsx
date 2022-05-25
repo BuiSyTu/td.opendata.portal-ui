@@ -1,19 +1,18 @@
-import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
-import { setCategoryId, setDatasetId } from 'src/setup/redux/dataset/Slice'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-
-import { Link } from 'react-router-dom'
 import React from 'react'
-import { categoryApi } from 'src/app/apis/category'
+import { useEffect, useState } from 'react'
+import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
+import { Link, useParams } from 'react-router-dom'
+
 import classNames from 'classnames/bind'
+import styles from './DataListPage.module.scss'
+
+import { categoryApi } from 'src/app/apis/category'
 import { datasetApi } from 'src/app/apis/dataset'
 import { organizationApi } from 'src/app/apis/organization'
 import { providerTypeApi } from 'src/app/apis/providertype'
-import styles from './DataListPage.module.scss'
-import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
-/* eslint-disable jsx-a11y/anchor-is-valid */
+import { toAbsoluteUrl } from 'src/_metronic/helpers'
+import { PageTitle } from 'src/_metronic/layout/core'
 
 const { Option } = Select;
 const { Search } = Input;
@@ -22,9 +21,6 @@ const { Text } = Typography;
 const cx = classNames.bind(styles)
 
 const DataListPage = () => {
-  const dispatch = useDispatch()
-  const categoryId = useSelector(state => state.dataset.categoryId)
-
   const [categories, setCategories] = useState([])
   const [providerTypeId, setProviderTypeId] = useState('')
   const [providerTypes, setProviderTypes] = useState([])
@@ -40,14 +36,39 @@ const DataListPage = () => {
   const [skip, setSkip] = useState(0)
   const [top, setTop] = useState(10)
 
+  let { id: categoryId } = useParams()
+  if (!categoryId) categoryId = ''
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const res = await categoryApi.getAll()
+      setCategories(res?.data ?? [])
+    }
+
+    const fetchProviderTypes = async () => {
+      const res = await providerTypeApi.getAll()
+      setProviderTypes(res?.data ?? [])
+    }
+
+    const fetchOrganizations = async () => {
+      const res = await organizationApi.getAll()
+      setOrganizations(res?.data ?? [])
+    }
+
+    fetchCategories()
+    fetchProviderTypes()
+    fetchOrganizations()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(() => {
     const fetchDatasets = async() => {
       try {
         setLoading(true)
         const res = await datasetApi.getAll({
-          categoryId,
-          organizationId,
-          providerTypeId,
+          ...categoryId && {categoryId},
+          ...organizationId && {organizationId},
+          ...providerTypeId && {providerTypeId},
           ...textSearch && {keyWord: textSearch}
         })
         setDatasets(res?.data ?? [])
@@ -70,37 +91,7 @@ const DataListPage = () => {
   useEffect(() => {
     setUpdate(true)
     return () => {}
-  }, [skip, top, textSearch])
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await categoryApi.getAll()
-      setCategories(res?.data ?? [])
-    }
-
-    const fetchProviderTypes = async () => {
-      const res = await providerTypeApi.getAll()
-      setProviderTypes(res?.data ?? [])
-    }
-
-    const fetchOrganizations = async () => {
-      const res = await organizationApi.getAll()
-      setOrganizations(res?.data ?? [])
-    }
-
-    fetchCategories()
-    fetchProviderTypes()
-    fetchOrganizations()
-
-    return () => {
-      dispatch(setCategoryId(''))
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const handleClickDatasetId = (datasetId) => {
-    dispatch(setDatasetId(datasetId))
-  }
+  }, [skip, top, textSearch, categoryId, providerTypeId, organizationId])
 
   const columns = [
     {
@@ -112,9 +103,6 @@ const DataListPage = () => {
           <div
             className='pointer'
             key={record.Id}
-            onClick={() => {
-              handleClickDatasetId(record.id)
-            }}
             style={{ backgroundColor: 'transparent' }}
           >
             <Row style={{ alignItems: 'center', paddingLeft: 10 }}>
@@ -151,19 +139,12 @@ const DataListPage = () => {
     },
   ]
 
-  const handleChangeCategoryId = ({key}) => {
-    dispatch(setCategoryId(key))
-    setUpdate(true)
-  }
-
   const handleChangeProviderTypeId = (value) => {
     setProviderTypeId(value)
-    setUpdate(true)
   }
 
   const handleChangeOrganizationId = (value) => {
     setOrganizationId(value)
-    setUpdate(true)
   }
 
   const handleSearch = (value) => {
@@ -189,6 +170,17 @@ const DataListPage = () => {
   
   return (
     <>
+      <PageTitle
+          breadcrumbs={[
+            {
+              title: 'Trang chủ',
+              path: '/',
+              isActive: true,
+              isSeparator: false
+            },
+          ]}
+        >Dữ liệu
+      </PageTitle>
       <Row justify='center'>
         <div className={cx('search')}>
           <Text style={{ fontSize: 18, fontWeight: '600', color: '#424242' }}>Dữ liệu</Text>
@@ -213,7 +205,6 @@ const DataListPage = () => {
             </div>
             <div style={{}}>
               <Menu
-                onClick={handleChangeCategoryId}
                 className={cx('menu-item')}
                 defaultSelectedKeys={['0']}
                 selectedKeys={[`${categoryId}`]}
@@ -235,6 +226,7 @@ const DataListPage = () => {
                   className={cx('menu-item-text')}
                 >
                   Tất cả
+                  <Link to='/du-lieu' ></Link>
                 </Menu.Item>
                 {
                   categories.map(i => (
@@ -253,6 +245,7 @@ const DataListPage = () => {
                         }
                         className={cx('menu-item-text')}
                       >{i.name}
+                      <Link to={`/du-lieu/${i.id}`} ></Link>
                       </Menu.Item>
                     )
                   )

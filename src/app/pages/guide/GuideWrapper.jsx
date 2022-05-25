@@ -1,6 +1,5 @@
 import './GuideWrapper.scss'
 
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import {Tabs} from 'antd'
 
@@ -53,10 +52,12 @@ const GuidePage = () => {
                         </p>
                       </div>
                     </div>
-                    <div className=''>
-                      <div className='notice d-flex bg-light-warning rounded border-warning border border-dashed p-6'>
-                        <span className='fw-bold text-danger me-2'>Bước 1: </span> Chọn chức năng{' '}
-                        <span className='fw-bold px-3'>ĐĂNG KÝ</span> trên thanh Menu
+                    <div>
+                      <div className='notice bg-light-warning rounded border-warning border border-dashed p-6'>
+                        <div className='d-flex'>
+                          <span className='fw-bold text-danger me-2'>Bước 1: </span> Chọn chức năng{' '}
+                          <span className='fw-bold px-3'>ĐĂNG KÝ</span> trên thanh Menu
+                        </div>
                       </div>
                       <img
                         style={{margin: '10px auto 20px auto', display: 'block'}}
@@ -96,7 +97,7 @@ const GuidePage = () => {
                         alt=''
                       />
                     </div>
-                    <div className=''>
+                    <div>
                       <div className='notice bg-light-warning rounded border-warning border border-dashed p-6'>
                         <span className='fw-bold text-danger me-2'>Bước 3:</span>Nhấn nút
                         <span className='fw-bold px-3'> Đăng ký</span> trên màn hình. Hệ thống sẽ
@@ -203,35 +204,6 @@ const GuidePage = () => {
                   </div>
                 </div>
               </TabPane>
-              {/* <TabPane tab="Tài liệu hướng dẫn sử dụng" key="tailieuhuongdan">
-                <div className='Video'>
-                  <div className='row'>
-                    {datas.map((data, index) => (
-                      <div className='col-xl-6' key={data.id}>
-                        <p
-                          style={{
-                            fontSize: '18px',
-                            textAlign: 'center',
-                            fontWeight: 'bolder',
-                            fontFamily: 'initial',
-                          }}
-                        >
-                          {data.name}
-                        </p>
-                        <iframe
-                          frameborder='0'
-                          style={{width: '420px', height: '315px'}}
-                          src={data.url}
-                          allowFullScreen
-                        >
-                          {' '}
-                        </iframe>
-                        <hr style={{width: '420px'}}></hr>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </TabPane> */}
             </Tabs>
           </div>
         </div>
