@@ -3,9 +3,10 @@ import React from 'react'
 import CardMostViewedDatas from './components/CardMostViewedDatas'
 import CardNewsCarousel from './components/CardNewsCarousel'
 import CardStatistical from './components/CardStatistical'
-import { toAbsoluteUrl } from '../../../_metronic/helpers'
 
-const Home = () => {
+const Home = ({ location }) => {
+  console.log(location)
+
   return (
     <>
       <CardMostViewedDatas />

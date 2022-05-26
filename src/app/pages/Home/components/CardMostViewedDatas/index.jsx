@@ -112,7 +112,7 @@ const CardMostViewedDatas = () => {
                     <div className={cx('item-mostview-data_header')}>
                       <img
                         src={i?.category?.imageUrl
-                          ? `https://192.168.2.169:5001/${i?.category?.imageUrl}`
+                          ? `${process.env.REACT_APP_FILE_URL}/${i?.category?.imageUrl}`
                           : ''}
                         alt='' />
                       <span>{i?.name}</span>

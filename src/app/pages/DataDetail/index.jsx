@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Tabs } from 'antd'
+import { Tabs, Input } from 'antd'
 
 import classNames from 'classnames/bind'
 import styles from './DataDetail.module.scss'
@@ -11,6 +11,7 @@ import { datasetApi } from 'src/app/apis/dataset'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
 const { TabPane } = Tabs
+const { Search } = Input
 const cx = classNames.bind(styles)
 
 const metadataToColumns = (metadata) => {
@@ -20,7 +21,7 @@ const metadataToColumns = (metadata) => {
             title: item?.Title ?? '',
             dataIndex: item?.Data ?? '',
             key: item?.Data ?? '',
-            width: `${100/metadataJSON.length}%`
+            width: `${100 / metadataJSON.length}%`
         }))
 
         return cl
@@ -33,6 +34,7 @@ const metadataToColumns = (metadata) => {
 const DataDetail = () => {
     const [dataset, setDataset] = useState(null)
 
+    const [inputValue, setInputValue] = useState('')
     const [update, setUpdate] = useState(false)
     const [columns, setColumns] = useState([])
     const [loading, setLoading] = useState(false)
@@ -46,7 +48,7 @@ const DataDetail = () => {
     useEffect(() => {
         setUpdate(true)
         return () => { }
-      }, [offset, size])
+    }, [offset, size, inputValue])
 
     useEffect(() => {
         const fetchDatasetField = async () => {
@@ -59,16 +61,21 @@ const DataDetail = () => {
             const _columns = metadataToColumns(metadata) ?? []
             setColumns(_columns)
             setCount(res?.data.length)
-            setLoading(false)    
+            setLoading(false)
         }
 
         const fetchDatasetData = async () => {
-            const res = await datasetApi.getData(datasetId)
+            const res = await datasetApi.getData(datasetId, {
+                ...inputValue && { q: inputValue }
+            })
             setDatasetData(res)
         }
 
-        fetchDatasetField()
-        fetchDatasetData()
+        if (update) {
+            fetchDatasetField()
+            fetchDatasetData()
+            setUpdate(false)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [update])
 
@@ -122,7 +129,6 @@ const DataDetail = () => {
             <div className={cx('card-datadetail', 'card shadow-sm mt-6')}>
                 <Tabs defaultActiveKey="1" className='ms-4'>
                     <TabPane
-
                         tab={
                             <span>
                                 <img src={`${toAbsoluteUrl('media/images/browser.png')}`} className="w-25px me-2" alt='' />
@@ -131,6 +137,14 @@ const DataDetail = () => {
                         }
                         key="1"
                     >
+                        <Search
+                            className={cx('search')}
+                            placeholder='Tìm kiếm'
+                            onSearch={(e) => {
+                                setInputValue(e)
+                            }}
+                        />
+
                         <TableList
                             dataTable={datasetData}
                             columns={columns}

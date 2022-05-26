@@ -52,14 +52,6 @@ const StatisticalOrganization = () => {
         y: 5
       }
     ];
-    var _sum = 0;
-    if (_data) {
-      for (var i = 0; i < _data.length; i++)
-        if (_data[i].y > 0) {
-          // eslint-disable-next-line no-unused-vars
-          _sum += _data[i].y;
-        }
-    }
 
     var isBig = window.innerWidth > 1199;
     var legendBig = {
@@ -152,17 +144,11 @@ const CardStatistical = () => {
       slug: 'to-chuc'
     },
     {
-      name: 'Nhóm',
+      name: 'Lĩnh vực',
       count: 15,
       icon: 'statistical (1).png',
       slug: 'nhom'
     },
-    {
-      name: 'Người sử dụng',
-      count: 71,
-      icon: 'statistical (2).png',
-      slug: ''
-    }
   ]
 
   const dataGroup = [
@@ -209,7 +195,7 @@ const CardStatistical = () => {
     <>
       <div
         className={cx('section-statistical')}
-        style={{ backgroundImage: `url(${toAbsoluteUrl('media/images/bg-analytics.png')})` }}>
+        style={{ backgroundImage: `url(${toAbsoluteUrl('media/images/bg-graphics.png')})` }}>
         <div className="container">
           <h4 className={cx('title', 'fs-1', 'fw-bold')}>
             <img src={toAbsoluteUrl('media/images/analytics.png')} className="h-40px me-3" alt="" />
@@ -217,7 +203,7 @@ const CardStatistical = () => {
           </h4>
           <div className="row">
             {listCategory.map((item, index) => (
-              <div className="col-lg-6 col-xl-3 mb-4 mb-xl-0" key={index}>
+              <div className="col-lg-4 col-xl-4 mb-4 mb-xl-0" key={index}>
                 <div className="card shadow-sm">
                   {item.slug
                     ? (
@@ -266,7 +252,7 @@ const CardStatistical = () => {
             <div className="col-12 col-xl-6">
               <div className='card shadow-sm min-h-100'>
                 <div className="card-header px-4">
-                  <div className="card-title text-center">Dữ liệu mở theo tổ nhóm</div>
+                  <div className="card-title text-center">Dữ liệu mở theo lĩnh vực</div>
                 </div>
                 <div className="card-body p-4 scroll mh-350px">
                   <div className="col-12">

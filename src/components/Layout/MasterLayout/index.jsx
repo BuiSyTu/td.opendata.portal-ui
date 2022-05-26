@@ -238,7 +238,7 @@ const MasterLayout = ({ children }) => {
                         <div className='item-category_thumb'>
                           <Link to={'/Du-lieu/'}>
                             <img src={i.imageUrl
-                              ? `https://192.168.2.169:5001/${i.imageUrl}`
+                              ? `${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`
                               : ''}
                               alt='' />
                           </Link>

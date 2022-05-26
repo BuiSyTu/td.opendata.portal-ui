@@ -45,11 +45,13 @@ const getById = async (id) => {
   }
 }
 
-const getData = async (id) => {
-  try {    
+const getData = async (id, listFilter) => {
+  try {
+    const params = toQueryString(listFilter)
+
     const res = await axios({
       method: 'GET',
-      url: `${baseUrl}/${id}/data`,
+      url: `${baseUrl}/${id}/data?${params}`,
       headers: {
         'Authorization': authorization,
         'TDAuthorization': getCookie('token'),

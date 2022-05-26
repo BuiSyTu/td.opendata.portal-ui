@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
 import classNames from 'classnames/bind'
 import styles from './DataList.module.scss'
@@ -58,18 +58,18 @@ const DataList = () => {
     fetchCategories()
     fetchProviderTypes()
     fetchOrganizations()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    const fetchDatasets = async() => {
+    const fetchDatasets = async () => {
       try {
         setLoading(true)
         const res = await datasetApi.getAll({
-          ...categoryId && {categoryId},
-          ...organizationId && {organizationId},
-          ...providerTypeId && {providerTypeId},
-          ...textSearch && {keyWord: textSearch}
+          ...categoryId && { categoryId },
+          ...organizationId && { organizationId },
+          ...providerTypeId && { providerTypeId },
+          ...textSearch && { keyWord: textSearch }
         })
         setDatasets(res?.data ?? [])
         setTotal(res?.data?.length ?? 0)
@@ -79,18 +79,18 @@ const DataList = () => {
       }
       setUpdate(false)
     }
-    
+
     if (update) {
       fetchDatasets()
     }
-    
-    return () => {}
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    return () => { }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   useEffect(() => {
     setUpdate(true)
-    return () => {}
+    return () => { }
   }, [skip, top, textSearch, categoryId, providerTypeId, organizationId])
 
   const columns = [
@@ -121,7 +121,7 @@ const DataList = () => {
                       : record.ModifiedAt
                       ? moment(record?.modifiedAt).format('DD/MM/YYYY')
                       : ''} */}
-                      {'05-05-2022 11:28:22 AM'}
+                    {'05-05-2022 11:28:22 AM'}
                   </Text>
                   <Text style={{ fontSize: 13, color: '#9E9E9E', paddingInline: 5, paddingBottom: 2 }}>{'|'}</Text>
                 </>
@@ -156,30 +156,30 @@ const DataList = () => {
     setSkip(page * (pageSize - 1))
     setLoading(true)
   }
-  
+
   const handleSizeChange = (current, size) => {
     setCurrent(1)
     setSkip(0)
     setTop(size)
     setLoading(true)
   }
-  
+
   const handleShowTotal = (total, range) => {
     return `${range[0]}-${range[1]} của ${total} dữ liệu`;
   }
-  
+
   return (
     <>
       <PageTitle
-          breadcrumbs={[
-            {
-              title: 'Trang chủ',
-              path: '/',
-              isActive: true,
-              isSeparator: false
-            },
-          ]}
-        >Dữ liệu
+        breadcrumbs={[
+          {
+            title: 'Trang chủ',
+            path: '/',
+            isActive: true,
+            isSeparator: false
+          },
+        ]}
+      >Dữ liệu
       </PageTitle>
       <Row justify='center'>
         <div className={cx('search')}>
@@ -188,7 +188,7 @@ const DataList = () => {
             size='large'
             placeholder='Bạn cần tìm dữ liệu gì?'
             style={{ borderRadius: 20 }}
-            onSearch={(val) => { handleSearch(val) }}
+            onSearch={(val) => handleSearch(val)}
           />
         </div>
       </Row >
@@ -226,24 +226,24 @@ const DataList = () => {
                 </Menu.Item>
                 {
                   categories.map(i => (
-                      <Menu.Item
-                        key={i.id}
-                        icon={
-                          <div>
-                            <Image
-                              src={`https://192.168.2.169:5001/${i.imageUrl}`}
-                              className={cx('menu-item-icon')}
-                              height={50}
-                              width={50}
-                              preview={false}
-                            />
-                          </div>
-                        }
-                        className={cx('menu-item-text')}
-                      >{i.name}
+                    <Menu.Item
+                      key={i.id}
+                      icon={
+                        <div>
+                          <Image
+                            src={`${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`}
+                            className={cx('menu-item-icon')}
+                            height={50}
+                            width={50}
+                            preview={false}
+                          />
+                        </div>
+                      }
+                      className={cx('menu-item-text')}
+                    >{i.name}
                       <Link to={`/du-lieu/${i.id}`} ></Link>
-                      </Menu.Item>
-                    )
+                    </Menu.Item>
+                  )
                   )
                 }
               </Menu>
@@ -267,10 +267,10 @@ const DataList = () => {
                     Tất cả
                   </Option>
                   {organizations?.map((item) => (
-                      <Option key={item.id} value={item.id}>
-                        {item.name}
-                      </Option>
-                    )
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  )
                   )}
                 </Select>
               </Col>
@@ -305,18 +305,18 @@ const DataList = () => {
               style={{ backgroundColor: 'transparent' }}
               ellipsis="enable"
               pagination={{
-                  total: total,
-                  defaultPageSize: top,
-                  pageSizeOptions: ['10', '20', '50'],
-                  onChange: handleTableChange,
-                  showSizeChanger: true,
-                  onShowSizeChange: handleSizeChange,
-                  current,
-                  showTotal: handleShowTotal,
-                  locale: {items_per_page: '/ trang'},
+                total: total,
+                defaultPageSize: top,
+                pageSizeOptions: ['10', '20', '50'],
+                onChange: handleTableChange,
+                showSizeChanger: true,
+                onShowSizeChange: handleSizeChange,
+                current,
+                showTotal: handleShowTotal,
+                locale: { items_per_page: '/ trang' },
               }}
-              locale= {{
-                  emptyText: 'Không có dữ liệu'
+              locale={{
+                emptyText: 'Không có dữ liệu'
               }}
             />
           </div>
