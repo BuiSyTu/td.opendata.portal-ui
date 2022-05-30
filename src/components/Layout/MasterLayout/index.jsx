@@ -61,9 +61,15 @@ const MasterLayout = ({ children }) => {
     <PageDataProvider>
       <div className='page d-flex flex-row flex-column-fluid'>
         <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
-          <div id='kt_header' className={classnames('header h-auto flex-column', {
-            'header-fixed-home': checkIsActive(pathname, '/home'),
-          })} data-kt-sticky='true' data-kt-sticky-name='header' data-kt-sticky-offset='{default: "200px", lg: "300px"}'>
+          <div
+            id='kt_header'
+            className={classnames('header h-auto flex-column', {
+              'header-fixed-home': checkIsActive(pathname, '/home'),
+            })}
+            data-kt-sticky='true'
+            data-kt-sticky-name='header'
+            data-kt-sticky-offset='{default: "200px", lg: "300px"}'
+          >
             {/*begin::Container*/}
             <div className='container-xl header-container'>
               <div className='header-content-contianer'>
@@ -175,7 +181,9 @@ const MasterLayout = ({ children }) => {
                       <a
                         href='abc'
                         className='btn btn-search input-group-text'
-                        id='search-addon2'><span className='fa fa-search'></span></a>
+                        id='search-addon2'>
+                        <span className='fa fa-search'></span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -186,7 +194,6 @@ const MasterLayout = ({ children }) => {
                     autoPlay
                     autoPlaySpeed={6000}
                     centerMode={false}
-                    className=''
                     containerclassName='container px-0'
                     dotListclassName=''
                     draggable={false}
