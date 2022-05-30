@@ -4,9 +4,7 @@ import CardMostViewedDatas from './components/CardMostViewedDatas'
 import CardNewsCarousel from './components/CardNewsCarousel'
 import CardStatistical from './components/CardStatistical'
 
-const Home = ({ location }) => {
-  console.log(location)
-
+const Home = () => {
   return (
     <>
       <CardMostViewedDatas />

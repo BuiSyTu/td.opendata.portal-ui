@@ -101,13 +101,13 @@ const CardMostViewedDatas = () => {
                 slidesToSlide={1}
                 swipeable
               >
-                {listMostViewData.map((i, index) => (
+                {listMostViewData.map((i) => (
                   <div
                     className={cx(
                       'item-mostview-data',
                       'bg-body shadow-sm mx-3'
                     )}
-                    key={index}
+                    key={i.id}
                   >
                     <div className={cx('item-mostview-data_header')}>
                       <img

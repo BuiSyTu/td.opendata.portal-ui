@@ -1,7 +1,7 @@
 import './MasterLayout.scss'
 
 import { Nav, Navbar } from 'react-bootstrap-v5'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { checkIsActive, toAbsoluteUrl } from 'src/_metronic/helpers'
 
 import Carousel from 'react-multi-carousel'
@@ -23,9 +23,38 @@ import { useLocation } from 'react-router-dom'
 const MasterLayout = ({ children }) => {
   const dispatch = useDispatch()
   const [listCategory, setListCategory] = useState([])
+  const [inputValue, setInputValue] = useState('')
 
   const location = useLocation()
   const { pathname } = location
+
+
+  const responseCarousel = {
+    desktop: {
+      breakpoint: {
+        max: 3000,
+        min: 1024
+      },
+      items: 7,
+      partialVisibilityGutter: 40
+    },
+    mobile: {
+      breakpoint: {
+        max: 464,
+        min: 0
+      },
+      items: 2,
+      partialVisibilityGutter: 30
+    },
+    tablet: {
+      breakpoint: {
+        max: 1024,
+        min: 464
+      },
+      items: 4,
+      partialVisibilityGutter: 30
+    }
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -155,8 +184,6 @@ const MasterLayout = ({ children }) => {
                 </div>
               </div>
               {/*end::Container*/}
-
-
             </div>
             {/*end::Container*/}
           </div>
@@ -177,13 +204,15 @@ const MasterLayout = ({ children }) => {
                         className='form-control'
                         placeholder='Bạn muốn tìm kiếm dữ liệu gì ?'
                         aria-label='Bạn muốn tìm kiếm dữ liệu gì ?'
-                        aria-describedby='search-addon2' />
-                      <a
-                        href='abc'
+                        aria-describedby='search-addon2'
+                        onChange={(event) => { setInputValue(event?.target?.value ?? '') }}
+                      />
+                      <Link
+                        to={`/du-lieu?search=${inputValue}`}
                         className='btn btn-search input-group-text'
                         id='search-addon2'>
                         <span className='fa fa-search'></span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -204,32 +233,7 @@ const MasterLayout = ({ children }) => {
                     minimumTouchDrag={80}
                     renderButtonGroupOutside={false}
                     renderDotsOutside={false}
-                    responsive={{
-                      desktop: {
-                        breakpoint: {
-                          max: 3000,
-                          min: 1024
-                        },
-                        items: 7,
-                        partialVisibilityGutter: 40
-                      },
-                      mobile: {
-                        breakpoint: {
-                          max: 464,
-                          min: 0
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 30
-                      },
-                      tablet: {
-                        breakpoint: {
-                          max: 1024,
-                          min: 464
-                        },
-                        items: 4,
-                        partialVisibilityGutter: 30
-                      }
-                    }}
+                    responsive={responseCarousel}
                     showDots={true}
                     sliderclassName=''
                     slidesToSlide={1}
@@ -243,7 +247,7 @@ const MasterLayout = ({ children }) => {
                         title={i?.name ?? ''}
                       >
                         <div className='item-category_thumb'>
-                          <Link to={'/Du-lieu/'}>
+                          <Link to={`/Du-lieu/${i.id}`}>
                             <img src={i.imageUrl
                               ? `${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`
                               : ''}

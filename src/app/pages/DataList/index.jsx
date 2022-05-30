@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import classNames from 'classnames/bind'
 import styles from './DataList.module.scss'
@@ -10,6 +10,7 @@ import { categoryApi, datasetApi, organizationApi, providerTypeApi } from 'src/a
 
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 import { PageTitle } from 'src/_metronic/layout/core'
+import useDebounce from 'src/app/hooks/useDebounce'
 
 const { Option } = Select;
 const { Search } = Input;
@@ -17,7 +18,7 @@ const { Text } = Typography;
 
 const cx = classNames.bind(styles)
 
-const DataList = () => {
+const DataList = ({ location, history }) => {
   const [categories, setCategories] = useState([])
   const [providerTypeId, setProviderTypeId] = useState('')
   const [providerTypes, setProviderTypes] = useState([])
@@ -26,12 +27,17 @@ const DataList = () => {
 
   const [datasets, setDatasets] = useState([])
   const [update, setUpdate] = useState(false)
-  const [textSearch, setTextSearch] = useState('')
+  const [textSearch, setTextSearch] = useState(() => {
+    const params = new URLSearchParams(location?.search)
+    return params.get('search') ?? ''
+  })
   const [loading, setLoading] = useState(false)
   const [current, setCurrent] = useState(1);
   const [total, setTotal] = useState(0)
   const [skip, setSkip] = useState(0)
   const [top, setTop] = useState(10)
+
+  const debounced = useDebounce(textSearch, 500)
 
   let { id: categoryId } = useParams()
   if (!categoryId) categoryId = ''
@@ -66,7 +72,7 @@ const DataList = () => {
           ...categoryId && { categoryId },
           ...organizationId && { organizationId },
           ...providerTypeId && { providerTypeId },
-          ...textSearch && { keyWord: textSearch }
+          ...debounced && { keyword: encodeURIComponent(debounced) }
         })
         setDatasets(res?.data ?? [])
         setTotal(res?.data?.length ?? 0)
@@ -88,7 +94,7 @@ const DataList = () => {
   useEffect(() => {
     setUpdate(true)
     return () => { }
-  }, [skip, top, textSearch, categoryId, providerTypeId, organizationId])
+  }, [skip, top, debounced, categoryId, providerTypeId, organizationId])
 
   const columns = [
     {
@@ -146,6 +152,8 @@ const DataList = () => {
 
   const handleSearch = (value) => {
     setTextSearch(value)
+    const newUrl = history.location.pathname + `${debounced.length > 0 ? `?search=${encodeURIComponent(debounced)}` : ''} `
+    history.push(newUrl)
   }
 
   const handleTableChange = async (page, pageSize) => {
@@ -182,9 +190,13 @@ const DataList = () => {
         <div className={cx('search')}>
           <Text style={{ fontSize: 18, fontWeight: '600', color: '#424242' }}>Dữ liệu</Text>
           <Search
+            defaultValue={textSearch}
             size='large'
             placeholder='Bạn cần tìm dữ liệu gì?'
             style={{ borderRadius: 20 }}
+            onChange={(event) => {
+              setTextSearch(event?.target?.value ?? '')
+            }}
             onSearch={(val) => handleSearch(val)}
           />
         </div>
@@ -222,26 +234,30 @@ const DataList = () => {
                   <Link to='/du-lieu' ></Link>
                 </Menu.Item>
                 {
-                  categories.map(i => (
+                  categories?.map(i => (
                     <Menu.Item
                       key={i.id}
                       icon={
-                        <div>
-                          <Image
-                            src={`${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`}
-                            className={cx('menu-item-icon')}
-                            height={50}
-                            width={50}
-                            preview={false}
-                          />
-                        </div>
+                        <Image
+                          key={`icon-image-${i.id}`}
+                          src={`${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`}
+                          className={cx('menu-item-icon')}
+                          height={50}
+                          width={50}
+                          preview={false}
+                        />
                       }
                       className={cx('menu-item-text')}
-                    >{i.name}
-                      <Link to={`/du-lieu/${i.id}`} ></Link>
+                    >
+                      {i.name}
+                      <Link
+                        key={`link-${i.id}`}
+                        to={`/du-lieu/${i.id}${textSearch.length > 0
+                          ? `?search=${encodeURIComponent(textSearch)}`
+                          : ''}`} >
+                      </Link>
                     </Menu.Item>
-                  )
-                  )
+                  ))
                 }
               </Menu>
             </div>
@@ -267,8 +283,7 @@ const DataList = () => {
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
-                  )
-                  )}
+                  ))}
                 </Select>
               </Col>
 
@@ -281,13 +296,11 @@ const DataList = () => {
                   <Option key={0} value=''>
                     Tất cả
                   </Option>
-                  {providerTypes?.map((item) => {
-                    return (
-                      <Option key={item.id} value={item.id}>
-                        {item.name}
-                      </Option>
-                    )
-                  })}
+                  {providerTypes?.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
                 </Select>
               </Col>
               <Col xl={8} md={10} xs={24}>
