@@ -5,9 +5,6 @@ import { AboutWrapper } from '../pages/about/AboutWrapper'
 import { BanDoWrapper } from '../pages/ban-do/BanDoWrapper'
 import { DangKyWrapper } from '../pages/auth/DangKyWrapper'
 import { DangNhapWrapper } from '../pages/auth/DangNhapWrapper'
-import HomePage from 'src/app/pages/Home'
-import DataDetailPage from 'src/app/pages/DataDetail'
-import DataListPage from 'src/app/pages/DataList'
 import { FallbackView } from '../../_metronic/partials'
 import { FaqDetailWrapper } from '../pages/thong-tin-phan-anh/FaqDetailWrapper'
 import { GuideWrapper } from '../pages/guide/GuideWrapper'
@@ -15,6 +12,12 @@ import { InteractWrapper } from '../pages/interact/InteractWrapper'
 import { MyFaqWrapper } from '../pages/myfaq/MyFaqWrapper'
 import { StatisticalWrapper } from '../pages/statistical/StatisticalWrapper'
 import { ThongKeWrapper } from '../pages/thong-ke/ThongKeWrapper'
+
+import HomePage from 'src/app/pages/Home'
+import DataDetailPage from 'src/app/pages/DataDetail'
+import DataListPage from 'src/app/pages/DataList'
+import ForgotPassword from 'src/app/pages/ForgotPassword'
+import ChangePassword from 'src/app/pages/ChangePassword'
 
 export function PrivateRoutes() {
   return (
@@ -34,6 +37,8 @@ export function PrivateRoutes() {
         <Route path='/dang-ky' component={DangKyWrapper} />
         <Route path='/dang-nhap' component={DangNhapWrapper} />
         <Route path='/tuong-tac/:id' component={InteractWrapper} />
+        <Route path='/quen-mat-khau' component={ForgotPassword} />
+        <Route path='/doi-mat-khau' component={ChangePassword} />
         <Redirect exact from='/' to='/home' />
         <Redirect to='error/404' />
       </Switch>
