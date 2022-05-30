@@ -3,8 +3,6 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 
 import { AboutWrapper } from '../pages/about/AboutWrapper'
 import { BanDoWrapper } from '../pages/ban-do/BanDoWrapper'
-import { DangKyWrapper } from '../pages/auth/DangKyWrapper'
-import { DangNhapWrapper } from '../pages/auth/DangNhapWrapper'
 import { FallbackView } from '../../_metronic/partials'
 import { FaqDetailWrapper } from '../pages/thong-tin-phan-anh/FaqDetailWrapper'
 import { GuideWrapper } from '../pages/guide/GuideWrapper'
@@ -16,8 +14,10 @@ import { ThongKeWrapper } from '../pages/thong-ke/ThongKeWrapper'
 import HomePage from 'src/app/pages/Home'
 import DataDetailPage from 'src/app/pages/DataDetail'
 import DataListPage from 'src/app/pages/DataList'
-import ForgotPassword from 'src/app/pages/ForgotPassword'
-import ChangePassword from 'src/app/pages/ChangePassword'
+import ForgotPasswordPage from 'src/app/pages/ForgotPassword'
+import ChangePasswordPage from 'src/app/pages/ChangePassword'
+import LoginPage from '../pages/Login'
+import RegisterPage from '../pages/Register'
 
 export function PrivateRoutes() {
   return (
@@ -32,13 +32,12 @@ export function PrivateRoutes() {
         <Route path='/thong-ke' component={StatisticalWrapper} />
         <Route path='/huong-dan' component={GuideWrapper} />
         <Route path='/phan-anh-ca-nhan' component={MyFaqWrapper} />
-        <Route path='/phan-anh-moi' component={HomePage} />
         <Route path='/thong-ke' component={ThongKeWrapper} />
-        <Route path='/dang-ky' component={DangKyWrapper} />
-        <Route path='/dang-nhap' component={DangNhapWrapper} />
+        <Route path='/dang-ky' component={RegisterPage} />
+        <Route path='/dang-nhap' component={LoginPage} />
         <Route path='/tuong-tac/:id' component={InteractWrapper} />
-        <Route path='/quen-mat-khau' component={ForgotPassword} />
-        <Route path='/doi-mat-khau' component={ChangePassword} />
+        <Route path='/quen-mat-khau' component={ForgotPasswordPage} />
+        <Route path='/doi-mat-khau' component={ChangePasswordPage} />
         <Redirect exact from='/' to='/home' />
         <Redirect to='error/404' />
       </Switch>
