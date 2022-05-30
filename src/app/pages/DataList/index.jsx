@@ -6,10 +6,7 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './DataList.module.scss'
 
-import { categoryApi } from 'src/app/apis/category'
-import { datasetApi } from 'src/app/apis/dataset'
-import { organizationApi } from 'src/app/apis/organization'
-import { providerTypeApi } from 'src/app/apis/providertype'
+import { categoryApi, datasetApi, organizationApi, providerTypeApi } from 'src/app/apis'
 
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 import { PageTitle } from 'src/_metronic/layout/core'

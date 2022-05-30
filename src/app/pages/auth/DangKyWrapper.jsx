@@ -1,15 +1,15 @@
+import React, { useState } from 'react'
+import { Redirect, Switch, useHistory } from 'react-router-dom'
+
 import * as Yup from 'yup'
 
-import React, {useState} from 'react'
-import {Redirect, Switch, useHistory} from 'react-router-dom'
-
-import {Modal} from 'react-bootstrap-v5'
+import { Modal } from 'react-bootstrap-v5'
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import classnames from 'classnames'
-import {register} from '../../modules/auth/redux/AuthCRUD'
-import {toast} from 'react-toastify'
-import {useFormik} from 'formik'
-import {useSelector} from 'react-redux'
+import { register } from '../../modules/auth/redux/AuthCRUD'
+import { toast } from 'react-toastify'
+import { useFormik } from 'formik'
+import { useSelector } from 'react-redux'
 
 const initialValues = {
   firstname: '',
@@ -65,8 +65,8 @@ const DangKyPage = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchema,
-    onSubmit: (values, {setStatus, setSubmitting}) => {
-      toast.success('Thao tác thành công!', {autoClose: 2000})
+    onSubmit: (values, { setStatus, setSubmitting }) => {
+      toast.success('Thao tác thành công!', { autoClose: 2000 })
       setLoading(true)
       setTimeout(() => {
         // var date = moment(values.dateOfBirth, 'DD/MM/YYYY').format('YYYY-MM-DD')
@@ -83,7 +83,6 @@ const DangKyPage = () => {
             let res = response.data
             if (res.succeeded) {
               toast.success('Đăng ký thành công! Vui lòng đăng nhâp lại để tiếp tục!')
-              //setModalRegister(false)
               setVisibleSuccess(true)
             } else {
               setStatus(res?.message ?? 'Đăng ký không thành công')
@@ -189,7 +188,7 @@ const DangKyPage = () => {
               {...formik.getFieldProps('phoneNumber')}
               className={classnames(
                 'form-control form-control-lg form-control-solid',
-                {'is-invalid': formik.touched.phoneNumber && formik.errors.phoneNumber},
+                { 'is-invalid': formik.touched.phoneNumber && formik.errors.phoneNumber },
                 {
                   'is-valid': formik.touched.phoneNumber && !formik.errors.phoneNumber,
                 }
@@ -214,7 +213,7 @@ const DangKyPage = () => {
               {...formik.getFieldProps('email')}
               className={classnames(
                 'form-control form-control-lg form-control-solid',
-                {'is-invalid': formik.touched.email && formik.errors.email},
+                { 'is-invalid': formik.touched.email && formik.errors.email },
                 {
                   'is-valid': formik.touched.email && !formik.errors.email,
                 }
@@ -303,7 +302,7 @@ const DangKyPage = () => {
             >
               {!loading && <span className='indicator-label'>Đăng ký</span>}
               {loading && (
-                <span className='indicator-progress' style={{display: 'block'}}>
+                <span className='indicator-progress' style={{ display: 'block' }}>
                   Đang xử lý...{' '}
                   <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                 </span>
@@ -325,7 +324,6 @@ const DangKyPage = () => {
       </div>
       <Modal
         show={visibleSuccess}
-        //size={'lg'}
         scrollable={true}
         onHide={() => {
           setVisibleSuccess(false)
@@ -369,4 +367,4 @@ const DangKyWrapper = () => {
   )
 }
 
-export {DangKyWrapper}
+export { DangKyWrapper }

@@ -14,7 +14,7 @@ import { MenuComponent } from 'src/_metronic/assets/ts/components'
 import { PageDataProvider } from 'src/_metronic/layout/core'
 import Particles from 'react-tsparticles'
 import { ScrollTop } from 'src/_metronic/layout/components/ScrollTop'
-import { categoryApi } from 'src/app/apis/category'
+import { categoryApi } from 'src/app/apis'
 import classnames from 'classnames/bind'
 import { setCategoryId } from 'src/setup/redux/dataset/Slice'
 import { useDispatch } from 'react-redux'
@@ -137,7 +137,7 @@ const MasterLayout = ({ children }) => {
                     {/*begin::Actions*/}
                     <div className='flex-shrink-0 p-2 p-lg-0 header_nav-right'>
                       <div className={classnames('d-flex align-items-stretch px-2 ms-2')}>
-                        <Link to={''} className='btn btn-default btn-sm fs-5'>
+                        <Link to='/dang-nhap' className='btn btn-default btn-sm fs-5'>
                           <span className='fa fa-lock fa-fw'></span> <label>Đăng nhập</label>
                         </Link>
                       </div>

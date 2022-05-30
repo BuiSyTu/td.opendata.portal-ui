@@ -5,7 +5,7 @@ import styles from './CardMostViewedDatas.module.scss'
 
 import Carousel from 'react-multi-carousel'
 import { Link } from 'react-router-dom';
-import { datasetApi } from 'src/app/apis/dataset'
+import { datasetApi } from 'src/app/apis'
 import { getCurrentDate } from 'src/utils/common';
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 

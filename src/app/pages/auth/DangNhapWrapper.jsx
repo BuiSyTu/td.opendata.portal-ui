@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, { useState } from 'react'
+import { Link, Redirect, Switch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import classnames from 'classnames'
-import {Link, useHistory, Redirect, Switch, Route} from 'react-router-dom'
 
-import {useFormik} from 'formik'
+import { useFormik } from 'formik'
 import * as auth from '../../modules/auth/redux/AuthRedux'
-import {login} from '../../modules/auth/redux/AuthCRUD'
+import { login } from '../../modules/auth/redux/AuthCRUD'
 
 const loginSchema = Yup.object().shape({
   userName: Yup.string()
@@ -26,13 +26,12 @@ const initialValues = {
 }
 
 const DangNhapPage = () => {
-  const history = useHistory()
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
-    onSubmit: (values, {setStatus, setSubmitting}) => {
+    onSubmit: (values, { setStatus, setSubmitting }) => {
       setLoading(true)
       login(values.userName, values.password)
         .then((data) => {
@@ -61,7 +60,7 @@ const DangNhapPage = () => {
           <h1 className='text-dark mb-3'>Đăng nhập hệ thống</h1>
           <div className='text-gray-400 fw-bold fs-4'>
             Bạn chưa có tài khoản?{' '}
-            <Link to='/auth/registration' className='link-primary fw-bolder'>
+            <Link to='/dang-ky' className='link-primary fw-bolder'>
               Tạo tài khoản mới
             </Link>
           </div>
@@ -84,7 +83,7 @@ const DangNhapPage = () => {
             {...formik.getFieldProps('userName')}
             className={classnames(
               'form-control form-control-lg form-control-solid',
-              {'is-invalid': formik.touched.userName && formik.errors.userName},
+              { 'is-invalid': formik.touched.userName && formik.errors.userName },
               {
                 'is-valid': formik.touched.userName && !formik.errors.userName,
               }
@@ -111,7 +110,7 @@ const DangNhapPage = () => {
               <Link
                 to='/auth/forgot-password'
                 className='link-primary fs-5 fw-bolder'
-                style={{marginLeft: '5px'}}
+                style={{ marginLeft: '5px' }}
               >
                 Quên mật khẩu ?
               </Link>
@@ -152,7 +151,7 @@ const DangNhapPage = () => {
           >
             {!loading && <span className='indicator-label'>Đăng nhập</span>}
             {loading && (
-              <span className='indicator-progress' style={{display: 'block'}}>
+              <span className='indicator-progress' style={{ display: 'block' }}>
                 Đang xử lý...
                 <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
               </span>
@@ -178,4 +177,4 @@ const DangNhapWrapper = () => {
   )
 }
 
-export {DangNhapWrapper}
+export { DangNhapWrapper }
