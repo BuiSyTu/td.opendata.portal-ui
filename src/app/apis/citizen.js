@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const baseUrl = process.env.CITIZEN_API_URL
+const baseUrl = process.env.REACT_APP_CITIZEN_API_URL
 
 const getToken = async (user, pass) => {
     try {
         const res = await axios({
             method: 'POST',
-            url: `${baseUrl}/api/token`,
+            url: `${baseUrl}/api/tokens`,
             headers: {
                 tenant: 'root',
             },

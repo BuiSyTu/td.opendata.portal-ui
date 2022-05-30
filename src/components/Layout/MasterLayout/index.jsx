@@ -17,11 +17,13 @@ import { ScrollTop } from 'src/_metronic/layout/components/ScrollTop'
 import { categoryApi } from 'src/app/apis'
 import classnames from 'classnames/bind'
 import { setCategoryId } from 'src/setup/redux/dataset/Slice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 const MasterLayout = ({ children }) => {
   const dispatch = useDispatch()
+  const accessToken = useSelector(state => state.global.accessToken)
+
   const [listCategory, setListCategory] = useState([])
   const [inputValue, setInputValue] = useState('')
 
@@ -172,9 +174,18 @@ const MasterLayout = ({ children }) => {
                     {/*begin::Actions*/}
                     <div className='flex-shrink-0 p-2 p-lg-0 header_nav-right'>
                       <div className={classnames('d-flex align-items-stretch px-2 ms-2')}>
-                        <Link to='/dang-nhap' className='btn btn-default btn-sm fs-5'>
-                          <span className='fa fa-lock fa-fw'></span> <label>Đăng nhập</label>
-                        </Link>
+                        {
+                          accessToken ? (
+                            <Link to='/dang-xuat' className='btn btn-default btn-sm fs-5'>
+                              <label>Đăng xuất</label>
+                            </Link>
+                          ) : (
+                            <Link to='/dang-nhap' className='btn btn-default btn-sm fs-5'>
+                              <span className='fa fa-lock fa-fw'></span> <label>Đăng nhập</label>
+                            </Link>
+                          )
+                        }
+
                       </div>
                     </div>
                     {/*end::Actions*/}

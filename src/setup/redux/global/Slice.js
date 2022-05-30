@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  accessToken: null,
-  error: null,
+  accessToken: '',
+  userProfile: null,
 }
 
 export const globalSlice = createSlice({
@@ -12,8 +12,12 @@ export const globalSlice = createSlice({
       state = initialState
     },
     setAccessToken: (state, action) => {
-      const payload = action.payload
-      state.accessToken = payload
+      state.accessToken = action.payload
     },
+    setUserProfile: (state, action) => {
+      state.userProfile = action.payload
+    }
   },
 })
+
+export const { logOut, setAccessToken, setUserProfile } = globalSlice.actions

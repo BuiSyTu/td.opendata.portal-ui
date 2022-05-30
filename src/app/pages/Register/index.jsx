@@ -5,17 +5,16 @@ import * as Yup from 'yup'
 
 import { Modal } from 'react-bootstrap-v5'
 import classnames from 'classnames'
-import { register } from '../../modules/auth/redux/AuthCRUD'
 import { toast } from 'react-toastify'
 import { useFormik } from 'formik'
 
 const initialValues = {
-    firstname: '',
-    phoneNumber: '',
-    dateOfBirth: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    fullName: 'Bùi Sỹ Tú',
+    email: 'tubui7121@gmail.com',
+    userName: 'tubs',
+    phoneNumber: '0914075420',
+    password: 'Tandan@123',
+    confirmPassword: 'Tandan@123',
 }
 
 
@@ -23,14 +22,13 @@ const regularPhone = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g
 const regularExpressionPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,18}$/
 
 const registrationSchema = Yup.object().shape({
-    firstname: Yup.string().min(3, '').max(100, '').required('Không hợp lệ'),
+    fullName: Yup.string().min(3, '').max(100, '').required('Không hợp lệ'),
     phoneNumber: Yup.string()
         .matches(regularPhone, 'Số điện thoại không hợp lệ')
         .min(8, '')
         .max(12, '')
         .required('Không hợp lệ'),
-    dateOfBirth: Yup.date().required('Không hợp lệ'),
-
+    userName: Yup.string().min(3, '').max(20, '').required('Không hợp lệ'),
     email: Yup.string()
         .email('Định dạng email không phù hợp.')
         .min(3, '')
@@ -65,33 +63,34 @@ const Register = () => {
         validationSchema: registrationSchema,
         onSubmit: (values, { setStatus, setSubmitting }) => {
             toast.success('Thao tác thành công!', { autoClose: 2000 })
-            setLoading(true)
+            // setLoading(true)
             setTimeout(() => {
-                register(
-                    values.email,
-                    values.firstname,
-                    values.dateOfBirth,
-                    values.phoneNumber,
-                    values.phoneNumber,
-                    values.password,
-                    values.confirmPassword
-                )
-                    .then((response) => {
-                        let res = response.data
-                        if (res.succeeded) {
-                            toast.success('Đăng ký thành công! Vui lòng đăng nhâp lại để tiếp tục!')
-                            setVisibleSuccess(true)
-                        } else {
-                            setStatus(res?.message ?? 'Đăng ký không thành công')
-                        }
-                        setLoading(false)
-                        setSubmitting(false)
-                    })
-                    .catch(() => {
-                        setLoading(false)
-                        setSubmitting(false)
-                        setStatus('Đăng ký không thành công')
-                    })
+                console.log(values)
+                // register(
+                //     values.email,
+                //     values.firstname,
+                //     values.dateOfBirth,
+                //     values.phoneNumber,
+                //     values.phoneNumber,
+                //     values.password,
+                //     values.confirmPassword
+                // )
+                // .then((response) => {
+                //     let res = response.data
+                //     if (res.succeeded) {
+                //         toast.success('Đăng ký thành công! Vui lòng đăng nhâp lại để tiếp tục!')
+                //         setVisibleSuccess(true)
+                //     } else {
+                //         setStatus(res?.message ?? 'Đăng ký không thành công')
+                //     }
+                //     setLoading(false)
+                //     setSubmitting(false)
+                // })
+                // .catch(() => {
+                //     setLoading(false)
+                //     setSubmitting(false)
+                //     setStatus('Đăng ký không thành công')
+                // })
             }, 1000)
         },
     })
@@ -116,7 +115,7 @@ const Register = () => {
                         </div>
                     )}
 
-                    {/* begin::Form group Firstname */}
+                    {/* begin::Form group FullName */}
                     <div className='row'>
                         <div className='col-6'>
                             <div className='fv-row mb-5'>
@@ -125,21 +124,21 @@ const Register = () => {
                                     placeholder='Họ và tên'
                                     type='text'
                                     autoComplete='off'
-                                    {...formik.getFieldProps('firstname')}
+                                    {...formik.getFieldProps('fullName')}
                                     className={classnames(
                                         'form-control form-control-lg form-control-solid',
                                         {
-                                            'is-invalid': formik.touched.firstname && formik.errors.firstname,
+                                            'is-invalid': formik.touched.fullName && formik.errors.fullName,
                                         },
                                         {
-                                            'is-valid': formik.touched.firstname && !formik.errors.firstname,
+                                            'is-valid': formik.touched.fullName && !formik.errors.fullName,
                                         }
                                     )}
                                 />
-                                {formik.touched.firstname && formik.errors.firstname && (
+                                {formik.touched.fullName && formik.errors.fullName && (
                                     <div className='fv-plugins-message-container invalid-feedback'>
                                         <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.firstname}</span>
+                                            <span role='alert'>{formik.errors.fullName}</span>
                                         </div>
                                     </div>
                                 )}
@@ -147,26 +146,26 @@ const Register = () => {
                         </div>
                         <div className='col-6'>
                             <div className='fv-row mb-5'>
-                                <label className='form-label required fw-bolder text-dark fs-6'>Ngày sinh</label>
+                                <label className='form-label required fw-bolder text-dark fs-6'>Tài khoản</label>
                                 <input
-                                    placeholder='Ngày sinh'
-                                    type='date'
+                                    placeholder='Tài khoản'
+                                    type='text'
                                     autoComplete='off'
-                                    {...formik.getFieldProps('dateOfBirth')}
+                                    {...formik.getFieldProps('userName')}
                                     className={classnames(
                                         'form-control form-control-lg form-control-solid',
                                         {
-                                            'is-invalid': formik.touched.dateOfBirth && formik.errors.dateOfBirth,
+                                            'is-invalid': formik.touched.userName && formik.errors.userName,
                                         },
                                         {
-                                            'is-valid': formik.touched.dateOfBirth && !formik.errors.dateOfBirth,
+                                            'is-valid': formik.touched.userName && !formik.errors.userName,
                                         }
                                     )}
                                 />
-                                {formik.touched.dateOfBirth && formik.errors.dateOfBirth && (
+                                {formik.touched.userName && formik.errors.userName && (
                                     <div className='fv-plugins-message-container invalid-feedback'>
                                         <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.dateOfBirth}</span>
+                                            <span role='alert'>{formik.errors.userName}</span>
                                         </div>
                                     </div>
                                 )}
@@ -176,7 +175,7 @@ const Register = () => {
 
                     <div className='fv-row mb-5'>
                         <label className='form-label required fw-bolder text-dark fs-6'>
-                            Số điện thoại (ID đăng nhập)
+                            Số điện thoại
                         </label>
                         <input
                             placeholder='Số điện thoại'
@@ -191,7 +190,9 @@ const Register = () => {
                                 }
                             )}
                         />
-                        <div className='text-muted mt-2 fs-6'>OTP xác thực sẽ được gửi về số này</div>
+                        <div className='text-muted mt-2 fs-6'>
+                            {/* OTP xác thực sẽ được gửi về số này */}
+                        </div>
                         {formik.touched.phoneNumber && formik.errors.phoneNumber && (
                             <div className='fv-plugins-message-container invalid-feedback'>
                                 <div className='fv-help-block'>
@@ -224,7 +225,7 @@ const Register = () => {
                             </div>
                         )}
                         <div className='text-muted mt-2 fs-6'>
-                            Dùng trong trường hợp quên mật khẩu, đặt lại mật khẩu, kết nối mạng xã hội
+                            {/* Dùng trong trường hợp quên mật khẩu, đặt lại mật khẩu, kết nối mạng xã hội */}
                         </div>
                     </div>
                     <div className='row'>

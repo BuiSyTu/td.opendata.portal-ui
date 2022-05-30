@@ -6,8 +6,8 @@ import * as Yup from 'yup'
 import classnames from 'classnames'
 
 import { useFormik } from 'formik'
-import * as auth from '../../modules/auth/redux/AuthRedux'
-import { login } from '../../modules/auth/redux/AuthCRUD'
+import { setAccessToken, setUserProfile } from 'src/setup/redux/global/Slice'
+import { citizenApi } from 'src/app/apis'
 
 const loginSchema = Yup.object().shape({
     userName: Yup.string()
@@ -25,7 +25,7 @@ const initialValues = {
     password: 'Tandan@123',
 }
 
-const Login = () => {
+const Login = ({ history }) => {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -33,20 +33,31 @@ const Login = () => {
         validationSchema: loginSchema,
         onSubmit: (values, { setStatus, setSubmitting }) => {
             setLoading(true)
-            login(values.userName, values.password)
+            const { userName, password } = values
+            citizenApi.getToken(userName, password)
                 .then((data) => {
-                    let accessToken = data.data.data.token
+                    const accessToken = data.token
+                    dispatch(setAccessToken(accessToken))
+
+                    citizenApi.getPersonalProfile(accessToken)
+                        .then(userProfile => {
+                            dispatch(setUserProfile(userProfile))
+                        })
+
                     setLoading(false)
-                    dispatch(auth.actions.login(accessToken))
-                    //history.push('/home')
+                    history.push('/home')
                 })
                 .catch(() => {
                     setLoading(false)
                     setSubmitting(false)
-                    setStatus('The login detail is incorrect')
+                    setStatus('Đăng nhập không thành công')
                 })
+            setLoading(false)
+
+
         },
     })
+
     return (
         <div className='w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto'>
             <form
@@ -72,7 +83,7 @@ const Login = () => {
                         <div className='alert-text font-weight-bold'>{formik.status}</div>
                     </div>
                 ) : (
-                    <div></div>
+                    <></>
                 )}
 
                 {/* begin::Form group */}

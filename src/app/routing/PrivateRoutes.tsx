@@ -18,6 +18,7 @@ import ForgotPasswordPage from 'src/app/pages/ForgotPassword'
 import ChangePasswordPage from 'src/app/pages/ChangePassword'
 import LoginPage from '../pages/Login'
 import RegisterPage from '../pages/Register'
+import LogoutPage from '../pages/LogOut'
 
 export function PrivateRoutes() {
   return (
@@ -35,6 +36,7 @@ export function PrivateRoutes() {
         <Route path='/thong-ke' component={ThongKeWrapper} />
         <Route path='/dang-ky' component={RegisterPage} />
         <Route path='/dang-nhap' component={LoginPage} />
+        <Route path='/dang-xuat' component={LogoutPage} />
         <Route path='/tuong-tac/:id' component={InteractWrapper} />
         <Route path='/quen-mat-khau' component={ForgotPasswordPage} />
         <Route path='/doi-mat-khau' component={ChangePasswordPage} />

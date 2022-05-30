@@ -231,7 +231,10 @@ const DataList = ({ location, history }) => {
                   className={cx('menu-item-text')}
                 >
                   Tất cả
-                  <Link to='/du-lieu' ></Link>
+                  <Link
+                    to={`/du-lieu${textSearch.length > 0
+                      ? `?search=${encodeURIComponent(textSearch)}`
+                      : ''}`} />
                 </Menu.Item>
                 {
                   categories?.map(i => (
