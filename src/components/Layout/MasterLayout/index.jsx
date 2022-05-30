@@ -1,7 +1,7 @@
 import './MasterLayout.scss'
 
 import { Nav, Navbar } from 'react-bootstrap-v5'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { checkIsActive, toAbsoluteUrl } from 'src/_metronic/helpers'
 
 import Carousel from 'react-multi-carousel'
@@ -239,15 +239,15 @@ const MasterLayout = ({ children }) => {
                     slidesToSlide={1}
                     swipeable
                   >
-                    {listCategory.map((i, index) => (
+                    {listCategory.map((i) => (
                       <div
                         className='item-category text-center'
-                        key={index}
+                        key={i.id}
                         onClick={() => handleClickCategory(i.id)}
                         title={i?.name ?? ''}
                       >
                         <div className='item-category_thumb'>
-                          <Link to={`/Du-lieu/${i.id}`}>
+                          <Link to={`/Du-lieu/${i.id}`} key={`link-${i.id}`}>
                             <img src={i.imageUrl
                               ? `${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`
                               : ''}
