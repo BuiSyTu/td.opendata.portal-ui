@@ -56,6 +56,60 @@ const ClientService = () => {
             width: '10%',
         },
         {
+            title: 'Trạng thái dữ liệu',
+            dataIndex: 'state',
+            key: 'state',
+            width: '20%',
+            render: (text, record, index) => {
+                const getApproveState = () => {
+                    let color = secondary
+                    let textDisplay = 'Không xác định'
+
+                    switch (record?.approveState) {
+                        case 0:
+                            textDisplay = 'Chưa duyệt'
+                            break;
+                        case 1:
+                            color = success
+                            textDisplay = 'Đã duyệt'
+                            break;
+                        case 2:
+                            color = danger
+                            textDisplay = 'Bị từ chối'
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return {
+                        color,
+                        textDisplay
+                    }
+                }
+
+                const getIsSynced = () => {
+                    return {
+                        color: record?.isSynced ? success : secondary,
+                        textDisplay: record?.isSynced ? 'Đã đồng bộ' : 'Đang đồng bộ',
+                    }
+                }
+
+                const { color: colorApproveState, textDisplay: textApproveState } = getApproveState()
+                const { color: colorSynced, textDisplay: textSynced } = getIsSynced()
+
+                return (
+                    <>
+                        <Tag color={colorApproveState}>
+                            {textApproveState}
+                        </Tag>
+                        <Tag color={colorSynced}>
+                            {textSynced}
+                        </Tag>
+                    </>
+                );
+            },
+        },
+        {
             title: 'Thao tác',
             width: '15%',
             dataIndex: '',
@@ -141,7 +195,7 @@ const ClientService = () => {
             dataIndex: 'view',
             key: 'view',
             align: 'center',
-            width: '10%',
+            width: '5%',
         },
     ]
 
