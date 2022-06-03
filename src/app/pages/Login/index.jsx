@@ -1,13 +1,16 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+import styles from './Login.module.scss'
+
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
-import classnames from 'classnames'
+import classNames from 'classnames/bind'
 
 import { useFormik } from 'formik'
 import { setAccessToken, setUserProfile } from 'src/setup/redux/global/Slice'
 import { citizenApi } from 'src/app/apis'
+
+const cx = classNames.bind(styles)
 
 const loginSchema = Yup.object().shape({
     userName: Yup.string()
@@ -32,34 +35,38 @@ const Login = ({ history }) => {
         initialValues,
         validationSchema: loginSchema,
         onSubmit: (values, { setStatus, setSubmitting }) => {
-            setLoading(true)
-            const { userName, password } = values
-            citizenApi.getToken(userName, password)
-                .then((data) => {
-                    const accessToken = data.token
-                    dispatch(setAccessToken(accessToken))
+            const getToken = async () => {
+                const { userName, password } = values
+                const data = await citizenApi.getToken(userName, password)
+                const accessToken = data?.token
+                dispatch(setAccessToken(accessToken))
+                return accessToken
+            }
 
-                    citizenApi.getPersonalProfile(accessToken)
-                        .then(userProfile => {
-                            dispatch(setUserProfile(userProfile))
-                        })
+            const getPersonalProfile = async () => {
+                setLoading(true)
 
-                    setLoading(false)
+                const accessToken = await getToken()
+                if (!accessToken) return;
+
+                const userProfile = await citizenApi.getPersonalProfile(accessToken)
+                if (!!userProfile) {
+                    dispatch(setUserProfile(userProfile))
                     history.push('/home')
-                })
-                .catch(() => {
-                    setLoading(false)
-                    setSubmitting(false)
+                } else {
                     setStatus('Đăng nhập không thành công')
-                })
-            setLoading(false)
+                }
 
+                setSubmitting(false)
+                setLoading(false)
+            }
 
+            getPersonalProfile()
         },
     })
 
     return (
-        <div className='w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto'>
+        <div className='w-600px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto'>
             <form
                 className='form w-100'
                 onSubmit={formik.handleSubmit}
@@ -92,7 +99,7 @@ const Login = ({ history }) => {
                     <input
                         placeholder='Tên đăng nhập'
                         {...formik.getFieldProps('userName')}
-                        className={classnames(
+                        className={cx(
                             'form-control form-control-lg form-control-solid',
                             { 'is-invalid': formik.touched.userName && formik.errors.userName },
                             {
@@ -132,7 +139,7 @@ const Login = ({ history }) => {
                         type='password'
                         autoComplete='off'
                         {...formik.getFieldProps('password')}
-                        className={classnames(
+                        className={cx(
                             'form-control form-control-lg form-control-solid',
                             {
                                 'is-invalid': formik.touched.password && formik.errors.password,

@@ -1,17 +1,17 @@
 import './FaqDetail.scss'
 import 'react-multi-carousel/lib/styles.css'
 
-import {Comment, Image, Input, notification} from 'antd'
+import { Comment, Image, Input, notification } from 'antd'
 import React, { useEffect, useState } from 'react'
 
-import {CONFIG} from '../../../helpers/config'
+import { CONFIG } from '../../../helpers/config'
 import Carousel from 'react-multi-carousel'
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import moment from 'moment'
-import {requestPOST} from '../../../helpers/baseAPI'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import {useParams} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import { requestPOST } from '../../../helpers/baseAPI'
+import { toAbsoluteUrl } from '../../../_metronic/helpers'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const FaqDetailPage = () => {
   const accessToken = useSelector((state) => state.auth.accessToken)
@@ -27,22 +27,22 @@ const FaqDetailPage = () => {
   const [fileReplyImgs, setFileReplyImgs] = useState([])
   const [fileReplyPdf, setFileReplyPdf] = useState('')
 
-  const {id} = useParams()
+  const { id } = useParams()
   const responsive = {
     superLargeDesktop: {
-      breakpoint: {max: 4000, min: 3000},
+      breakpoint: { max: 4000, min: 3000 },
       items: 1,
     },
     desktop: {
-      breakpoint: {max: 3000, min: 1024},
+      breakpoint: { max: 3000, min: 1024 },
       items: 1,
     },
     tablet: {
-      breakpoint: {max: 1024, min: 464},
+      breakpoint: { max: 1024, min: 464 },
       items: 1,
     },
     mobile: {
-      breakpoint: {max: 464, min: 0},
+      breakpoint: { max: 464, min: 0 },
       items: 1,
     },
   }
@@ -104,7 +104,7 @@ const FaqDetailPage = () => {
     } catch (error) {
       console.log(error)
     }
-    return () => {}
+    return () => { }
   }, [id, update])
 
   const ExampleComment = () => (
@@ -131,10 +131,10 @@ const FaqDetailPage = () => {
               </p>
             }
           >
-            {}
+            { }
           </Comment>
           {/* {index < comments?.length - 1 ? <div style={{borderTop: '1px dashed #cfcfcf'}} /> : <></>} */}
-          <div style={{borderTop: '1px dashed #cfcfcf'}} />
+          <div style={{ borderTop: '1px dashed #cfcfcf' }} />
         </div>
       ))}
     </div>
@@ -203,9 +203,9 @@ const FaqDetailPage = () => {
               </div>
             </div>
           </div>
-          <div class='ribbon-label bg-warning min-h-35px'>
-            <i class='fas fa-comments fs-4 text-white me-2'></i>
-            <label class='fw-bold'>Phản ánh, kiến nghị</label>
+          <div className='ribbon-label bg-warning min-h-35px'>
+            <i className='fas fa-comments fs-4 text-white me-2'></i>
+            <label className='fw-bold'>Phản ánh, kiến nghị</label>
           </div>
           {/* <div className='ribbon-label bg-warning'>
             <i className='fas fa-comments fs-4 text-white me-2'></i>
@@ -219,7 +219,7 @@ const FaqDetailPage = () => {
               <div className='col-auto pe-5'>
                 <i className='fs-2x fad fa-quote-left text-primary'></i>
               </div>
-              <div className='faq-desc-content' style={{fontSize: '20px !important'}}>
+              <div className='faq-desc-content' style={{ fontSize: '20px !important' }}>
                 <p className='text-gray-800 fw-normal fs-6 mb-0'>{data?.NoiDung ?? ''}</p>
               </div>
             </div>
@@ -439,4 +439,4 @@ const FaqDetailWrapper = () => {
   )
 }
 
-export {FaqDetailWrapper}
+export { FaqDetailWrapper }

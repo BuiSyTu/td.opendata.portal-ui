@@ -1,5 +1,8 @@
+import styles from './Register.module.scss'
+
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import classNames from 'classnames/bind'
 
 import * as Yup from 'yup'
 
@@ -7,6 +10,8 @@ import { Modal } from 'react-bootstrap-v5'
 import classnames from 'classnames'
 import { toast } from 'react-toastify'
 import { useFormik } from 'formik'
+
+const cx = classNames.bind(styles)
 
 const initialValues = {
     fullName: 'Bùi Sỹ Tú',
@@ -96,10 +101,10 @@ const Register = () => {
     })
 
     return (
-        <>
-            <div className='card p-5'>
+        <div className={cx('wrapper')} >
+            <div className='card p-10 p-lg-15 w-850px '>
                 <form
-                    className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
+                    className='form w-100'
                     noValidate
                     id='kt_login_signup_form'
                     onSubmit={formik.handleSubmit}
@@ -348,7 +353,7 @@ const Register = () => {
                     </div>
                 </Modal.Body>
             </Modal>
-        </>
+        </div >
     )
 }
 

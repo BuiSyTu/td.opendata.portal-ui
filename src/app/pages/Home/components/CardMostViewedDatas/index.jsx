@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment';
 
 import classNames from 'classnames/bind';
 import styles from './CardMostViewedDatas.module.scss'
@@ -6,7 +7,6 @@ import styles from './CardMostViewedDatas.module.scss'
 import Carousel from 'react-multi-carousel'
 import { Link } from 'react-router-dom';
 import { datasetApi } from 'src/app/apis'
-import { getCurrentDate } from 'src/utils/common';
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
 const cx = classNames.bind(styles)
@@ -128,7 +128,11 @@ const CardMostViewedDatas = () => {
                           <span className='far fa-eye'></span> {i?.view ?? 0} lượt xem
                         </div>
                         <div className={cx('col', 'col-date')}>
-                          {getCurrentDate()}<span className='far fa-clock'></span>
+                          {i?.createdOn
+                            ? moment(i?.createdOn).format('DD/MM/YYYY')
+                            : i.lastModifiedOn
+                              ? moment(i?.lastModifiedOn).format('DD/MM/YYYY')
+                              : ''}<span className='far fa-clock'></span>
                         </div>
                       </div>
                       <div className={cx('row-bottom', 'row')}>

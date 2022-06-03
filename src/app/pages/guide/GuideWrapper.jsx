@@ -1,13 +1,13 @@
 import './GuideWrapper.scss'
 
 import React from 'react'
-import {Tabs} from 'antd'
+import { Tabs } from 'antd'
 
 function callback(key) {
   console.log(key)
 }
 
-const {TabPane} = Tabs
+const { TabPane } = Tabs
 
 const GuidePage = () => {
   return (
@@ -19,12 +19,12 @@ const GuidePage = () => {
           </div>
         </div>
         <div className='card-body p-5'>
-          <div className='container-gruid' style={{backgroundColor: ''}}>
+          <div className='container-gruid' style={{ backgroundColor: '' }}>
             <Tabs defaultActiveKey='1' onChange={callback} type='card'>
               <TabPane tab='Đăng ký' key='dangky'>
                 <div className='tab-content'>
                   <div role='tabpanel' className='tab-pane active' id='home'>
-                    <div className='' style={{fontFamily: 'initial', fontSize: '18px'}}>
+                    <div className='' style={{ fontFamily: 'initial', fontSize: '18px' }}>
                       <div className='col'>
                         <p>
                           <span
@@ -37,15 +37,15 @@ const GuidePage = () => {
                           >
                             Từ Hệ thống Phản ánh hiện trường Hải Dương tại địa chỉ{' '}
                           </span>
-                          <span style={{fontWeight: 'bolder', fontSize: '18px'}}>
+                          <span style={{ fontWeight: 'bolder', fontSize: '18px' }}>
                             <a
                               href='https://tuongtachd.hanhchinhcong.net'
-                              style={{color: '#167495'}}
+                              style={{ color: '#167495' }}
                             >
                               https://tuongtachd.hanhchinhcong.net
                             </a>
                           </span>
-                          <span style={{color: '#23282c', fontWeight: 'bolder'}}>
+                          <span style={{ color: '#23282c', fontWeight: 'bolder' }}>
                             {' '}
                             thực hiện các bước:
                           </span>
@@ -60,7 +60,7 @@ const GuidePage = () => {
                         </div>
                       </div>
                       <img
-                        style={{margin: '10px auto 20px auto', display: 'block'}}
+                        style={{ margin: '10px auto 20px auto', display: 'block' }}
                         src={require('../../images/dangky.png').default}
                         alt=''
                       />
@@ -72,27 +72,27 @@ const GuidePage = () => {
                       </div>
                       <div className='pt-5 ps-5'>
                         <p>
-                          <span class='fw-bold'>Họ và tên: </span>Họ tên đầy đủ người đăng ký
+                          <span className='fw-bold'>Họ và tên: </span>Họ tên đầy đủ người đăng ký
                         </p>
                         <p>
-                          <span class='fw-bold'>Ngày sinh: </span>Ngày sinh của người đăng ký
+                          <span className='fw-bold'>Ngày sinh: </span>Ngày sinh của người đăng ký
                         </p>
                         <p>
-                          <span class='fw-bold'>Số điện thoai: </span>Số điện thoại người đăng ký
+                          <span className='fw-bold'>Số điện thoai: </span>Số điện thoại người đăng ký
                           (được sử dụng làm ID tài khoản đăng nhập)
                         </p>
                         <p>
-                          <span class='fw-bold'>Email: </span>Hộp thư điện tử người đăng ký
+                          <span className='fw-bold'>Email: </span>Hộp thư điện tử người đăng ký
                         </p>
                         <p>
-                          <span class='fw-bold'>Mật khẩu: </span>Mật khẩu bảo mật tài khoản
+                          <span className='fw-bold'>Mật khẩu: </span>Mật khẩu bảo mật tài khoản
                         </p>
                         <p>
-                          <span class='fw-bold'>Nhập lại mật khẩu: </span>Xác nhận lại mật khẩu
+                          <span className='fw-bold'>Nhập lại mật khẩu: </span>Xác nhận lại mật khẩu
                         </p>
                       </div>
                       <img
-                        style={{margin: '10px auto 20px auto', display: 'block'}}
+                        style={{ margin: '10px auto 20px auto', display: 'block' }}
                         src={require('../../images/formdangky.png').default}
                         alt=''
                       />
@@ -106,7 +106,7 @@ const GuidePage = () => {
                         <div className=' text-center'></div>
                       </div>
                       <img
-                        style={{margin: '10px auto 20px auto', display: 'block'}}
+                        style={{ margin: '10px auto 20px auto', display: 'block' }}
                         src={require('../../images/dangkythanhcong.png').default}
                         alt=''
                       />
@@ -116,18 +116,18 @@ const GuidePage = () => {
               </TabPane>
               <TabPane tab='Gửi phản ánh' key='phananh'>
                 <div role='tabpanel' className='tab-pane' id='profile'>
-                  <div className='' style={{fontFamily: 'initial', fontSize: '18px'}}>
+                  <div className='' style={{ fontFamily: 'initial', fontSize: '18px' }}>
                     <div className='col'>
                       <p>
-                        <span style={{color: '#23282c', fontWeight: 'bolder'}}>
+                        <span style={{ color: '#23282c', fontWeight: 'bolder' }}>
                           Từ Hệ thống Phản ánh hiện trường Hải Dương tại địa chỉ{' '}
                         </span>
-                        <span style={{fontWeight: 'bolder'}}>
-                          <a href='https://tuongtachd.hanhchinhcong.net' style={{color: '#167495'}}>
+                        <span style={{ fontWeight: 'bolder' }}>
+                          <a href='https://tuongtachd.hanhchinhcong.net' style={{ color: '#167495' }}>
                             https://tuongtachd.hanhchinhcong.net
                           </a>
                         </span>
-                        <span style={{color: '#23282c', fontWeight: 'bolder'}}>
+                        <span style={{ color: '#23282c', fontWeight: 'bolder' }}>
                           {' '}
                           thực hiện các bước:
                         </span>
@@ -140,7 +140,7 @@ const GuidePage = () => {
                   </div>
                   <div>
                     <img
-                      style={{margin: '10px auto 20px auto', display: 'block'}}
+                      style={{ margin: '10px auto 20px auto', display: 'block' }}
                       src={require('../../images/guiphananh.png').default}
                       alt=''
                     />
@@ -190,7 +190,7 @@ const GuidePage = () => {
                     </p>
                   </div>
                   <img
-                    style={{margin: '10px auto 20px auto', display: 'block'}}
+                    style={{ margin: '10px auto 20px auto', display: 'block' }}
                     src={require('../../images/formphananh.png').default}
                     alt=''
                   />
@@ -219,4 +219,4 @@ const GuideWrapper = () => {
     </>
   )
 }
-export {GuideWrapper}
+export { GuideWrapper }

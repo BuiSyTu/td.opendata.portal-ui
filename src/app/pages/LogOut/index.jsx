@@ -5,9 +5,9 @@ import { logOut } from 'src/setup/redux/global/Slice'
 
 export default function Logout() {
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(logOut())
-        document.location.reload()
     }, [dispatch])
 
     return (

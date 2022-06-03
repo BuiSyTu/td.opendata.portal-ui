@@ -19,8 +19,10 @@ import ChangePasswordPage from 'src/app/pages/ChangePassword'
 import LoginPage from '../pages/Login'
 import RegisterPage from '../pages/Register'
 import LogoutPage from '../pages/LogOut'
+import AccountPage from '../pages/Account'
+import ClientServicePage from '../pages/ClientService'
 
-export function PrivateRoutes() {
+export default function PrivateRoutes() {
   return (
     <Suspense fallback={<FallbackView />}>
       <Switch>
@@ -40,6 +42,8 @@ export function PrivateRoutes() {
         <Route path='/tuong-tac/:id' component={InteractWrapper} />
         <Route path='/quen-mat-khau' component={ForgotPasswordPage} />
         <Route path='/doi-mat-khau' component={ChangePasswordPage} />
+        <Route path='/tai-khoan' component={AccountPage} />
+        <Route path='/quan-ly-dich-vu' component={ClientServicePage} />
         <Redirect exact from='/' to='/home' />
         <Redirect to='error/404' />
       </Switch>

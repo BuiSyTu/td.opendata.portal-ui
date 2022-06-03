@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
 import { Link, useParams } from 'react-router-dom'
+import moment from 'moment'
 
 import classNames from 'classnames/bind'
 import styles from './DataList.module.scss'
@@ -119,12 +120,11 @@ const DataList = ({ location, history }) => {
               {
                 <>
                   <Text style={{ fontSize: 14, color: '#9E9E9E' }}>
-                    {/* {record?.createdAt
-                      ? moment(record?.createdAt).format('DD/MM/YYYY')
-                      : record.ModifiedAt
-                      ? moment(record?.modifiedAt).format('DD/MM/YYYY')
-                      : ''} */}
-                    {'05-05-2022 11:28:22 AM'}
+                    {record?.createdOn
+                      ? moment(record?.createdOn).format('DD/MM/YYYY')
+                      : record.lastModifiedOn
+                        ? moment(record?.lastModifiedOn).format('DD/MM/YYYY')
+                        : ''}
                   </Text>
                   <Text style={{ fontSize: 13, color: '#9E9E9E', paddingInline: 5, paddingBottom: 2 }}>{'|'}</Text>
                 </>
@@ -174,7 +174,7 @@ const DataList = ({ location, history }) => {
   }
 
   return (
-    <>
+    <div className={cx('wrapper')}>
       <PageTitle
         breadcrumbs={[
           {
@@ -187,19 +187,17 @@ const DataList = ({ location, history }) => {
       >Dữ liệu
       </PageTitle>
       <Row justify='center'>
-        <div className={cx('search')}>
-          <Text style={{ fontSize: 18, fontWeight: '600', color: '#424242' }}>Dữ liệu</Text>
-          <Search
-            defaultValue={textSearch}
-            size='large'
-            placeholder='Bạn cần tìm dữ liệu gì?'
-            style={{ borderRadius: 20 }}
-            onChange={(event) => {
-              setTextSearch(event?.target?.value ?? '')
-            }}
-            onSearch={(val) => handleSearch(val)}
-          />
-        </div>
+        <Search
+          enterButton="Tìm kiếm"
+          className={cx('search')}
+          defaultValue={textSearch}
+          size='large'
+          placeholder='Bạn cần tìm dữ liệu gì?'
+          onChange={(event) => {
+            setTextSearch(event?.target?.value ?? '')
+          }}
+          onSearch={(val) => handleSearch(val)}
+        />
       </Row >
       <Divider />
       <Row gutter={[30, 20]} justify='center' style={{ marginBottom: 30 }} >
@@ -335,7 +333,7 @@ const DataList = ({ location, history }) => {
           </div>
         </Col>
       </Row >
-    </>
+    </div>
   )
 }
 

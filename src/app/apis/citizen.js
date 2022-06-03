@@ -68,8 +68,28 @@ const getPersonalProfile = async (token) => {
     }
 }
 
+const updatePersonalProfile = async (data, token) => {
+    try {
+        await axios({
+            method: 'PUT',
+            url: `${baseUrl}/api/personal/profile`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            data,
+            timeout: 15000,
+        })
+
+        return true
+    } catch (error) {
+        console.error(error.response)
+        return false
+    }
+}
+
 export const citizenApi = {
     register,
     getToken,
     getPersonalProfile,
+    updatePersonalProfile,
 }

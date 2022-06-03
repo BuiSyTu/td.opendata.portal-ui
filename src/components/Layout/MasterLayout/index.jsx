@@ -1,28 +1,32 @@
 import './MasterLayout.scss'
 
-import { Nav, Navbar } from 'react-bootstrap-v5'
 import React, { useEffect, useState } from 'react'
+import Carousel from 'react-multi-carousel'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, Link } from 'react-router-dom'
+import { Menu } from 'antd'
+import { Nav, Navbar } from 'react-bootstrap-v5'
+import Particles from 'react-tsparticles'
+import Tippy from '@tippyjs/react/headless'
+
 import { checkIsActive, toAbsoluteUrl } from 'src/_metronic/helpers'
 
-import Carousel from 'react-multi-carousel'
 import { Content } from 'src/_metronic/layout/components/Content'
 import { DefaultTitleCustom } from 'src/_metronic/layout/components/header/page-title/DefaultTitleCustom'
 import { Footer } from 'src/_metronic/layout/components/Footer'
-import { Link } from 'react-router-dom'
-import { Menu } from 'antd'
 import { MenuComponent } from 'src/_metronic/assets/ts/components'
 import { PageDataProvider } from 'src/_metronic/layout/core'
-import Particles from 'react-tsparticles'
 import { ScrollTop } from 'src/_metronic/layout/components/ScrollTop'
 import { categoryApi } from 'src/app/apis'
 import classnames from 'classnames/bind'
 import { setCategoryId } from 'src/setup/redux/dataset/Slice'
-import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { Wrapper as PopperWrapper } from 'src/components/Popper'
+import AccountItem from 'src/components/AccountItem'
 
 const MasterLayout = ({ children }) => {
   const dispatch = useDispatch()
   const accessToken = useSelector(state => state.global.accessToken)
+  const userProfile = useSelector(state => state.global.userProfile)
 
   const [listCategory, setListCategory] = useState([])
   const [inputValue, setInputValue] = useState('')
@@ -175,10 +179,45 @@ const MasterLayout = ({ children }) => {
                     <div className='flex-shrink-0 p-2 p-lg-0 header_nav-right'>
                       <div className={classnames('d-flex align-items-stretch px-2 ms-2')}>
                         {
-                          accessToken ? (
-                            <Link to='/dang-xuat' className='btn btn-default btn-sm fs-5'>
-                              <label>Đăng xuất</label>
-                            </Link>
+                          !!accessToken ? (
+                            <Tippy
+                              interactive
+                              // visible
+                              render={attrs => (
+                                <div className="dd-info" tabIndex="-1" {...attrs}>
+                                  <PopperWrapper>
+                                    <AccountItem
+                                      icon='fa fas fa-align-left'
+                                      content='Thông tin tài khoản'
+                                      to='tai-khoan'
+                                    />
+                                    <AccountItem
+                                      icon='fa fas fa-history'
+                                      content='Quản lý dịch vụ'
+                                      borderTop
+                                      to='/quan-ly-dich-vu'
+                                    />
+                                    <AccountItem
+                                      icon='fa fas fa-sign-out-alt'
+                                      content='Đăng xuất'
+                                      borderTop
+                                      to='/dang-xuat'
+                                    />
+                                  </PopperWrapper>
+                                </div>
+                              )}
+                              placement="bottom-end"
+                              delay={[0, 50]}
+                              hideOnClick={false}
+                            >
+                              <div className='avatar'>
+                                <img
+                                  src='/media/logos/user.png'
+                                  alt='' />
+                                <label className='menu-text'>{userProfile?.fullName}</label>
+                                <i className="fa fas fa-angle-down"></i>
+                              </div>
+                            </Tippy>
                           ) : (
                             <Link to='/dang-nhap' className='btn btn-default btn-sm fs-5'>
                               <span className='fa fa-lock fa-fw'></span> <label>Đăng nhập</label>
