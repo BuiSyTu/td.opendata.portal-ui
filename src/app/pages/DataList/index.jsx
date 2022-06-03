@@ -70,6 +70,7 @@ const DataList = ({ location, history }) => {
       try {
         setLoading(true)
         const res = await datasetApi.getAll({
+          visibility: true,
           ...categoryId && { categoryId },
           ...organizationId && { organizationId },
           ...providerTypeId && { providerTypeId },
