@@ -191,14 +191,17 @@ const FormModal = ({
             const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
 
             if (dataTypeCode === 'excel') {
-                const datasetFileConfig = {
-                    fileType,
-                    fileName,
-                    fileUrl,
-                    sheetName: formData?.sheetName ?? '',
-                }
+                // Khi file thay đổi, 3 thuộc tính này mới hết empty
+                if (fileName && fileType && fileUrl) {
+                    const datasetFileConfig = {
+                        fileType,
+                        fileName,
+                        fileUrl,
+                        sheetName: formData?.sheetName ?? '',
+                    }
 
-                formData.datasetFileConfig = datasetFileConfig
+                    formData.datasetFileConfig = datasetFileConfig
+                }
             }
 
             if (dataTypeCode === 'webapi') {
