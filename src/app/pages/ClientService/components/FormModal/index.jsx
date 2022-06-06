@@ -190,7 +190,7 @@ const FormModal = ({
 
             const headerObject = Array.isArray(formData.headers) ? toObject(formData.headers, 'key', 'value') : {}
 
-            if (dataTypeCode === 'excel') {
+            if (dataTypeCode === 'file') {
                 // Khi file thay đổi, 3 thuộc tính này mới hết empty
                 if (fileName && fileType && fileUrl) {
                     const datasetFileConfig = {
@@ -409,7 +409,7 @@ const FormModal = ({
             case 'webapi':
                 handleWebApi()
                 break;
-            case 'excel':
+            case 'file':
                 handleExcel()
                 break;
             default:
@@ -505,7 +505,7 @@ const FormModal = ({
             case 'webapi':
                 handleWebApi();
                 break;
-            case 'excel':
+            case 'file':
                 handleExcel();
                 break;
             default:
@@ -659,6 +659,20 @@ const FormModal = ({
                                     </Form.Item>
                                 </Col>
                                 <Col span={12}>
+                                    <Form.Item label='Giấy phép' name='licenseId'>
+                                        <Select showSearch placeholder='Chọn giấy phép'>
+                                            {licenses.map(license => (
+                                                <Option key={license.id} value={license.id}>
+                                                    {license.name}
+                                                </Option>
+                                            ))}
+                                        </Select>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col span={12}>
                                     <Form.Item
                                         label='Loại dữ liệu'
                                         name='dataTypeId'
@@ -670,20 +684,6 @@ const FormModal = ({
                                             {dataTypes.map(dataType => (
                                                 <Option key={dataType.id} value={dataType.id} code={dataType.code}>
                                                     {dataType.name}
-                                                </Option>
-                                            ))}
-                                        </Select>
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col span={12}>
-                                    <Form.Item label='Giấy phép' name='licenseId'>
-                                        <Select showSearch placeholder='Chọn giấy phép'>
-                                            {licenses.map(license => (
-                                                <Option key={license.id} value={license.id}>
-                                                    {license.name}
                                                 </Option>
                                             ))}
                                         </Select>
