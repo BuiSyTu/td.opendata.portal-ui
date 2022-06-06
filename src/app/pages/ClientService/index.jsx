@@ -160,7 +160,7 @@ const ClientService = () => {
         },
         {
             title: 'Dữ liệu',
-            width: '15%',
+            width: '10%',
             dataIndex: '',
             key: '',
             align: 'center',
@@ -195,7 +195,7 @@ const ClientService = () => {
             dataIndex: 'view',
             key: 'view',
             align: 'center',
-            width: '5%',
+            width: '10%',
         },
     ]
 

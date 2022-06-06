@@ -8,20 +8,20 @@ import { Menu } from 'antd'
 import { Nav, Navbar } from 'react-bootstrap-v5'
 import Particles from 'react-tsparticles'
 import Tippy from '@tippyjs/react/headless'
+import classnames from 'classnames/bind'
 
 import { checkIsActive, toAbsoluteUrl } from 'src/_metronic/helpers'
 
 import { Content } from 'src/_metronic/layout/components/Content'
 import { DefaultTitleCustom } from 'src/_metronic/layout/components/header/page-title/DefaultTitleCustom'
-import { Footer } from 'src/_metronic/layout/components/Footer'
 import { MenuComponent } from 'src/_metronic/assets/ts/components'
 import { PageDataProvider } from 'src/_metronic/layout/core'
 import { ScrollTop } from 'src/_metronic/layout/components/ScrollTop'
 import { categoryApi } from 'src/app/apis'
-import classnames from 'classnames/bind'
 import { setCategoryId } from 'src/setup/redux/dataset/Slice'
 import { Wrapper as PopperWrapper } from 'src/components/Popper'
 import AccountItem from 'src/components/AccountItem'
+import { Footer } from './Footer'
 
 const MasterLayout = ({ children }) => {
   const dispatch = useDispatch()
@@ -189,7 +189,7 @@ const MasterLayout = ({ children }) => {
                                     <AccountItem
                                       icon='fa fas fa-align-left'
                                       content='Thông tin tài khoản'
-                                      to='tai-khoan'
+                                      to='/tai-khoan'
                                     />
                                     <AccountItem
                                       icon='fa fas fa-history'
@@ -238,6 +238,7 @@ const MasterLayout = ({ children }) => {
             {/*end::Container*/}
           </div>
           {/*end::Header*/}
+          {/* begin:: Banner */}
           {checkIsActive(pathname, '/home') ?
             <div className='main-banner' style={{ backgroundImage: `url(${toAbsoluteUrl('media/images/bg-slide.png')})` }}>
               <div className='container'>

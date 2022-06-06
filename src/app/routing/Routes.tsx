@@ -7,7 +7,7 @@
 
 import React, { FC } from 'react'
 
-import MasterLayout from 'src/components/Layout/MasterLayout'
+import MasterLayout from 'src/_metronic/layout/MasterLayout'
 import PrivateRoutes from './PrivateRoutes'
 import { Switch } from 'react-router-dom'
 
