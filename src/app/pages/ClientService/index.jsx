@@ -1,6 +1,9 @@
+import styles from './ClientService.module.scss'
+
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Input, Popconfirm, Tag, Typography, notification } from 'antd'
+import classNames from 'classnames/bind'
 
 import { setDisableDataTab } from 'src/setup/redux/clientService/Slice'
 import { danger, secondary, success } from 'src/app/constants/color'
@@ -12,6 +15,7 @@ import { openJsonInNewTab } from 'src/utils/common'
 
 const { Text } = Typography
 const { Search } = Input
+const cx = classNames.bind(styles)
 
 const ClientService = () => {
     const dispatch = useDispatch()
@@ -304,13 +308,13 @@ const ClientService = () => {
     }
 
     return (
-        <div>
+        <div className={cx('wrapper')}>
             <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
             <div className='card mb-5 mb-xl-12 p-10'>
                 <div className='d-flex row justify-content-between align-items-center'>
                     <div className='col-xl-8 d-flex align-items-center'>
                         <Search
-                            style={{ width: '40%', height: 35, borderRadius: 10 }}
+                            className={cx('search')}
                             placeholder='Tìm kiếm'
                             onSearch={(e) => {
                                 setInputValue(e)

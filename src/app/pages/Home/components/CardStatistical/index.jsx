@@ -56,10 +56,10 @@ const CardStatistical = () => {
   return (
     <div
       className={cx('section-statistical')}
-      style={{ backgroundImage: `url(${toAbsoluteUrl('media/images/bg-graphics.png')})` }}>
+      style={{ backgroundImage: `url(${toAbsoluteUrl('/media/images/bg-graphics.png')})` }}>
       <div className="container">
         <h4 className={cx('title', 'fs-1', 'fw-bold')}>
-          <img src={toAbsoluteUrl('media/images/analytics.png')} className="h-40px me-3" alt="" />
+          <img src={toAbsoluteUrl('/media/images/analytics.png')} className="h-40px me-3" alt="" />
           Thống kê
         </h4>
         <div className="row">
@@ -76,7 +76,7 @@ const CardStatistical = () => {
                             <h3 className='m-0 text-danger fs-1'>{item.count}</h3>
                           </div>
                           <div className="statistical-thumb">
-                            <img src={toAbsoluteUrl(`media/images/${item.icon}`)} className="w-60px" alt="" />
+                            <img src={toAbsoluteUrl(`/media/images/${item.icon}`)} className="w-60px" alt="" />
                           </div>
                         </div>
                       </div>
@@ -90,7 +90,7 @@ const CardStatistical = () => {
                           <h3 className='m-0 text-danger fs-1'>{item.count}</h3>
                         </div>
                         <div className="statistical-thumb">
-                          <img src={toAbsoluteUrl(`media/images/${item.icon}`)} className="w-60px" alt="" />
+                          <img src={toAbsoluteUrl(`/media/images/${item.icon}`)} className="w-60px" alt="" />
                         </div>
                       </div>
                     </div>

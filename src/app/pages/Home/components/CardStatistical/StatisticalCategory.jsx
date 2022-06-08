@@ -21,7 +21,7 @@ const StatisticalCategory = () => {
                 setDataCategory(data ?? [])
                 setMaxValue(Math.max(...data.map(o => o.count), 0))
             })
-    })
+    }, [])
 
     return (
         <div className="col-12">

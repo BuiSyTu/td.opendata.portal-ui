@@ -328,7 +328,7 @@ const DataList = ({ location, history }) => {
                 locale: { items_per_page: '/ trang' },
               }}
               locale={{
-                emptyText: 'Không có dữ liệu'
+                emptyText: <div className='py-10 text-muted font-weight-bold'>Không có dữ liệu</div>
               }}
             />
           </div>
