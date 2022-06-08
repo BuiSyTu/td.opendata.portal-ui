@@ -11,9 +11,9 @@ import {
   IToolbar,
 } from './LayoutModels'
 
-import {DefaultLayoutConfig} from './DefaultLayoutConfig'
+import { DefaultLayoutConfig } from './DefaultLayoutConfig'
 
-const LAYOUT_CONFIG_KEY = process.env.REACT_APP_BASE_LAYOUT_CONFIG_KEY || 'LayoutConfig'
+const LAYOUT_CONFIG_KEY = 'metronic-react-demo100' || 'LayoutConfig'
 
 export function getLayout(): ILayout {
   const ls = localStorage.getItem(LAYOUT_CONFIG_KEY)
@@ -256,7 +256,7 @@ export class LayoutSetup {
 
   public static updatePartialConfig(fieldsToUpdate: Partial<ILayout>): ILayout {
     const config = LayoutSetup.config
-    const updatedConfig = {...config, ...fieldsToUpdate}
+    const updatedConfig = { ...config, ...fieldsToUpdate }
     LayoutSetup.initCSSClasses()
     LayoutSetup.initCSSVariables()
     LayoutSetup.initHTMLAttributes()

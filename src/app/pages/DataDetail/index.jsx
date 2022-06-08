@@ -7,7 +7,7 @@ import styles from './DataDetail.module.scss'
 
 import { PageTitle } from 'src/_metronic/layout/core'
 import TableList from 'src/components/TableList'
-import { datasetApi } from 'src/app/apis/dataset'
+import { datasetApi } from 'src/app/apis'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
 const { TabPane } = Tabs

@@ -1,19 +1,15 @@
+.wrapper {}
+
 .search {
     width: 100%;
-    background-color: #fff;
-    padding: 20px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 2px 2px 0 #BDBDBD, 0 1px 2px 0 #BDBDBD;
-}
+    margin-top: 30px;
 
-.dataset-name {
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
+    span {
+        border-radius: 999px;
 
-    &:hover {
-        color: #1890ff;
+        input {
+            border-color: transparent;
+        }
     }
 }
 
@@ -23,6 +19,18 @@
     border-color: #BDBDBD;
     border-width: 0.5;
     border-style: solid;
+
+    .menu-header {
+        background-color: #1E88E5;
+        text-align: center;
+        padding: 5px 0;
+
+        .menu-header-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #fff;
+        }
+    }
 
     .menu-item {
         margin-bottom: 0;
@@ -45,20 +53,18 @@
     }
 }
 
-.menu-header {
-    background-color: #1E88E5;
-    text-align: center;
-    padding: 5px 0;
-
-    .menu-header-text {
-        font-size: 18px;
-        font-weight: 500;
-        color: #fff;
-    }
-}
-
 .filter-text {
     font-size: 13;
     font-weight: 600;
     color: #616161;
+}
+
+.dataset-name {
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+        color: #1890ff;
+    }
 }

@@ -1,18 +1,17 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import moment from 'moment'
 
 import classNames from 'classnames/bind'
 import styles from './DataList.module.scss'
 
-import { categoryApi } from 'src/app/apis/category'
-import { datasetApi } from 'src/app/apis/dataset'
-import { organizationApi } from 'src/app/apis/organization'
-import { providerTypeApi } from 'src/app/apis/providertype'
+import { categoryApi, datasetApi, organizationApi, providerTypeApi } from 'src/app/apis'
 
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 import { PageTitle } from 'src/_metronic/layout/core'
+import useDebounce from 'src/app/hooks/useDebounce'
 
 const { Option } = Select;
 const { Search } = Input;
@@ -20,7 +19,7 @@ const { Text } = Typography;
 
 const cx = classNames.bind(styles)
 
-const DataList = () => {
+const DataList = ({ location, history }) => {
   const [categories, setCategories] = useState([])
   const [providerTypeId, setProviderTypeId] = useState('')
   const [providerTypes, setProviderTypes] = useState([])
@@ -29,12 +28,17 @@ const DataList = () => {
 
   const [datasets, setDatasets] = useState([])
   const [update, setUpdate] = useState(false)
-  const [textSearch, setTextSearch] = useState('')
+  const [textSearch, setTextSearch] = useState(() => {
+    const params = new URLSearchParams(location?.search)
+    return params.get('search') ?? ''
+  })
   const [loading, setLoading] = useState(false)
   const [current, setCurrent] = useState(1);
   const [total, setTotal] = useState(0)
   const [skip, setSkip] = useState(0)
   const [top, setTop] = useState(10)
+
+  const debounced = useDebounce(textSearch, 500)
 
   let { id: categoryId } = useParams()
   if (!categoryId) categoryId = ''
@@ -66,10 +70,11 @@ const DataList = () => {
       try {
         setLoading(true)
         const res = await datasetApi.getAll({
+          visibility: true,
           ...categoryId && { categoryId },
           ...organizationId && { organizationId },
           ...providerTypeId && { providerTypeId },
-          ...textSearch && { keyWord: textSearch }
+          ...debounced && { keyword: encodeURIComponent(debounced) }
         })
         setDatasets(res?.data ?? [])
         setTotal(res?.data?.length ?? 0)
@@ -91,7 +96,7 @@ const DataList = () => {
   useEffect(() => {
     setUpdate(true)
     return () => { }
-  }, [skip, top, textSearch, categoryId, providerTypeId, organizationId])
+  }, [skip, top, debounced, categoryId, providerTypeId, organizationId])
 
   const columns = [
     {
@@ -116,12 +121,11 @@ const DataList = () => {
               {
                 <>
                   <Text style={{ fontSize: 14, color: '#9E9E9E' }}>
-                    {/* {record?.createdAt
-                      ? moment(record?.createdAt).format('DD/MM/YYYY')
-                      : record.ModifiedAt
-                      ? moment(record?.modifiedAt).format('DD/MM/YYYY')
-                      : ''} */}
-                    {'05-05-2022 11:28:22 AM'}
+                    {record?.createdOn
+                      ? moment(record?.createdOn).format('DD/MM/YYYY')
+                      : record.lastModifiedOn
+                        ? moment(record?.lastModifiedOn).format('DD/MM/YYYY')
+                        : ''}
                   </Text>
                   <Text style={{ fontSize: 13, color: '#9E9E9E', paddingInline: 5, paddingBottom: 2 }}>{'|'}</Text>
                 </>
@@ -149,6 +153,8 @@ const DataList = () => {
 
   const handleSearch = (value) => {
     setTextSearch(value)
+    const newUrl = history.location.pathname + `${debounced.length > 0 ? `?search=${encodeURIComponent(debounced)}` : ''} `
+    history.push(newUrl)
   }
 
   const handleTableChange = async (page, pageSize) => {
@@ -169,7 +175,7 @@ const DataList = () => {
   }
 
   return (
-    <>
+    <div className={cx('wrapper')}>
       <PageTitle
         breadcrumbs={[
           {
@@ -182,15 +188,17 @@ const DataList = () => {
       >Dữ liệu
       </PageTitle>
       <Row justify='center'>
-        <div className={cx('search')}>
-          <Text style={{ fontSize: 18, fontWeight: '600', color: '#424242' }}>Dữ liệu</Text>
-          <Search
-            size='large'
-            placeholder='Bạn cần tìm dữ liệu gì?'
-            style={{ borderRadius: 20 }}
-            onSearch={(val) => handleSearch(val)}
-          />
-        </div>
+        <Search
+          enterButton="Tìm kiếm"
+          className={cx('search')}
+          defaultValue={textSearch}
+          size='large'
+          placeholder='Bạn cần tìm dữ liệu gì?'
+          onChange={(event) => {
+            setTextSearch(event?.target?.value ?? '')
+          }}
+          onSearch={(val) => handleSearch(val)}
+        />
       </Row >
       <Divider />
       <Row gutter={[30, 20]} justify='center' style={{ marginBottom: 30 }} >
@@ -222,29 +230,36 @@ const DataList = () => {
                   className={cx('menu-item-text')}
                 >
                   Tất cả
-                  <Link to='/du-lieu' ></Link>
+                  <Link
+                    to={`/du-lieu${textSearch.length > 0
+                      ? `?search=${encodeURIComponent(textSearch)}`
+                      : ''}`} />
                 </Menu.Item>
                 {
-                  categories.map(i => (
+                  categories?.map(i => (
                     <Menu.Item
                       key={i.id}
                       icon={
-                        <div>
-                          <Image
-                            src={`${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`}
-                            className={cx('menu-item-icon')}
-                            height={50}
-                            width={50}
-                            preview={false}
-                          />
-                        </div>
+                        <Image
+                          key={`icon-image-${i.id}`}
+                          src={`${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`}
+                          className={cx('menu-item-icon')}
+                          height={50}
+                          width={50}
+                          preview={false}
+                        />
                       }
                       className={cx('menu-item-text')}
-                    >{i.name}
-                      <Link to={`/du-lieu/${i.id}`} ></Link>
+                    >
+                      {i.name}
+                      <Link
+                        key={`link-${i.id}`}
+                        to={`/du-lieu/${i.id}${textSearch.length > 0
+                          ? `?search=${encodeURIComponent(textSearch)}`
+                          : ''}`} >
+                      </Link>
                     </Menu.Item>
-                  )
-                  )
+                  ))
                 }
               </Menu>
             </div>
@@ -270,8 +285,7 @@ const DataList = () => {
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
-                  )
-                  )}
+                  ))}
                 </Select>
               </Col>
 
@@ -284,13 +298,11 @@ const DataList = () => {
                   <Option key={0} value=''>
                     Tất cả
                   </Option>
-                  {providerTypes?.map((item) => {
-                    return (
-                      <Option key={item.id} value={item.id}>
-                        {item.name}
-                      </Option>
-                    )
-                  })}
+                  {providerTypes?.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
                 </Select>
               </Col>
               <Col xl={8} md={10} xs={24}>
@@ -316,13 +328,13 @@ const DataList = () => {
                 locale: { items_per_page: '/ trang' },
               }}
               locale={{
-                emptyText: 'Không có dữ liệu'
+                emptyText: <div className='py-10 text-muted font-weight-bold'>Không có dữ liệu</div>
               }}
             />
           </div>
         </Col>
       </Row >
-    </>
+    </div>
   )
 }
 

@@ -1,12 +1,12 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 
-import {Link} from 'react-router-dom'
-import {useLayout} from '../../../core/LayoutProvider'
-import {usePageData} from '../../../core/PageData'
+import { Link } from 'react-router-dom'
+import { useLayout } from '../../../core/LayoutProvider'
+import { usePageData } from '../../../core/PageData'
 
 const DefaultTitleCustom: FC = () => {
-  const {pageTitle, pageBreadcrumbs} = usePageData()
-  const {config, attributes} = useLayout()
+  const { pageTitle, pageBreadcrumbs } = usePageData()
+  const { config, attributes } = useLayout()
   return (
     <div {...attributes.pageTitle} className='page-title d-flex flex-column'>
       {pageBreadcrumbs &&
@@ -14,11 +14,6 @@ const DefaultTitleCustom: FC = () => {
         config.pageTitle &&
         config.pageTitle.breadCrumbs && (
           <ul className='breadcrumb breadcrumb-line fw-bold fs-5 my-1'>
-            {/* <li className={'breadcrumb-item text-white'}>
-                <Link className='text-white' to={'/home'}>
-                  Trang chủ
-                </Link>
-            </li> */}
             {Array.from(pageBreadcrumbs).map((item, index) => (
               <li className={'breadcrumb-item'} key={`${item.path}${index}`}>
 
@@ -38,4 +33,4 @@ const DefaultTitleCustom: FC = () => {
   )
 }
 
-export {DefaultTitleCustom}
+export { DefaultTitleCustom }

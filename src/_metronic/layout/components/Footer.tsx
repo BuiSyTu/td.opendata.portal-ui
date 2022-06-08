@@ -10,12 +10,12 @@ const Footer: FC = () => {
       <div className="container">
         <div className="row">
           <div className="col-xl-6">
-            <h3 className='fs-4 text-white mb-2'>© CỔNG DỮ LIỆU MỞ</h3>
-            <p className='text-white mb-0'><strong>Công ty Cổ phần Tin học Tân Dân</strong></p>
-            <p className='text-white mb-0'><strong>Địa chỉ</strong>: Tầng 3 nhà B, Số 60 Thịnh Hào 1 - Phố Tôn Đức Thắng - Đống Đa - Hà Nội</p>
-            <p className='text-white mb-0'><strong>Điện thoại</strong>: (+84)(24)3847.1894 - (+84)(24)3823.0041 - <strong>Fax:</strong> (+84)(24)3847.1895</p>
-            <p className='text-white mb-0'><strong>Hotline:</strong> 0904.358.501 - 0912.522.861 - 0985.915.920</p>
-            <p className='text-white mb-0'><strong>Email</strong>: contact@tandan.com.vn </p>
+            <h3 className='fs-4 text-white mb-2'>{process.env.REACT_APP_TEN_PHAN_MEM}</h3>
+            <p className='text-white mb-0'><strong>{process.env.REACT_APP_TEN_CONG_TY}</strong></p>
+            <p className='text-white mb-0'><strong>Địa chỉ: </strong>{process.env.REACT_APP_DIA_CHI}</p>
+            <p className='text-white mb-0'><strong>Điện thoại: </strong>{process.env.REACT_APP_DIA_CHI}<strong>Fax: </strong>{process.env.REACT_APP_FAX}</p>
+            <p className='text-white mb-0'><strong>Hotline: </strong>{process.env.REACT_APP_HOTLINE}</p>
+            <p className='text-white mb-0'><strong>Email: </strong>{process.env.REACT_APP_EMAIL}</p>
           </div>
           <div className="col-xl-3 my-5 my-xl-0 col-footer-right">
             <h4 className="text-white fw-bold text-uppercase fs-4 mb-xl-6">Truy cập nhanh</h4>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment';
 
 import classNames from 'classnames/bind';
 import styles from './CardMostViewedDatas.module.scss'
 
 import Carousel from 'react-multi-carousel'
 import { Link } from 'react-router-dom';
-import { datasetApi } from 'src/app/apis/dataset'
-import { getCurrentDate } from 'src/utils/common';
+import { datasetApi } from 'src/app/apis'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
 const cx = classNames.bind(styles)
@@ -101,13 +101,13 @@ const CardMostViewedDatas = () => {
                 slidesToSlide={1}
                 swipeable
               >
-                {listMostViewData.map((i, index) => (
+                {listMostViewData.map((i) => (
                   <div
                     className={cx(
                       'item-mostview-data',
                       'bg-body shadow-sm mx-3'
                     )}
-                    key={index}
+                    key={i.id}
                   >
                     <div className={cx('item-mostview-data_header')}>
                       <img
@@ -128,7 +128,11 @@ const CardMostViewedDatas = () => {
                           <span className='far fa-eye'></span> {i?.view ?? 0} lượt xem
                         </div>
                         <div className={cx('col', 'col-date')}>
-                          {getCurrentDate()}<span className='far fa-clock'></span>
+                          {i?.createdOn
+                            ? moment(i?.createdOn).format('DD/MM/YYYY')
+                            : i.lastModifiedOn
+                              ? moment(i?.lastModifiedOn).format('DD/MM/YYYY')
+                              : ''}<span className='far fa-clock'></span>
                         </div>
                       </div>
                       <div className={cx('row-bottom', 'row')}>

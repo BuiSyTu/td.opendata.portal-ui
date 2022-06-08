@@ -5,10 +5,10 @@
  * components (e.g: `src/app/modules/Auth/pages/AuthPage`, `src/app/BasePage`).
  */
 
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 
-import MasterLayout from 'src/components/Layout/MasterLayout'
-import {PrivateRoutes} from './PrivateRoutes'
+import MasterLayout from 'src/_metronic/layout/MasterLayout'
+import PrivateRoutes from './PrivateRoutes'
 import { Switch } from 'react-router-dom'
 
 const Routes: FC = () => {
@@ -21,4 +21,4 @@ const Routes: FC = () => {
   )
 }
 
-export {Routes}
+export { Routes }

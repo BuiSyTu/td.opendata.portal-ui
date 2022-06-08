@@ -3,12 +3,12 @@ import 'react-toastify/dist/ReactToastify.css'
 import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/style.react.scss'
 
-import store, {persistor} from './setup/redux/Store'
+import store, { persistor } from './setup/redux/Store'
 
-import {App} from './app/App'
-import {MetronicI18nProvider} from './_metronic/i18n/Metronici18n'
-import {PersistGate} from 'redux-persist/integration/react'
-import {Provider} from 'react-redux'
+import { App } from './app/App'
+import { MetronicI18nProvider } from './_metronic/i18n/Metronici18n'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -39,8 +39,7 @@ import ReactDOM from 'react-dom'
  *
  * @see https://facebook.github.io/create-react-app/docs/using-the-public-folder
  */
-const {PUBLIC_URL} = process.env
-// _redux.setupAxios(axios, store)
+const { PUBLIC_URL } = process.env
 
 ReactDOM.render(
   <MetronicI18nProvider>

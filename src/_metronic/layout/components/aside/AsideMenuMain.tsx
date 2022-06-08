@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
-import {useIntl} from 'react-intl'
-import {KTSVG} from '../../../helpers'
-import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
-import {AsideMenuItem} from './AsideMenuItem'
+import { useIntl } from 'react-intl'
+import { KTSVG } from '../../../helpers'
+import { AsideMenuItemWithSub } from './AsideMenuItemWithSub'
+import { AsideMenuItem } from './AsideMenuItem'
 
 export function AsideMenuMain() {
   const intl = useIntl()
@@ -13,7 +13,7 @@ export function AsideMenuMain() {
       <AsideMenuItem
         to='/dashboard'
         icon='/media/icons/duotune/art/art002.svg'
-        title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
+        title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
         fontIcon='bi-app-indicator'
       />
       <AsideMenuItem
@@ -109,12 +109,12 @@ export function AsideMenuMain() {
         <a
           target='_blank'
           className='menu-link'
-          href={process.env.REACT_APP_PREVIEW_DOCS_URL + '/docs/changelog'}
+          href={'https://preview.keenthemes.com/metronic8/react/demo1-docs/docs/changelog'}
         >
           <span className='menu-icon'>
             <KTSVG path='/media/icons/duotune/general/gen005.svg' className='svg-icon-2' />
           </span>
-          <span className='menu-title'>Changelog {process.env.REACT_APP_VERSION}</span>
+          <span className='menu-title'>Changelog v8.0.30</span>
         </a>
       </div>
     </>
