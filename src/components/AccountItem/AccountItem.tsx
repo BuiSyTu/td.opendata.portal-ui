@@ -4,7 +4,14 @@ import styles from './AccountItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AccountItem({ icon, content, borderTop = false, to }) {
+interface AccountItemProps {
+    icon?: string,
+    content?: any,
+    borderTop?: boolean,
+    to: string,
+}
+
+const AccountItem: React.FC<AccountItemProps> = ({ icon, content, borderTop = false, to }) => {
     return (
         <div className={cx(
             'wrapper',
