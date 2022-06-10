@@ -2,7 +2,16 @@ import axios from 'axios'
 
 const baseUrl = process.env.REACT_APP_CITIZEN_API_URL
 
-const getToken = async (user, pass) => {
+export interface RegisterModel {
+    fullName: string,
+    email: string,
+    userName: string,
+    password: string,
+    confirmPassword: string,
+    phoneNumber: string,
+}
+
+const getToken = async (user: string, pass: string) => {
     try {
         const res = await axios({
             method: 'POST',
@@ -18,13 +27,13 @@ const getToken = async (user, pass) => {
         })
 
         return res?.data
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.response)
         return null
     }
 }
 
-const register = async ({ fullName, email, userName, password, confirmPassword, phoneNumber }) => {
+const register = async ({ fullName, email, userName, password, confirmPassword, phoneNumber }: RegisterModel) => {
     try {
         const res = await axios({
             method: 'POST',
@@ -44,13 +53,13 @@ const register = async ({ fullName, email, userName, password, confirmPassword, 
         })
 
         return res?.data
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.response)
         return null
     }
 }
 
-const getPersonalProfile = async (token) => {
+const getPersonalProfile = async (token: string) => {
     try {
         const res = await axios({
             method: 'GET',
@@ -62,13 +71,13 @@ const getPersonalProfile = async (token) => {
         })
 
         return res?.data
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.response)
         return null
     }
 }
 
-const updatePersonalProfile = async (data, token) => {
+const updatePersonalProfile = async (data: any, token: string) => {
     try {
         await axios({
             method: 'PUT',
@@ -81,7 +90,7 @@ const updatePersonalProfile = async (data, token) => {
         })
 
         return true
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.response)
         return false
     }

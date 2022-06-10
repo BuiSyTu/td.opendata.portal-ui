@@ -8,7 +8,7 @@ const controllerName = 'datasets'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-const getAll = async (listFilter) => {
+const getAll = async (listFilter: any) => {
   try {
     const params = toQueryString(listFilter)
     const res = await axios({
@@ -22,13 +22,13 @@ const getAll = async (listFilter) => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }
 }
 
-const add = async (data) => {
+const add = async (data: any) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -43,13 +43,13 @@ const add = async (data) => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }
 }
 
-const getById = async (id) => {
+const getById = async (id: string) => {
   try {
     const res = await axios({
       method: 'GET',
@@ -62,13 +62,13 @@ const getById = async (id) => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }
 }
 
-const getData = async (id, listFilter) => {
+const getData = async (id: string, listFilter: any) => {
   try {
     const params = toQueryString(listFilter)
 
@@ -83,13 +83,13 @@ const getData = async (id, listFilter) => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }
 }
 
-const update = async (id, data) => {
+const update = async (id: string, data: any) => {
   try {
     const res = await axios({
       method: 'PUT',
@@ -103,7 +103,7 @@ const update = async (id, data) => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     const { status } = error.response
 
     if (status === 406) {
@@ -122,7 +122,7 @@ const update = async (id, data) => {
   }
 }
 
-const _delete = async (id) => {
+const _delete = async (id: string) => {
   try {
     const res = await axios({
       method: 'DELETE',
@@ -135,7 +135,7 @@ const _delete = async (id) => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }
@@ -154,7 +154,7 @@ const statsByCategory = async () => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }
@@ -174,7 +174,7 @@ const statsByOrganization = async () => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }

@@ -1,31 +1,30 @@
 import axios from 'axios'
-import { getCookie } from 'src/utils/cookies'
+import { getCookie } from 'src/utils/cookies';
+import { toQueryString } from 'src/utils/common';
 
-const controllerName = 'forward'
+const controllerName = 'datatypes'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-const forward = async (axiosConfig) => {
+const getAll = async (listFilter: any) => {
     try {
+        const params = toQueryString(listFilter)
         const res = await axios({
-            method: 'POST',
+            method: 'GET',
+            url: `${baseUrl}?${params}`,
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': authorization,
                 'TDAuthorization': getCookie('token'),
             },
-            url: baseUrl,
-            data: axiosConfig,
             timeout: 15000,
         })
 
         return res?.data
-    } catch (error) {
-        console.error(error.response)
+    } catch (error: any) {
+        console.error(error?.response)
         return null
     }
 }
-
-export const forwardApi = {
-    forward,
+export const dataTypeApi = {
+    getAll,
 }

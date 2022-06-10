@@ -1,30 +1,31 @@
 import axios from 'axios'
-import { getCookie } from 'src/utils/cookies';
-import { toQueryString } from 'src/utils/common';
+import { getCookie } from 'src/utils/cookies'
 
-const controllerName = 'licenses'
+const controllerName = 'forward'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-const getAll = async (listFilter) => {
+const forward = async (axiosConfig: any) => {
     try {
-        const params = toQueryString(listFilter)
         const res = await axios({
-            method: 'GET',
-            url: `${baseUrl}?${params}`,
+            method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': authorization,
                 'TDAuthorization': getCookie('token'),
             },
+            url: baseUrl,
+            data: axiosConfig,
             timeout: 15000,
         })
 
         return res?.data
-    } catch (error) {
-        console.error(error?.response)
+    } catch (error: any) {
+        console.error(error.response)
         return null
     }
 }
-export const licenseApi = {
-    getAll,
+
+export const forwardApi = {
+    forward,
 }

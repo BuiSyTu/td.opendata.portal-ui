@@ -18,7 +18,7 @@ const getWidget = async () => {
         })
 
         return res?.data
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.response)
         return null
     }
@@ -37,7 +37,7 @@ const getOverview = async () => {
         })
 
         return res?.data
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.response)
         return null
     }

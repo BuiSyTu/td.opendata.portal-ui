@@ -6,8 +6,8 @@ const controllerName = 'providertypes'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-const getAll = async (listFilter) => {
-  try {    
+const getAll = async (listFilter: any) => {
+  try {
     const params = toQueryString(listFilter)
     const res = await axios({
       method: 'GET',
@@ -20,7 +20,7 @@ const getAll = async (listFilter) => {
     })
 
     return res?.data
-  } catch (error) {
+  } catch (error: any) {
     console.error(error.response)
     return null
   }
