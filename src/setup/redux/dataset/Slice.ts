@@ -9,11 +9,11 @@ export const datasetSlice = createSlice({
     name: 'dataset',
     initialState: initialState,
     reducers: {
-        setCategoryId: (state, action) => {
+        setCategoryId: (state: any, action: any) => {
             state.categoryId = action?.payload ?? ''
         },
 
-        setDatasetId: (state, action) => {
+        setDatasetId: (state: any, action: any) => {
             state.datasetId = action?.payload ?? ''
         }
     },

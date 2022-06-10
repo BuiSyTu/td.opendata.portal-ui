@@ -8,14 +8,14 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState: initialState,
   reducers: {
-    logOut: (state, action) => {
+    logOut: (state: any, action: any) => {
       state.accessToken = ''
       state.userProfile = null
     },
-    setAccessToken: (state, action) => {
+    setAccessToken: (state: any, action: any) => {
       state.accessToken = action.payload
     },
-    setUserProfile: (state, action) => {
+    setUserProfile: (state: any, action: any) => {
       state.userProfile = action.payload
     }
   },
