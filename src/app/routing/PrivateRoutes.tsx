@@ -1,20 +1,22 @@
-import React, { Suspense } from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 
 import { FallbackView } from '../../_metronic/partials'
 
-import HomePage from 'src/app/pages/Home'
-import DataDetailPage from 'src/app/pages/DataDetail'
-import DataListPage from 'src/app/pages/DataList'
-import ForgotPasswordPage from 'src/app/pages/ForgotPassword'
-import ChangePasswordPage from 'src/app/pages/ChangePassword'
-import LoginPage from '../pages/Login'
-import RegisterPage from '../pages/Register'
-import LogoutPage from '../pages/LogOut'
-import AccountPage from '../pages/Account'
-import ClientServicePage from '../pages/ClientService'
-
 export default function PrivateRoutes() {
+  const HomePage = lazy(() => import('src/app/pages/Home'))
+  const DataDetailPage = lazy(() => import('src/app/pages/DataList'))
+  const DataListPage = lazy(() => import('src/app/pages/DataList'))
+  const ForgotPasswordPage = lazy(() => import('src/app/pages/ForgotPassword'))
+  const ChangePasswordPage = lazy(() => import('src/app/pages/ChangePassword'))
+  const LoginPage = lazy(() => import('../pages/Login'))
+  const RegisterPage = lazy(() => import('../pages/Register'))
+  const LogoutPage = lazy(() => import('../pages/LogOut'))
+  const AccountPage = lazy(() => import('../pages/Account'))
+  const ClientServicePage = lazy(() => import('../pages/ClientService'))
+
+
+
   return (
     <Suspense fallback={<FallbackView />}>
       <Switch>
