@@ -12,6 +12,7 @@ import { PageTitle } from 'src/_metronic/layout/core'
 import TableList from 'src/components/TableList'
 import { datasetApi } from 'src/app/apis'
 import { openJsonInNewTab } from 'src/utils/common'
+import { RootState } from 'src/setup'
 
 const { Text } = Typography
 const { Search } = Input
@@ -19,7 +20,7 @@ const cx = classNames.bind(styles)
 
 const ClientService = () => {
     const dispatch = useDispatch()
-    const userProfile = useSelector(state => state.global.userProfile)
+    const userProfile: any = useSelector((state: RootState) => state.global.userProfile)
 
     const [modalVisible, setModalVisible] = useState(false)
     const [modalId, setModalId] = useState('')
@@ -38,7 +39,7 @@ const ClientService = () => {
             dataIndex: '',
             key: '',
             align: 'center',
-            render: (text, record, index) => {
+            render: (text: any, record: any, index: any) => {
                 return (
                     <Text style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {index + 1}
@@ -64,7 +65,7 @@ const ClientService = () => {
             dataIndex: 'state',
             key: 'state',
             width: '20%',
-            render: (text, record, index) => {
+            render: (text: any, record: any, index: any) => {
                 const getApproveState = () => {
                     let color = secondary
                     let textDisplay = 'Không xác định'
@@ -119,7 +120,7 @@ const ClientService = () => {
             dataIndex: '',
             key: '',
             align: 'center',
-            render: (text, record) => (
+            render: (text: any, record: any) => (
                 <div>
                     <button
                         className='btn btn-light-success m-btn m-btn--icon btn-sm m-btn--icon-only'
@@ -168,7 +169,7 @@ const ClientService = () => {
             dataIndex: '',
             key: '',
             align: 'center',
-            render: (text, record) => (
+            render: (text: any, record: any) => (
                 <div>
                     <button
                         className='btn btn-light-primary m-btn m-btn--icon btn-sm m-btn--icon-only'
@@ -209,7 +210,7 @@ const ClientService = () => {
                 setLoading(true)
                 var res = await datasetApi.getAll({
                     orderBy: ['view'],
-                    author: userProfile.userName,
+                    author: userProfile?.userName ?? '',
                 })
                 setDataTable(res?.data ?? [])
                 setCount(res?.totalCount ?? 0)
@@ -232,7 +233,7 @@ const ClientService = () => {
         return () => { }
     }, [offset, size, inputValue])
 
-    const handleEdit = (id) => {
+    const handleEdit = (id: string) => {
         setModalVisible(true)
         setModalId(id)
         setTypeModal('edit')
@@ -240,7 +241,7 @@ const ClientService = () => {
         dispatch(setDisableDataTab(false))
     }
 
-    const handleView = (id) => {
+    const handleView = (id: string) => {
         setModalVisible(true)
         setModalId(id)
         setTypeModal('view')
@@ -253,7 +254,7 @@ const ClientService = () => {
         setTypeModal('add')
     }
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: string) => {
         var res = await datasetApi.delete(id)
         if (res) {
             notification.success({
@@ -271,14 +272,14 @@ const ClientService = () => {
         }
     }
 
-    const handleSyncData = async (id) => {
+    const handleSyncData = async (id: string) => {
         notification.warning({
             message: 'Đang đồng bộ!',
             duration: 2,
             placement: 'bottomRight',
         });
 
-        var res = await datasetApi.syncData(id)
+        var res: any = await datasetApi.syncData(id)
         if (res) {
             notification.success({
                 message: 'Thành công!',
@@ -295,7 +296,7 @@ const ClientService = () => {
         }
     }
 
-    const handleGetData = async (id) => {
+    const handleGetData = async (id: string) => {
         var res = await datasetApi.getData(id)
         if (res) {
             openJsonInNewTab(res)

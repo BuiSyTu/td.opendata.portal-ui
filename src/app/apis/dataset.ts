@@ -68,7 +68,7 @@ const getById = async (id: string) => {
   }
 }
 
-const getData = async (id: string, listFilter: any) => {
+const getData = async (id: string, listFilter?: any) => {
   try {
     const params = toQueryString(listFilter)
 
@@ -180,6 +180,10 @@ const statsByOrganization = async () => {
   }
 }
 
+const syncData = (id: string) => {
+  return id ? true : false
+}
+
 export const datasetApi = {
   getAll,
   add,
@@ -189,4 +193,5 @@ export const datasetApi = {
   delete: _delete,
   statsByCategory,
   statsByOrganization,
+  syncData,
 }

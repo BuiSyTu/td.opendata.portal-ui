@@ -13,6 +13,7 @@ import { categoryApi, datasetApi, dataTypeApi, forwardApi, licenseApi, organizat
 import { setColumnMetata, setColumnPreview, setDataMetadata, setDataPreview, setDataTypeCode, setDataUpload, setDisableDataTab, setTabKey, setFileName, setFileType, setFileUrl } from 'src/setup/redux/clientService/Slice'
 import { toObject } from 'src/utils/common'
 import MetadataTable from '../MetadataTable'
+import { RootState } from 'src/setup'
 
 const { TextArea } = Input
 const { Text } = Typography
@@ -22,8 +23,18 @@ const { Dragger } = Upload
 
 const cx = classNames.bind(styles)
 
+interface FormModalProps {
+    setUpdate: any,
+    modalVisible: boolean,
+    setModalVisible: any,
+    modalId: string,
+    setModalId: any,
+    typeModal: string,
+    setTypeModal: any,
+}
 
-const FormModal = ({
+
+const FormModal: React.FC<FormModalProps> = ({
     setUpdate,
     modalVisible,
     setModalVisible,
@@ -34,19 +45,19 @@ const FormModal = ({
 }) => {
     const dispatch = useDispatch()
 
-    const userProfile = useSelector(state => state.global.userProfile)
+    const userProfile: any = useSelector((state: RootState) => state.global.userProfile)
 
-    const tabKey = useSelector(state => state.clientService.tabKey)
-    const disableDataTab = useSelector(state => state.clientService.disableDataTab)
-    const dataTypeCode = useSelector(state => state.clientService.dataTypeCode)
-    const dataPreview = useSelector(state => state.clientService.dataPreview)
-    const columnPreview = useSelector(state => state.clientService.columnPreview)
-    const dataMetadata = useSelector(state => state.clientService.dataMetadata)
-    const dataUpload = useSelector(state => state.clientService.dataUpload)
+    const tabKey = useSelector((state: RootState) => state.clientService.tabKey)
+    const disableDataTab = useSelector((state: RootState) => state.clientService.disableDataTab)
+    const dataTypeCode = useSelector((state: RootState) => state.clientService.dataTypeCode)
+    const dataPreview = useSelector((state: RootState) => state.clientService.dataPreview)
+    const columnPreview = useSelector((state: RootState) => state.clientService.columnPreview)
+    const dataMetadata = useSelector((state: RootState) => state.clientService.dataMetadata)
+    const dataUpload = useSelector((state: RootState) => state.clientService.dataUpload)
 
-    const fileName = useSelector(state => state.clientService.fileName)
-    const fileType = useSelector(state => state.clientService.fileType)
-    const fileUrl = useSelector(state => state.clientService.fileUrl)
+    const fileName = useSelector((state: RootState) => state.clientService.fileName)
+    const fileType = useSelector((state: RootState) => state.clientService.fileType)
+    const fileUrl = useSelector((state: RootState) => state.clientService.fileUrl)
 
     const [form] = Form.useForm()
     const [disable, setDisable] = useState(false)
@@ -58,7 +69,7 @@ const FormModal = ({
     const [providerTypes, setProviderTypes] = useState([])
     const [dataTypes, setDataTypes] = useState([])
     const [licenses, setLicenses] = useState([])
-    const [fileList, setFileList] = useState([])
+    const [fileList, setFileList] = useState<any[]>([])
     const [disableTablePreview, setDisableTablePreview] = useState(true)
     const [disableTableMetadata, setDisableTableMetadata] = useState(true)
 
@@ -223,8 +234,8 @@ const FormModal = ({
 
             formData.metadata = JSON.stringify(dataMetadata)
 
-            formData.author = userProfile.userName
-            formData.authorEmail = userProfile.email
+            formData.author = userProfile?.userName ?? ''
+            formData.authorEmail = userProfile?.email ?? ''
 
             typeModal === 'edit' ? putData(formData) : postData(formData)
         } catch (errorInfo) {
@@ -232,7 +243,7 @@ const FormModal = ({
         }
     }
 
-    const handleChangeDataType = (value, event) => {
+    const handleChangeDataType = (value: any, event: any) => {
         setDisableTablePreview(true)
         setDisableTableMetadata(true)
 
@@ -240,7 +251,7 @@ const FormModal = ({
         dispatch(setDisableDataTab(false))
     }
 
-    const postData = async (data) => {
+    const postData = async (data: any) => {
         if (!data.metadata) {
             notification.error({
                 message: 'Bạn chưa tạo metadata',
@@ -272,7 +283,7 @@ const FormModal = ({
         handleCancel()
     }
 
-    const putData = async (data) => {
+    const putData = async (data: any) => {
         try {
             setButtonLoading(true)
             var res = await datasetApi.update(modalId, data)
@@ -290,11 +301,11 @@ const FormModal = ({
         handleCancel()
     }
 
-    const handleTabClick = (key) => {
+    const handleTabClick = (key: any) => {
         dispatch(setTabKey(key))
     }
 
-    const handleChangeDragger = (info) => {
+    const handleChangeDragger = (info: any) => {
         setFileList(info.fileList)
         const { response } = info.file
 
@@ -310,7 +321,7 @@ const FormModal = ({
 
         let reader = new FileReader()
 
-        reader.onload = (e) => {
+        reader.onload = (e: any) => {
             const data = e.target.result
             const workbook = XLSX.read(data, { type: 'binary' })
 
@@ -326,7 +337,7 @@ const FormModal = ({
     }
 
     const handleClickPreview = () => {
-        const handlePreview = (dataSource) => {
+        const handlePreview = (dataSource: any) => {
             if (!Array.isArray(dataSource)) {
                 notification.info({
                     message: 'Dữ liệu không hợp lệ',
@@ -352,7 +363,7 @@ const FormModal = ({
             dispatch(setDataPreview(dataSource))
 
             if (Array.isArray(dataMetadata) && dataMetadata.length > 0) {
-                const columns = dataMetadata.map((metadata) => ({
+                const columns = dataMetadata.map((metadata: any) => ({
                     key: metadata.Data,
                     title: metadata.Title,
                     dataIndex: metadata.Data,
@@ -430,7 +441,7 @@ const FormModal = ({
             { key: 'Description', title: 'Description', dataIndex: 'Description', editable: true },
         ]
 
-        const handleWithDataSource = (dataSource) => {
+        const handleWithDataSource = (dataSource: any) => {
             if (!Array.isArray(dataSource)) {
                 notification.info({
                     message: 'Dữ liệu không hợp lệ',
@@ -518,9 +529,9 @@ const FormModal = ({
         }
     }
 
-    const handleDrop = (e) => console.log('Dropped files', e.dataTransfer.files)
+    const handleDrop = (e: any) => console.log('Dropped files', e.dataTransfer.files)
 
-    const handlePreview = async (file) => {
+    const handlePreview = async (file: any) => {
         console.log(file)
         if (file.url) {
             window.open(file.url, '_blank')
@@ -620,7 +631,7 @@ const FormModal = ({
                                 <Col span={12}>
                                     <Form.Item label='Lĩnh vực' name='categoryId'>
                                         <Select showSearch placeholder='Chọn lĩnh vực'>
-                                            {categories.map(category => (
+                                            {categories.map((category: any) => (
                                                 <Option key={category.id} value={category.id}>
                                                     {category.name}
                                                 </Option>
@@ -631,7 +642,7 @@ const FormModal = ({
                                 <Col span={12}>
                                     <Form.Item label='Tổ chức' name='organizationId'>
                                         <Select showSearch placeholder='Chọn tổ chức'>
-                                            {organizations.map(organization => (
+                                            {organizations.map((organization: any) => (
                                                 <Option key={organization.id} value={organization.id}>
                                                     {organization.name}
                                                 </Option>
@@ -645,7 +656,7 @@ const FormModal = ({
                                 <Col span={12}>
                                     <Form.Item label='Hình thức cung cấp' name='providerTypeId'>
                                         <Select showSearch placeholder='Chọn hình thức cung cấp'>
-                                            {providerTypes.map(providerType => (
+                                            {providerTypes.map((providerType: any) => (
                                                 <Option key={providerType.id} value={providerType.id}>
                                                     {providerType.name}
                                                 </Option>
@@ -656,7 +667,7 @@ const FormModal = ({
                                 <Col span={12}>
                                     <Form.Item label='Giấy phép' name='licenseId'>
                                         <Select showSearch placeholder='Chọn giấy phép'>
-                                            {licenses.map(license => (
+                                            {licenses.map((license: any) => (
                                                 <Option key={license.id} value={license.id}>
                                                     {license.name}
                                                 </Option>
@@ -676,7 +687,7 @@ const FormModal = ({
                                         <Select showSearch placeholder='Chọn loại dữ liệu'
                                             onChange={(value, event) => handleChangeDataType(value, event)}
                                         >
-                                            {dataTypes.map(dataType => (
+                                            {dataTypes.map((dataType: any) => (
                                                 <Option key={dataType.id} value={dataType.id} code={dataType.code}>
                                                     {dataType.name}
                                                 </Option>

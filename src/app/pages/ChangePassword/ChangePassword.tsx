@@ -33,7 +33,7 @@ const registrationSchema = Yup.object().shape({
     confirmPassword: Yup.string()
         .required('Không hợp lệ')
         .when('password', {
-            is: (val) => (val && val.length > 0 ? true : false),
+            is: (val: any) => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf(
                 [Yup.ref('password')],
                 'Mật khẩu không khớp, vui lòng kiểm tra lại!'
@@ -41,21 +41,27 @@ const registrationSchema = Yup.object().shape({
         }),
 })
 
-const ChangePassword = (props) => {
-    const { setModalLogin, setModalChangePass, emailChangePass } = props
+interface ChangePasswordProps {
+    setModalLogin: any,
+    setModalChangePass: any,
+    emailChangePass: any,
+}
+
+
+const ChangePassword: React.FC<ChangePasswordProps> = ({ setModalLogin, setModalChangePass, emailChangePass }) => {
     const [loading, setLoading] = useState(false)
 
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchema,
-        onSubmit: (values, { setStatus, setSubmitting }) => {
+        onSubmit: (values: any, { setStatus, setSubmitting }) => {
             toast.success('Thao tác thành công!', { autoClose: 2000 })
             setLoading(true)
             setTimeout(() => {
                 // var date = moment(values.dateOfBirth, 'DD/MM/YYYY').format('YYYY-MM-DD')
                 changePassword(emailChangePass, values.password, values.confirmPassword, values.code)
                     .then((response) => {
-                        let res = response.data
+                        let res: any = response.data
                         if (res.succeeded) {
                             toast.success('Mật khẩu được đổi thành công! Vui lòng đăng nhâp lại để tiếp tục!')
                             setModalChangePass(false)

@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
 
-import { toAbsoluteUrl } from 'src/_metronic/helpers'
-
 interface WidgetStatisticProps {
     slug?: string,
     name: string,

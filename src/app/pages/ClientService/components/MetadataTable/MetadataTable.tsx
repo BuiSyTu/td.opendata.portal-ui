@@ -1,15 +1,19 @@
 import './MetadataTable.scss'
 
-import { Button, Form, Input, Table } from 'antd'
+import { Button, Form, FormInstance, Input, Table } from 'antd'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { RootState } from 'src/setup'
 import { setDataMetadata } from 'src/setup/redux/clientService/Slice'
 
-const EditableContext = React.createContext(null)
+const EditableContext = React.createContext<FormInstance<any> | null>(null)
 
+interface EditableRowProps {
+    index: number;
+}
 
-const EditableRow = ({ index, ...props }) => {
+const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
     const [form] = Form.useForm()
     return (
         <Form form={form} component={false}>
@@ -20,7 +24,16 @@ const EditableRow = ({ index, ...props }) => {
     )
 }
 
-const EditableCell = ({
+interface EditableCellProps {
+    title: React.ReactNode;
+    editable: boolean;
+    children: React.ReactNode;
+    dataIndex: any;
+    record: any;
+    handleSave: (record: any) => void;
+}
+
+const EditableCell: React.FC<EditableCellProps> = ({
     title,
     editable,
     children,
@@ -30,7 +43,7 @@ const EditableCell = ({
     ...restProps
 }) => {
     const [editing, setEditing] = useState(false)
-    const inputRef = useRef(null)
+    const inputRef = useRef<any>(null)
     const form = useContext(EditableContext)
 
     useEffect(() => {
@@ -86,8 +99,8 @@ const EditableCell = ({
 
 const MetadataTable = () => {
     const dispatch = useDispatch()
-    const columnMetadata = useSelector(state => state.clientService.columnMetadata)
-    const dataMetadata = useSelector(state => state.clientService.dataMetadata)
+    const columnMetadata = useSelector((state: RootState) => state.clientService.columnMetadata)
+    const dataMetadata = useSelector((state: RootState) => state.clientService.dataMetadata)
 
     const handleAdd = () => {
         const newData = {
@@ -99,10 +112,10 @@ const MetadataTable = () => {
         dispatch(setDataMetadata([...dataMetadata, newData]))
     }
 
-    const handleSave = (row) => {
-        const newData = [...dataMetadata]
-        const index = newData.findIndex((item) => row.Data === item.Data)
-        const item = newData[index]
+    const handleSave = (row: any) => {
+        const newData: any[] = [...dataMetadata]
+        const index = newData.findIndex((item: any) => row.Data === item.Data)
+        const item: any = newData[index]
         newData.splice(index, 1, { ...item, ...row })
         dispatch(setDataMetadata(newData))
     }
@@ -114,14 +127,14 @@ const MetadataTable = () => {
         },
     }
 
-    const columns = columnMetadata?.map((col) => {
+    const columns = columnMetadata.map((col: any) => {
         if (!col.editable) {
             return col
         }
 
         return {
             ...col,
-            onCell: (record) => ({
+            onCell: (record: any) => ({
                 record,
                 editable: col.editable,
                 dataIndex: col.dataIndex,

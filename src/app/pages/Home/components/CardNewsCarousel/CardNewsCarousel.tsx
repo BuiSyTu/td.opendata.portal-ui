@@ -51,13 +51,9 @@ const CardNewsCarousel = () => {
                         autoPlay
                         autoPlaySpeed={6000}
                         centerMode={false}
-                        className=""
-                        containerclassName="container px-0"
-                        dotListclassName=""
                         draggable={false}
                         focusOnSelect={false}
                         infinite
-                        itemclassName=""
                         keyBoardControl={false}
                         minimumTouchDrag={80}
                         renderButtonGroupOutside={false}
@@ -89,7 +85,6 @@ const CardNewsCarousel = () => {
                             }
                         }}
                         showDots={true}
-                        sliderclassName=""
                         slidesToSlide={1}
                         swipeable
                     >

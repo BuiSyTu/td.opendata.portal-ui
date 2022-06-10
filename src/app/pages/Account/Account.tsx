@@ -8,6 +8,7 @@ import classNames from 'classnames/bind'
 
 import { setUserProfile } from 'src/setup/redux/global/Slice'
 import { citizenApi } from 'src/app/apis'
+import { RootState } from 'src/setup'
 
 const cx = classNames.bind(styles)
 
@@ -30,12 +31,12 @@ const accountSchema = Yup.object().shape({
 
 const Account = () => {
     const dispatch = useDispatch()
-    const userProfile = useSelector(state => state.global.userProfile)
-    const accessToken = useSelector(state => state.global.accessToken)
+    const userProfile: any = useSelector((state: RootState) => state.global.userProfile)
+    const accessToken = useSelector((state: RootState) => state.global.accessToken)
 
     const [loading, setLoading] = useState(false)
 
-    const initialValues = {
+    const initialValues: any = {
         fullName: userProfile?.fullName ?? '',
         address: userProfile?.address ?? '',
         phoneNumber: userProfile?.phoneNumber ?? '',

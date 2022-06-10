@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom'
 import moment from 'moment'
 
 import classNames from 'classnames/bind'
@@ -19,7 +19,10 @@ const { Text } = Typography;
 
 const cx = classNames.bind(styles)
 
-const DataList = ({ location, history }) => {
+const DataList = () => {
+  const location = useLocation()
+  const history = useHistory()
+
   const [categories, setCategories] = useState([])
   const [providerTypeId, setProviderTypeId] = useState('')
   const [providerTypes, setProviderTypes] = useState([])
@@ -40,7 +43,7 @@ const DataList = ({ location, history }) => {
 
   const debounced = useDebounce(textSearch, 500)
 
-  let { id: categoryId } = useParams()
+  let { id: categoryId }: any = useParams()
   if (!categoryId) categoryId = ''
 
   useEffect(() => {
@@ -103,7 +106,7 @@ const DataList = ({ location, history }) => {
       title: '',
       dataIndex: 'name',
       key: 'name',
-      render: (text, record, index) => {
+      render: (text: any, record: any, index: any) => {
         return (
           <div
             className='pointer'
@@ -143,34 +146,34 @@ const DataList = ({ location, history }) => {
     },
   ]
 
-  const handleChangeProviderTypeId = (value) => {
+  const handleChangeProviderTypeId = (value: string) => {
     setProviderTypeId(value)
   }
 
-  const handleChangeOrganizationId = (value) => {
+  const handleChangeOrganizationId = (value: string) => {
     setOrganizationId(value)
   }
 
-  const handleSearch = (value) => {
+  const handleSearch = (value: string) => {
     setTextSearch(value)
     const newUrl = history.location.pathname + `${debounced.length > 0 ? `?search=${encodeURIComponent(debounced)}` : ''} `
     history.push(newUrl)
   }
 
-  const handleTableChange = async (page, pageSize) => {
+  const handleTableChange = async (page: number, pageSize: number) => {
     setCurrent(page)
     setSkip(page * (pageSize - 1))
     setLoading(true)
   }
 
-  const handleSizeChange = (current, size) => {
+  const handleSizeChange = (current: number, size: number) => {
     setCurrent(1)
     setSkip(0)
     setTop(size)
     setLoading(true)
   }
 
-  const handleShowTotal = (total, range) => {
+  const handleShowTotal = (total: number, range: any) => {
     return `${range[0]}-${range[1]} của ${total} dữ liệu`;
   }
 
@@ -236,7 +239,7 @@ const DataList = ({ location, history }) => {
                       : ''}`} />
                 </Menu.Item>
                 {
-                  categories?.map(i => (
+                  categories?.map((i: any) => (
                     <Menu.Item
                       key={i.id}
                       icon={
@@ -281,7 +284,7 @@ const DataList = ({ location, history }) => {
                   <Option key={0} value=''>
                     Tất cả
                   </Option>
-                  {organizations?.map((item) => (
+                  {organizations?.map((item: any) => (
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
@@ -298,7 +301,7 @@ const DataList = ({ location, history }) => {
                   <Option key={0} value=''>
                     Tất cả
                   </Option>
-                  {providerTypes?.map((item) => (
+                  {providerTypes?.map((item: any) => (
                     <Option key={item.id} value={item.id}>
                       {item.name}
                     </Option>
@@ -315,7 +318,6 @@ const DataList = ({ location, history }) => {
               dataSource={datasets}
               showHeader={false}
               style={{ backgroundColor: 'transparent' }}
-              ellipsis="enable"
               pagination={{
                 total: total,
                 defaultPageSize: top,

@@ -22,11 +22,16 @@ import { setCategoryId } from 'src/setup/redux/dataset/Slice'
 import { Wrapper as PopperWrapper } from 'src/components/Popper'
 import AccountItem from 'src/components/AccountItem'
 import { Footer } from './Footer'
+import { RootState } from 'src/setup'
 
-const MasterLayout = ({ children }) => {
+interface MasterLayoutProps {
+  children?: any,
+}
+
+const MasterLayout: React.FC<MasterLayoutProps> = ({ children }) => {
   const dispatch = useDispatch()
-  const accessToken = useSelector(state => state.global.accessToken)
-  const userProfile = useSelector(state => state.global.userProfile)
+  const accessToken = useSelector((state: RootState) => state.global.accessToken)
+  const userProfile: any = useSelector((state: RootState) => state.global.userProfile)
 
   const [listCategory, setListCategory] = useState([])
   const [inputValue, setInputValue] = useState('')
@@ -84,11 +89,12 @@ const MasterLayout = ({ children }) => {
   }, [location.key])
 
   const [currentNavbar, setCurrentNavbar] = useState(1)
-  const onClickNavbar = (e) => {
+
+  const onClickNavbar = (e: any) => {
     setCurrentNavbar(e.key)
   }
 
-  const handleClickCategory = (value) => {
+  const handleClickCategory = (value: any) => {
     dispatch(setCategoryId(value))
   }
 
@@ -131,7 +137,7 @@ const MasterLayout = ({ children }) => {
                         <Nav className='me-auto w-100 mw-100'>
                           <Menu
                             onClick={onClickNavbar}
-                            selectedKeys={[currentNavbar]}
+                            selectedKeys={[currentNavbar.toString()]}
                             mode='horizontal'
                             className='w-100 mw-100'
                           >
@@ -184,7 +190,7 @@ const MasterLayout = ({ children }) => {
                               interactive
                               // visible
                               render={attrs => (
-                                <div className="dd-info" tabIndex="-1" {...attrs}>
+                                <div className="dd-info" tabIndex={-1} {...attrs}>
                                   <PopperWrapper>
                                     <AccountItem
                                       icon='fa fas fa-align-left'
@@ -274,23 +280,19 @@ const MasterLayout = ({ children }) => {
                     autoPlay
                     autoPlaySpeed={6000}
                     centerMode={false}
-                    containerclassName='container px-0'
-                    dotListclassName=''
                     draggable={false}
                     focusOnSelect={false}
                     infinite
-                    itemclassName=''
                     keyBoardControl={false}
                     minimumTouchDrag={80}
                     renderButtonGroupOutside={false}
                     renderDotsOutside={false}
                     responsive={responseCarousel}
                     showDots={true}
-                    sliderclassName=''
                     slidesToSlide={1}
                     swipeable
                   >
-                    {listCategory.map((i) => (
+                    {listCategory.map((i: any) => (
                       <div
                         className='item-category text-center'
                         key={i.id}
@@ -370,7 +372,7 @@ const MasterLayout = ({ children }) => {
       </div>
 
       <ScrollTop />
-    </PageDataProvider>
+    </PageDataProvider >
   )
 }
 

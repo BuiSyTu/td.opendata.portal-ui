@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 const initialState = {
   accessToken: '',
   userProfile: null,
@@ -8,7 +9,7 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState: initialState,
   reducers: {
-    logOut: (state: any, action: any) => {
+    logOut: (state: any) => {
       state.accessToken = ''
       state.userProfile = null
     },

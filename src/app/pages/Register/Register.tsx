@@ -50,7 +50,7 @@ const registrationSchema = Yup.object().shape({
     confirmPassword: Yup.string()
         .required('Không hợp lệ')
         .when('password', {
-            is: (val) => (val && val.length > 0 ? true : false),
+            is: (val: any) => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf(
                 [Yup.ref('password')],
                 'Mật khẩu không khớp, vui lòng kiểm tra lại!'

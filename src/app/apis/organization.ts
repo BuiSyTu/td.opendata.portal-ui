@@ -6,7 +6,7 @@ const controllerName = 'organizations'
 const baseUrl = `${process.env.REACT_APP_API_URL}/${controllerName}`
 const authorization = `Bearer ${process.env.REACT_APP_BEAR_TOKEN}`
 
-const getAll = async (listFilter: any) => {
+const getAll = async (listFilter?: any) => {
   try {
     const params = toQueryString(listFilter)
     const res = await axios({

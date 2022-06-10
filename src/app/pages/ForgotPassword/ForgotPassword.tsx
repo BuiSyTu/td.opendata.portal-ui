@@ -19,8 +19,13 @@ const initialValues = {
     email: '',
 }
 
-const ForgotPassword = (props) => {
-    const { setModalForgot, setModalChangePass, setEmailChangePass } = props
+interface ForgotPasswordProps {
+    setModalForgot: any,
+    setModalChangePass: any,
+    setEmailChangePass: any,
+}
+
+const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setModalForgot, setModalChangePass, setEmailChangePass }) => {
     const [loading, setLoading] = useState(false)
 
     const formik = useFormik({

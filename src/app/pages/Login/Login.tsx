@@ -1,7 +1,7 @@
 import styles from './Login.module.scss'
 
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
 import classNames from 'classnames/bind'
@@ -28,7 +28,8 @@ const initialValues = {
     password: 'Tandan@123',
 }
 
-const Login = ({ history }) => {
+const Login = () => {
+    const history = useHistory()
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const formik = useFormik({

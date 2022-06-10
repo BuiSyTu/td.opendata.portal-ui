@@ -23,14 +23,14 @@ const CardMostViewedDatas = () => {
     fetchData()
   }, [])
 
-  const CustomLeftArrow = ({ onClick, ...rest }) => {
+  const CustomLeftArrow = ({ onClick, ...rest }: any) => {
     return <button
       className={cx('react-multiple-carousel__arrow', 'react-multiple-carousel__arrow--left')}
       onClick={() => onClick()}>
     </button>;
   }
 
-  const CustomRightArrow = ({ onClick, ...rest }) => {
+  const CustomRightArrow = ({ onClick, ...rest }: any) => {
     return <button
       className={cx('react-multiple-carousel__arrow', 'react-multiple-carousel__arrow--right')}
       onClick={() => onClick()}>
@@ -60,12 +60,9 @@ const CardMostViewedDatas = () => {
                 autoPlay
                 autoPlaySpeed={8000}
                 centerMode={false}
-                containerclassName='container px-0'
-                dotListclassName=''
                 draggable={false}
                 focusOnSelect={false}
                 infinite
-                itemclassName=''
                 keyBoardControl={false}
                 minimumTouchDrag={80}
                 renderButtonGroupOutside={false}
@@ -97,11 +94,10 @@ const CardMostViewedDatas = () => {
                   }
                 }}
                 showDots={false}
-                sliderclassName=''
                 slidesToSlide={1}
                 swipeable
               >
-                {listMostViewData.map((i) => (
+                {listMostViewData.map((i: any) => (
                   <div
                     className={cx(
                       'item-mostview-data',

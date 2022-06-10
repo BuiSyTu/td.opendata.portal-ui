@@ -14,10 +14,10 @@ const { TabPane } = Tabs
 const { Search } = Input
 const cx = classNames.bind(styles)
 
-const metadataToColumns = (metadata) => {
+const metadataToColumns = (metadata: any) => {
     try {
         const metadataJSON = JSON.parse(metadata)
-        const cl = metadataJSON.map(item => ({
+        const cl = metadataJSON.map((item: any) => ({
             title: item?.Title ?? '',
             dataIndex: item?.Data ?? '',
             key: item?.Data ?? '',
@@ -32,7 +32,7 @@ const metadataToColumns = (metadata) => {
 }
 
 const DataDetail = () => {
-    const [dataset, setDataset] = useState(null)
+    const [dataset, setDataset] = useState<any>(null)
 
     const [inputValue, setInputValue] = useState('')
     const [update, setUpdate] = useState(false)
@@ -43,7 +43,7 @@ const DataDetail = () => {
     const [count, setCount] = useState(0)
     const [offset, setOffset] = useState(0)
 
-    const { id: datasetId } = useParams()
+    const { id: datasetId }: any = useParams()
 
     useEffect(() => {
         setUpdate(true)
