@@ -111,7 +111,10 @@ const CardStatistical = () => {
           {overViewData.map((item: any, index: any) => (
             <div className="col-lg-4 col-xl-4 mb-4 mb-xl-5" key={index}>
               <WidgetStatistic
-                data={item}
+                name={item?.name}
+                count={item?.count}
+                slug={item?.slug}
+                imageUrl={toAbsoluteUrl(`/media/images/${item?.icon}`)}
               />
             </div>
           ))}

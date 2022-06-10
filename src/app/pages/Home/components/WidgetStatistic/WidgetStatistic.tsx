@@ -3,23 +3,31 @@ import { Link } from 'react-router-dom'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
 interface WidgetStatisticProps {
-    data: any,
+    slug?: string,
+    name: string,
+    count: any,
+    imageUrl?: string,
 }
 
-const WidgetStatistic: React.FC<WidgetStatisticProps> = ({ data }) => {
+const WidgetStatistic: React.FC<WidgetStatisticProps> = ({
+    slug,
+    name,
+    count,
+    imageUrl,
+}) => {
     return (
         <div className="card shadow-sm">
-            {data?.slug
+            {slug
                 ? (
-                    <Link to={data?.slug}>
+                    <Link to={slug}>
                         <div className="card-body p-4">
                             <div className='d-flex align-items-center justify-content-between'>
                                 <div className='d-flex align-items-start flex-column'>
-                                    <h4 className='text-gray-800 fw-bold fs-5'>{data?.name}</h4>
-                                    <h3 className='m-0 text-danger fs-1'>{data?.count}</h3>
+                                    <h4 className='text-gray-800 fw-bold fs-5'>{name}</h4>
+                                    <h3 className='m-0 text-danger fs-1'>{count}</h3>
                                 </div>
                                 <div className="statistical-thumb">
-                                    <img src={toAbsoluteUrl(`/media/images/${data?.icon}`)} className="w-60px" alt="" />
+                                    <img src={imageUrl} className="w-60px" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -28,11 +36,11 @@ const WidgetStatistic: React.FC<WidgetStatisticProps> = ({ data }) => {
                     <div className="card-body p-4">
                         <div className='d-flex align-items-center justify-content-between'>
                             <div className='d-flex align-items-start flex-column'>
-                                <h4 className='text-gray-800 fw-bold fs-5'>{data?.name}</h4>
-                                <h3 className='m-0 text-danger fs-1'>{data?.count}</h3>
+                                <h4 className='text-gray-800 fw-bold fs-5'>{name}</h4>
+                                <h3 className='m-0 text-danger fs-1'>{count}</h3>
                             </div>
                             <div className="statistical-thumb">
-                                <img src={toAbsoluteUrl(`/media/images/${data?.icon}`)} className="w-60px" alt="" />
+                                <img src={imageUrl} className="w-60px" alt="" />
                             </div>
                         </div>
                     </div>
