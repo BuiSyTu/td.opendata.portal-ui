@@ -10,7 +10,7 @@ const cookies = new Cookies();
  * @param cookieValue - Value of the cookie.
  * @param cookiePath - Path of the cookie. Defaults to "/".
  */
-export function setCookie(cookieName, cookieValue, cookiePath = CONFIG.COOKIE_PATH) {
+export function setCookie(cookieName: string, cookieValue: string, cookiePath = CONFIG.COOKIE_PATH) {
     cookies.set(cookieName, cookieValue,
         {
             path: cookiePath,
@@ -26,7 +26,7 @@ export function setCookie(cookieName, cookieValue, cookiePath = CONFIG.COOKIE_PA
  * @param cookieName - Name of the cookie.
  * @param cookiePath - Path of the cookie. Defaults to "/".
  */
-export function removeCookie(cookieName, cookiePath = CONFIG.COOKIE_PATH) {
+export function removeCookie(cookieName: string, cookiePath = CONFIG.COOKIE_PATH) {
     cookies.remove(
         cookieName,
         {
@@ -41,6 +41,6 @@ export function removeCookie(cookieName, cookiePath = CONFIG.COOKIE_PATH) {
  * @param cookieName - Name of the cookie.
  * @return {any}
  */
-export function getCookie(cookieName) {
+export function getCookie(cookieName: string) {
     return cookies.get(cookieName);
 }

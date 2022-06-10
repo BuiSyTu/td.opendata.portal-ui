@@ -1,13 +1,12 @@
 import _ from 'lodash'
-/* eslint no-useless-escape:0 import/prefer-default-export:0 */
 
 const reg =
   /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/
-export const isUrl = (path) => reg.test(path)
+export const isUrl = (path: string) => reg.test(path)
 
-export const handleImage = (values, URL) => {
+export const handleImage = (values: any, URL: any) => {
   const arr = _.without(_.split(values, '##'), '')
-  let res = []
+  let res: any[] = []
   arr.forEach((i) => {
     res.push({
       url: !(i.includes('https://') || i.includes('http://')) ? URL + i : i,
@@ -17,16 +16,16 @@ export const handleImage = (values, URL) => {
   return res
 }
 
-export const convertImage = (array) => {
-  var temp = []
-  array.forEach((element) => {
+export const convertImage = (array: any) => {
+  var temp: any[] = []
+  array.forEach((element: any) => {
     temp = _.concat(temp, element?.response?.data[0]?.url ?? element.path)
   })
   var res = _.uniq(temp).join('##')
   return res
 }
 
-export const getBase64 = (file) => {
+export const getBase64 = (file: any) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.readAsDataURL(file)
