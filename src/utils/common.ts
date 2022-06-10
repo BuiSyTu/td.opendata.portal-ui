@@ -1,9 +1,9 @@
-export const toObject = (arr, key, value) => arr.reduce((previous, item) => ({
+export const toObject = (arr: any, key: string, value: any) => arr.reduce((previous: any, item: any) => ({
   ...previous,
   ...(item !== null && item !== undefined && { [item[key]]: item[value] }),
 }), {})
 
-export const getBase64 = (fileBlob) => {
+export const getBase64 = (fileBlob: any) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
@@ -14,7 +14,7 @@ export const getBase64 = (fileBlob) => {
 
 export const isDevelopmentMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
-export const openJsonInNewTab = (json) => {
+export const openJsonInNewTab = (json: any) => {
   var myjson = JSON.stringify(json, null, 2);
   var x = window.open();
   x?.document.open();
@@ -22,7 +22,7 @@ export const openJsonInNewTab = (json) => {
   x?.document.close();
 }
 
-export const toQueryString = (obj, prefix) => {
+export const toQueryString: any = (obj: any, prefix: any) => {
   var str = [],
     p;
   for (p in obj) {
@@ -37,16 +37,16 @@ export const toQueryString = (obj, prefix) => {
   return str.join("&");
 }
 
-export const getCurrentDate = (date) => {
+export const getCurrentDate = (date: any) => {
   var d = new Date(date ?? Date.now()),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
 
-  if (month.length < 2) 
-      month = '0' + month;
-  if (day.length < 2) 
-      day = '0' + day;
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
 
   return [day, month, year].join('-');
 }
