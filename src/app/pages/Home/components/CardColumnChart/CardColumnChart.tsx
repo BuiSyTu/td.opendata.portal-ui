@@ -13,7 +13,7 @@ const CardColumnChart: React.FC<CardColumnChartProps> = ({ title, data, maxValue
     return (
         <div className={cx('card shadow-sm min-h-100', 'wrapper')}>
             <div className="card-header px-4">
-                <div className="card-title text-center">Dữ liệu mở theo lĩnh vực</div>
+                <div className="card-title text-center">{title}</div>
             </div>
             <div className="card-body p-4 scroll mh-350px">
                 {data.map((i: any, index: any) => (

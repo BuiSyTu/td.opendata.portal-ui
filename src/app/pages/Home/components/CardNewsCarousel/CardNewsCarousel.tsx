@@ -7,7 +7,6 @@ import './CardNewsCarousel.scss'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
 const CardNewsCarousel = () => {
-
     const listNews = [
         {
             name: 'Quy Định Cấp Giấy Phép Hoạt Động Đối Với Cơ Sở Khám Chữa Bệnh',

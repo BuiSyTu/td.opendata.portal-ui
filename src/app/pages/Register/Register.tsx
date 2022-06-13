@@ -10,16 +10,17 @@ import { Modal } from 'react-bootstrap-v5'
 import classnames from 'classnames'
 import { toast } from 'react-toastify'
 import { useFormik } from 'formik'
+import { citizenApi } from 'src/app/apis'
 
 const cx = classNames.bind(styles)
 
 const initialValues = {
-    fullName: 'Bùi Sỹ Tú',
-    email: 'tubui7121@gmail.com',
-    userName: 'tubs',
-    phoneNumber: '0914075420',
-    password: 'Tandan@123',
-    confirmPassword: 'Tandan@123',
+    fullName: '',
+    email: '',
+    userName: '',
+    phoneNumber: '',
+    password: '',
+    confirmPassword: '',
 }
 
 
@@ -67,36 +68,22 @@ const Register = () => {
         initialValues,
         validationSchema: registrationSchema,
         onSubmit: (values, { setStatus, setSubmitting }) => {
-            toast.success('Thao tác thành công!', { autoClose: 2000 })
-            // setLoading(true)
-            setTimeout(() => {
-                console.log(values)
-                // register(
-                //     values.email,
-                //     values.firstname,
-                //     values.dateOfBirth,
-                //     values.phoneNumber,
-                //     values.phoneNumber,
-                //     values.password,
-                //     values.confirmPassword
-                // )
-                // .then((response) => {
-                //     let res = response.data
-                //     if (res.succeeded) {
-                //         toast.success('Đăng ký thành công! Vui lòng đăng nhâp lại để tiếp tục!')
-                //         setVisibleSuccess(true)
-                //     } else {
-                //         setStatus(res?.message ?? 'Đăng ký không thành công')
-                //     }
-                //     setLoading(false)
-                //     setSubmitting(false)
-                // })
-                // .catch(() => {
-                //     setLoading(false)
-                //     setSubmitting(false)
-                //     setStatus('Đăng ký không thành công')
-                // })
-            }, 1000)
+            const handleRegister = async () => {
+                setLoading(true)
+                const res = await citizenApi.register(values)
+
+                if (!res?.data) {
+                    setStatus(res?.message ?? 'Đăng ký không thành công')
+                } else {
+                    toast.success('Thao tác thành công!', { autoClose: 2000 })
+                    setVisibleSuccess(true)
+                }
+
+                setSubmitting(false)
+                setLoading(false)
+            }
+
+            handleRegister()
         },
     })
 
@@ -195,9 +182,6 @@ const Register = () => {
                                 }
                             )}
                         />
-                        <div className='text-muted mt-2 fs-6'>
-                            {/* OTP xác thực sẽ được gửi về số này */}
-                        </div>
                         {formik.touched.phoneNumber && formik.errors.phoneNumber && (
                             <div className='fv-plugins-message-container invalid-feedback'>
                                 <div className='fv-help-block'>
@@ -206,7 +190,7 @@ const Register = () => {
                             </div>
                         )}
                     </div>
-                    {/* begin::Form group Email */}
+
                     <div className='fv-row mb-5'>
                         <label className='form-label required fw-bolder text-dark fs-6'>Email</label>
                         <input
@@ -229,9 +213,6 @@ const Register = () => {
                                 </div>
                             </div>
                         )}
-                        <div className='text-muted mt-2 fs-6'>
-                            {/* Dùng trong trường hợp quên mật khẩu, đặt lại mật khẩu, kết nối mạng xã hội */}
-                        </div>
                     </div>
                     <div className='row'>
                         <div className='col-6'>

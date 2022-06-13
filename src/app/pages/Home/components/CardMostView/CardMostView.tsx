@@ -1,11 +1,11 @@
+import styles from './CardMostView.module.scss'
+
 import React, { useEffect, useState } from 'react'
 import moment from 'moment';
-
 import classNames from 'classnames/bind';
-import styles from './CardMostViewedDatas.module.scss'
-
 import Carousel from 'react-multi-carousel'
 import { Link } from 'react-router-dom';
+
 import { datasetApi } from 'src/app/apis'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
 
@@ -24,17 +24,21 @@ const CardMostViewedDatas = () => {
   }, [])
 
   const CustomLeftArrow = ({ onClick, ...rest }: any) => {
-    return <button
-      className={cx('react-multiple-carousel__arrow', 'react-multiple-carousel__arrow--left')}
-      onClick={() => onClick()}>
-    </button>;
+    return (
+      <button
+        className={cx('react-multiple-carousel__arrow', 'react-multiple-carousel__arrow--left')}
+        onClick={() => onClick()}>
+      </button>
+    )
   }
 
   const CustomRightArrow = ({ onClick, ...rest }: any) => {
-    return <button
-      className={cx('react-multiple-carousel__arrow', 'react-multiple-carousel__arrow--right')}
-      onClick={() => onClick()}>
-    </button>;
+    return (
+      <button
+        className={cx('react-multiple-carousel__arrow', 'react-multiple-carousel__arrow--right')}
+        onClick={() => onClick()}>
+      </button>
+    )
   }
 
   return (
@@ -153,7 +157,6 @@ const CardMostViewedDatas = () => {
                 )}
               </Carousel>
             </div>
-
           </div>
         </div>
       </div>

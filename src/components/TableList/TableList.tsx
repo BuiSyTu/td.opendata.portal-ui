@@ -1,5 +1,5 @@
-import {Table} from 'antd'
-import {useState} from 'react'
+import { Table } from 'antd'
+import { useState, memo } from 'react'
 
 interface Props {
   loading?: any,
@@ -47,31 +47,31 @@ const TableList: React.FC<Props> = ({
       {...props}
       rowKey={rowKey || 'id'}
       bordered
-      style={{backgroundColor: '#fff', width: '100%'}}
+      style={{ backgroundColor: '#fff', width: '100%' }}
       rowClassName={(record, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')}
       loading={loading}
       size='small'
       pagination={
         isPagination
           ? {
-              total: count,
-              defaultPageSize: size,
-              pageSizeOptions: ['10', '20', '50'],
-              onChange: handleTableChange,
-              showSizeChanger: true,
-              onShowSizeChange: handleSizeChange,
-              current,
-              showTotal: handleShowTotal,
-              locale: {items_per_page: '/ trang'},
-              size: 'default',
-            }
+            total: count,
+            defaultPageSize: size,
+            pageSizeOptions: ['10', '20', '50'],
+            onChange: handleTableChange,
+            showSizeChanger: true,
+            onShowSizeChange: handleSizeChange,
+            current,
+            showTotal: handleShowTotal,
+            locale: { items_per_page: '/ trang' },
+            size: 'default',
+          }
           : {}
       }
-      columns={columns.map((item: any) => ({...item}))}
+      columns={columns.map((item: any) => ({ ...item }))}
       dataSource={dataTable}
       rowSelection={rowSelection}
     />
   )
 }
 
-export default TableList
+export default memo(TableList)

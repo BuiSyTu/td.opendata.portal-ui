@@ -24,7 +24,7 @@ const CardStatistical = () => {
 
       const data = responseOverView?.data
       if (!data) {
-        return;
+        return
       }
 
       const template: any = {

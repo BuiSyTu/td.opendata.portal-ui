@@ -5,7 +5,7 @@ import { FallbackView } from '../../_metronic/partials'
 
 export default function PrivateRoutes() {
   const HomePage = lazy(() => import('src/app/pages/Home'))
-  const DataDetailPage = lazy(() => import('src/app/pages/DataList'))
+  const DataDetailPage = lazy(() => import('src/app/pages/DataDetail'))
   const DataListPage = lazy(() => import('src/app/pages/DataList'))
   const ForgotPasswordPage = lazy(() => import('src/app/pages/ForgotPassword'))
   const ChangePasswordPage = lazy(() => import('src/app/pages/ChangePassword'))
@@ -14,8 +14,6 @@ export default function PrivateRoutes() {
   const LogoutPage = lazy(() => import('../pages/LogOut'))
   const AccountPage = lazy(() => import('../pages/Account'))
   const ClientServicePage = lazy(() => import('../pages/ClientService'))
-
-
 
   return (
     <Suspense fallback={<FallbackView />}>

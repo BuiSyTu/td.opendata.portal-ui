@@ -1,6 +1,6 @@
 import styles from './FormModal.module.scss'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Checkbox, Col, Divider, Form, Input, message, Modal, notification, Row, Select, Space, Spin, Table, Tabs, Typography, Upload } from 'antd'
@@ -200,7 +200,6 @@ const FormModal: React.FC<FormModalProps> = ({
 
     const handleOk = async () => {
         try {
-            debugger
             await form.validateFields()
             const formData = form.getFieldsValue(true)
 
@@ -532,8 +531,7 @@ const FormModal: React.FC<FormModalProps> = ({
     const handleDrop = (e: any) => console.log('Dropped files', e.dataTransfer.files)
 
     const handlePreview = async (file: any) => {
-        console.log(file)
-        if (file.url) {
+        if (file?.url) {
             window.open(file.url, '_blank')
         }
     }
@@ -842,4 +840,4 @@ const FormModal: React.FC<FormModalProps> = ({
     )
 }
 
-export default FormModal
+export default memo(FormModal)

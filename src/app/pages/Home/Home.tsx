@@ -1,16 +1,14 @@
 import React from 'react'
 
-import CardMostViewedDatas from './components/CardMostViewedDatas'
+import CardMostView from './components/CardMostView'
 import CardNewsCarousel from './components/CardNewsCarousel'
 import CardStatistical from './components/CardStatistical'
 
 const Home = () => {
   return (
     <>
-      <CardMostViewedDatas />
-
+      <CardMostView />
       <CardStatistical />
-
       <CardNewsCarousel />
     </>
   )
