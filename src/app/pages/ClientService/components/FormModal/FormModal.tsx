@@ -24,23 +24,23 @@ const { Dragger } = Upload
 const cx = classNames.bind(styles)
 
 interface FormModalProps {
-    setUpdate: any,
     modalVisible: boolean,
-    setModalVisible: any,
     modalId: string,
-    setModalId: any,
     typeModal: string,
-    setTypeModal: any,
+    setUpdate: React.Dispatch<React.SetStateAction<boolean>>,
+    setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    setModalId: React.Dispatch<React.SetStateAction<string>>,
+    setTypeModal: React.Dispatch<React.SetStateAction<string>>,
 }
 
 
 const FormModal: React.FC<FormModalProps> = ({
-    setUpdate,
     modalVisible,
-    setModalVisible,
     modalId,
-    setModalId,
     typeModal,
+    setUpdate,
+    setModalVisible,
+    setModalId,
     setTypeModal
 }) => {
     const dispatch = useDispatch()

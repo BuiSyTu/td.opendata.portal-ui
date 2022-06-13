@@ -96,9 +96,7 @@ const Register = () => {
                     id='kt_login_signup_form'
                     onSubmit={formik.handleSubmit}
                 >
-                    {/* begin::Heading */}
                     <div className='mb-10 text-center'>
-                        {/* begin::Title */}
                         <h1 className='text-dark mb-3'>Đăng ký tài khoản</h1>
                     </div>
                     {formik.status && (
@@ -107,7 +105,6 @@ const Register = () => {
                         </div>
                     )}
 
-                    {/* begin::Form group FullName */}
                     <div className='row'>
                         <div className='col-6'>
                             <div className='fv-row mb-5'>
@@ -303,7 +300,6 @@ const Register = () => {
                             Huỷ
                         </button>
                     </div>
-                    {/* end::Form group */}
                 </form>
             </div>
             <Modal

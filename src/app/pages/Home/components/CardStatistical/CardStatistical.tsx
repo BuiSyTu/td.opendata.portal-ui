@@ -11,7 +11,6 @@ import WidgetStatistic from '../WidgetStatistic';
 
 const cx = classNames.bind(styles)
 
-
 const CardStatistical = () => {
   const [overViewData, setOverViewData] = useState<any>([])
   const [dataByOrganization, setDataByOrganization] = useState([])

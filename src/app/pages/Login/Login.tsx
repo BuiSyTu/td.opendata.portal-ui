@@ -74,7 +74,6 @@ const Login = () => {
                 noValidate
                 id='kt_login_signin_form'
             >
-                {/* begin::Heading */}
                 <div className='text-center mb-10'>
                     <h1 className='text-dark mb-3'>Đăng nhập hệ thống</h1>
                     <div className='text-gray-400 fw-bold fs-4'>
@@ -84,7 +83,6 @@ const Login = () => {
                         </Link>
                     </div>
                 </div>
-                {/* begin::Heading */}
 
                 {formik.status ? (
                     <div className='mb-lg-15 alert alert-danger'>
@@ -94,7 +92,6 @@ const Login = () => {
                     <></>
                 )}
 
-                {/* begin::Form group */}
                 <div className='fv-row mb-10'>
                     <label className='form-label fs-5 fw-bolder text-dark'>Tài khoản</label>
                     <input
@@ -116,16 +113,11 @@ const Login = () => {
                         </div>
                     )}
                 </div>
-                {/* end::Form group */}
 
-                {/* begin::Form group */}
                 <div className='fv-row mb-10'>
                     <div className='d-flex justify-content-between mt-n5'>
                         <div className='d-flex flex-stack mb-2'>
-                            {/* begin::Label */}
                             <label className='form-label fw-bolder text-dark fs-5 mb-0'>Mật khẩu</label>
-                            {/* end::Label */}
-                            {/* begin::Link */}
                             <Link
                                 to='/quen-mat-khau'
                                 className='link-primary fs-5 fw-bolder'
@@ -133,7 +125,6 @@ const Login = () => {
                             >
                                 Quên mật khẩu ?
                             </Link>
-                            {/* end::Link */}
                         </div>
                     </div>
                     <input
@@ -158,9 +149,7 @@ const Login = () => {
                         </div>
                     )}
                 </div>
-                {/* end::Form group */}
 
-                {/* begin::Action */}
                 <div className='text-center'>
                     <button
                         type='submit'
@@ -177,7 +166,6 @@ const Login = () => {
                         )}
                     </button>
                 </div>
-                {/* end::Action */}
             </form>
         </div>
     )
