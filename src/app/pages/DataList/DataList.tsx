@@ -220,15 +220,13 @@ const DataList = () => {
                 <Menu.Item
                   key={''}
                   icon={
-                    <div>
-                      <Image
-                        src={`${toAbsoluteUrl('/media/logos/Tất cả.png')}`}
-                        className={cx('menu-item-icon')}
-                        height={50}
-                        width={50}
-                        preview={false}
-                      />
-                    </div>
+                    <Image
+                      src={`${toAbsoluteUrl('/media/logos/Tất cả.png')}`}
+                      className={cx('menu-item-icon')}
+                      height={50}
+                      width={50}
+                      preview={false}
+                    />
                   }
                   className={cx('menu-item-text')}
                 >
@@ -322,12 +320,12 @@ const DataList = () => {
                 total: total,
                 defaultPageSize: top,
                 pageSizeOptions: ['10', '20', '50'],
-                onChange: handleTableChange,
                 showSizeChanger: true,
-                onShowSizeChange: handleSizeChange,
                 current,
-                showTotal: handleShowTotal,
                 locale: { items_per_page: '/ trang' },
+                onChange: handleTableChange,
+                onShowSizeChange: handleSizeChange,
+                showTotal: handleShowTotal,
               }}
               locale={{
                 emptyText: <div className='py-10 text-muted font-weight-bold'>Không có dữ liệu</div>
