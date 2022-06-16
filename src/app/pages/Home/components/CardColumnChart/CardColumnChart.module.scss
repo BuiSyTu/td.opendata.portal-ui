@@ -1,0 +1,16 @@
+.wrapper {
+    .item-group-name {
+        font-size: 14px !important;
+        color: #333333 !important
+    }
+
+    .bg-danger {
+        background-color: #ff6951 !important;
+    }
+}
+
+.hover-gray {
+    &:hover {
+        opacity: 0.8;
+    }
+}
