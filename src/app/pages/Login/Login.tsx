@@ -39,6 +39,9 @@ const Login = () => {
             const getToken = async () => {
                 const { userName, password } = values
                 const data = await citizenApi.getToken(userName, password)
+
+                if (!data) return null
+
                 const accessToken = data?.token
                 dispatch(setAccessToken(accessToken))
                 return accessToken
@@ -48,7 +51,12 @@ const Login = () => {
                 setLoading(true)
 
                 const accessToken = await getToken()
-                if (!accessToken) return;
+                if (!accessToken) {
+                    setStatus('Đăng nhập không thành công')
+                    setSubmitting(false)
+                    setLoading(false)
+                    return
+                }
 
                 const userProfile = await citizenApi.getPersonalProfile(accessToken)
                 if (!!userProfile) {
