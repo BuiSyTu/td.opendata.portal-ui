@@ -311,23 +311,23 @@ const ClientService = () => {
     return (
         <div className={cx('wrapper')}>
             <PageTitle breadcrumbs={[]}>Danh sách tập dữ liệu</PageTitle>
-            <div className='card mb-5 mb-xl-12 p-10'>
-                <div className='d-flex row justify-content-between align-items-center'>
-                    <div className='col-xl-8 d-flex align-items-center'>
+            <div className="card mb-5 mb-xl-12 p-10">
+                <div className="d-flex row justify-content-between align-items-center">
+                    <div className="col-xl-8 d-flex align-items-center">
                         <Search
                             className={cx('search')}
-                            placeholder='Tìm kiếm'
+                            placeholder="Tìm kiếm"
                             onSearch={(e) => {
                                 setInputValue(e)
                             }}
                         />
                     </div>
-                    <div className='col-xl-4 d-flex justify-content-end'>
+                    <div className="col-xl-4 d-flex justify-content-end">
                         <button
-                            className=' btn btn-success btn-sm m-btn m-btn--icon'
+                            className="btn btn-success btn-sm m-btn m-btn--icon"
                             onClick={() => handleAdd()}
                         >
-                            <i className='bi bi-plus-square'></i> Thêm
+                            <i className="bi bi-plus-square"></i> Thêm
                         </button>
                     </div>
                 </div>

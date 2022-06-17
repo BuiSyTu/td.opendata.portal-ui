@@ -12,7 +12,6 @@ export const datasetSlice = createSlice({
         setCategoryId: (state: any, action: any) => {
             state.categoryId = action?.payload ?? ''
         },
-
         setDatasetId: (state: any, action: any) => {
             state.datasetId = action?.payload ?? ''
         }

@@ -128,6 +128,7 @@ const Login = () => {
                         </div>
                     </div>
                     <input
+                        placeholder='Mật khẩu'
                         type='password'
                         autoComplete='off'
                         {...formik.getFieldProps('password')}

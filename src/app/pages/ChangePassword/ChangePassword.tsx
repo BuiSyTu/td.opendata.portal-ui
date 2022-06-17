@@ -84,28 +84,26 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ setModalLogin, setModal
     return (
         <div>
             <form
-                className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
+                className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
                 noValidate
-                id='kt_login_signup_form'
+                id="kt_login_signup_form"
                 onSubmit={formik.handleSubmit}
             >
-                {/* begin::Heading */}
-                <div className='mb-10 text-center'>
-                    {/* begin::Title */}
-                    <h1 className='text-dark mb-3'>Đổi mật khẩu</h1>
+                <div className="mb-10 text-center">
+                    <h1 className="text-dark mb-3">Đổi mật khẩu</h1>
                 </div>
                 {formik.status && (
-                    <div className='mb-lg-15 alert alert-danger'>
-                        <div className='alert-text font-weight-bold'>{formik.status}</div>
+                    <div className="mb-lg-15 alert alert-danger">
+                        <div className="alert-text font-weight-bold">{formik.status}</div>
                     </div>
                 )}
 
-                <div className='fv-row mb-10'>
-                    <label className='form-label required fw-bolder text-dark fs-6'>Mã bảo mật</label>
+                <div className="fv-row mb-10">
+                    <label className="form-label required fw-bolder text-dark fs-6">Mã bảo mật</label>
                     <input
-                        placeholder='Mã bảo mật'
-                        type='text'
-                        autoComplete='off'
+                        placeholder="Mã bảo mật"
+                        type="text"
+                        autoComplete="off"
                         {...formik.getFieldProps('code')}
                         className={classnames(
                             'form-control form-control-lg form-control-solid',
@@ -118,14 +116,14 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ setModalLogin, setModal
                         )}
                     />
                 </div>
-                <div className='mb-10 fv-row' data-kt-password-meter='true'>
-                    <div className='mb-1'>
-                        <label className='form-label required fw-bolder text-dark fs-6'>Mật khẩu</label>
-                        <div className='position-relative mb-3'>
+                <div className="mb-10 fv-row" data-kt-password-meter="true">
+                    <div className="mb-1">
+                        <label className="form-label required fw-bolder text-dark fs-6">Mật khẩu</label>
+                        <div className="position-relative mb-3">
                             <input
-                                type='password'
-                                placeholder='Mật khẩu'
-                                autoComplete='off'
+                                type="password"
+                                placeholder="Mật khẩu"
+                                autoComplete="off"
                                 {...formik.getFieldProps('password')}
                                 className={classnames(
                                     'form-control form-control-lg form-control-solid',
@@ -138,24 +136,22 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ setModalLogin, setModal
                                 )}
                             />
                             {formik.touched.password && formik.errors.password && (
-                                <div className='fv-plugins-message-container invalid-feedback'>
-                                    <div className='fv-help-block'>
-                                        <span role='alert'>{formik.errors.password}</span>
+                                <div className="fv-plugins-message-container invalid-feedback">
+                                    <div className="fv-help-block">
+                                        <span role="alert">{formik.errors.password}</span>
                                     </div>
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
-                {/* end::Form group */}
 
-                {/* begin::Form group Confirm password */}
-                <div className='fv-row mb-10'>
-                    <label className='form-label required fw-bolder text-dark fs-6'>Nhập lại mật khẩu</label>
+                <div className="fv-row mb-10">
+                    <label className="form-label required fw-bolder text-dark fs-6">Nhập lại mật khẩu</label>
                     <input
-                        type='password'
-                        placeholder='Nhập lại mật khẩu'
-                        autoComplete='off'
+                        type="password"
+                        placeholder="Nhập lại mật khẩu"
+                        autoComplete="off"
                         {...formik.getFieldProps('confirmPassword')}
                         className={classnames(
                             'form-control form-control-lg form-control-solid',
@@ -168,33 +164,33 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ setModalLogin, setModal
                         )}
                     />
                     {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                        <div className='fv-plugins-message-container invalid-feedback'>
-                            <div className='fv-help-block'>
-                                <span role='alert'>{formik.errors.confirmPassword}</span>
+                        <div className="fv-plugins-message-container invalid-feedback">
+                            <div className="fv-help-block">
+                                <span role="alert">{formik.errors.confirmPassword}</span>
                             </div>
                         </div>
                     )}
                 </div>
 
-                <div className='text-center'>
+                <div className="text-center">
                     <button
-                        type='submit'
-                        id='kt_sign_up_submit'
-                        className='btn btn-lg btn-primary w-100 mb-5'
+                        type="submit"
+                        id="kt_sign_up_submit"
+                        className="btn btn-lg btn-primary w-100 mb-5"
                         disabled={formik.isSubmitting || !formik.isValid}
                     >
-                        {!loading && <span className='indicator-label'>Đổi mật khẩu</span>}
+                        {!loading && <span className="indicator-label">Đổi mật khẩu</span>}
                         {loading && (
-                            <span className='indicator-progress' style={{ display: 'block' }}>
+                            <span className="indicator-progress" style={{ display: 'block' }}>
                                 Đang xử lý...{' '}
-                                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
                         )}
                     </button>
                     <button
-                        type='button'
-                        id='kt_login_signup_form_cancel_button'
-                        className='btn btn-lg btn-light-info w-100 mb-5'
+                        type="button"
+                        id="kt_login_signup_form_cancel_button"
+                        className="btn btn-lg btn-light-info w-100 mb-5"
                         onClick={() => {
                             setModalChangePass(false)
                         }}
@@ -202,7 +198,6 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ setModalLogin, setModal
                         Huỷ
                     </button>
                 </div>
-                {/* end::Form group */}
             </form>
         </div>
     )

@@ -15,13 +15,15 @@ const AccountItem: React.FC<AccountItemProps> = ({ icon, content, borderTop = fa
     return (
         <div className={cx(
             'wrapper',
-            borderTop ? 'border-top' : '',
+            {
+                'border-top': borderTop
+            },
         )}>
             <Link to={to} className={cx('info')}>
                 <i className={icon}></i>
                 <span className={cx('name')}>{content}</span>
             </Link>
-        </div >
+        </div>
     );
 }
 

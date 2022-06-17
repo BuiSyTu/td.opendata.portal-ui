@@ -1,10 +1,9 @@
-import * as Yup from 'yup'
-
 import { useState } from 'react'
-
+import * as Yup from 'yup'
 import classnames from 'classnames'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
+
 import { requestPassword } from 'src/app/modules/auth/redux/AuthCRUD'
 
 const loginSchema = Yup.object().shape({
@@ -25,7 +24,11 @@ interface ForgotPasswordProps {
     setEmailChangePass: any,
 }
 
-const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setModalForgot, setModalChangePass, setEmailChangePass }) => {
+const ForgotPassword: React.FC<ForgotPasswordProps> = ({
+    setModalForgot,
+    setModalChangePass,
+    setEmailChangePass
+}) => {
     const [loading, setLoading] = useState(false)
 
     const formik = useFormik({
@@ -59,12 +62,10 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setModalForgot, setModa
                 noValidate
                 id='kt_login_signin_form'
             >
-                {/* begin::Heading */}
                 <div className='text-center mb-10'>
                     <h1 className='text-dark mb-3'>Quên mật khẩu</h1>
                     <div className='text-gray-400 fw-bold fs-4'>Nhập email để đặt lại mật khẩu.</div>
                 </div>
-                {/* begin::Heading */}
 
                 {formik.status ? (
                     <div className='mb-lg-15 alert alert-danger'>
@@ -97,9 +98,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setModalForgot, setModa
                         </div>
                     )}
                 </div>
-                {/* end::Form group */}
 
-                {/* begin::Action */}
                 <div className='text-center'>
                     <button
                         type='submit'
@@ -126,7 +125,6 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setModalForgot, setModa
                         Huỷ
                     </button>
                 </div>
-                {/* end::Action */}
             </form>
         </div>
     )

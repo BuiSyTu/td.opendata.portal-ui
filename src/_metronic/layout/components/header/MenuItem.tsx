@@ -1,10 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {useLocation} from 'react-router'
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import classnames from 'classnames'
-import {checkIsActive, KTSVG} from '../../../helpers'
+import { checkIsActive, KTSVG } from '../../../helpers'
 
-type Props = {
+interface MenuItemProps {
   to: string
   title: string
   icon?: string
@@ -13,7 +13,7 @@ type Props = {
   hasBullet?: boolean
 }
 
-const MenuItem: React.FC<Props> = ({
+const MenuItem: React.FC<MenuItemProps> = ({
   to,
   title,
   icon,
@@ -21,7 +21,7 @@ const MenuItem: React.FC<Props> = ({
   hasArrow = false,
   hasBullet = false,
 }) => {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
 
   return (
     <div className='menu-item me-lg-1'>
@@ -57,4 +57,4 @@ const MenuItem: React.FC<Props> = ({
   )
 }
 
-export {MenuItem}
+export { MenuItem }

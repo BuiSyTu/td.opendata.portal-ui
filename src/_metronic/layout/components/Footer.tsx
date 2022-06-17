@@ -1,21 +1,37 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { footerConfigApi } from 'src/app/apis/footerConfig'
+
+import { FooterConfig } from 'src/models'
 import { toAbsoluteUrl } from '../../helpers'
 
 const Footer: FC = () => {
+  const [footerConfig, setFooterConfig] = useState<FooterConfig | null>()
+
+  useEffect(() => {
+    const fetchFooterConfig = async () => {
+      const res = await footerConfigApi.get()
+
+      if (res) {
+        setFooterConfig(res?.data ?? null)
+      }
+    }
+
+    fetchFooterConfig()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className='footer py-4' id='kt_footer' style={{ backgroundImage: `url(${toAbsoluteUrl('/media/images/footer-bg.png')})` }}>
       <div className="container">
         <div className="row">
           <div className="col-xl-6">
-            <h3 className='fs-4 text-white mb-2'>{process.env.REACT_APP_TEN_PHAN_MEM}</h3>
-            <p className='text-white mb-0'><strong>{process.env.REACT_APP_TEN_CONG_TY}</strong></p>
-            <p className='text-white mb-0'><strong>Địa chỉ: </strong>{process.env.REACT_APP_DIA_CHI}</p>
-            <p className='text-white mb-0'><strong>Điện thoại: </strong>{process.env.REACT_APP_DIA_CHI}<strong>Fax: </strong>{process.env.REACT_APP_FAX}</p>
-            <p className='text-white mb-0'><strong>Hotline: </strong>{process.env.REACT_APP_HOTLINE}</p>
-            <p className='text-white mb-0'><strong>Email: </strong>{process.env.REACT_APP_EMAIL}</p>
+            <h3 className='fs-4 text-white mb-2'>{footerConfig?.softwareName ?? ''}</h3>
+            <p className='text-white mb-0'><strong>{footerConfig?.companyName ?? ''}</strong></p>
+            <p className='text-white mb-0'><strong>Địa chỉ: </strong>{footerConfig?.address ?? ''}</p>
+            <p className='text-white mb-0'><strong>Điện thoại: </strong>{footerConfig?.phoneNumber ?? ''}<strong>Fax: </strong>{footerConfig?.fax ?? ''}</p>
+            <p className='text-white mb-0'><strong>Hotline: </strong>{footerConfig?.hotLine ?? ''}</p>
+            <p className='text-white mb-0'><strong>Email: </strong>{footerConfig?.email ?? ''}</p>
           </div>
           <div className="col-xl-3 my-5 my-xl-0 col-footer-right">
             <h4 className="text-white fw-bold text-uppercase fs-4 mb-xl-6">Truy cập nhanh</h4>

@@ -575,7 +575,7 @@ const FormModal: React.FC<FormModalProps> = ({
             title={<Text className={cx('text-modal')}>Tập dữ liệu</Text>}
             onOk={handleOk}
             onCancel={handleCancel}
-            closeIcon={<i className='las la-times' style={{ color: '#fff', fontSize: 20 }}></i>}
+            closeIcon={<i className="las la-times" style={{ color: '#fff', fontSize: 20 }}></i>}
             footer={footer}
         >
             <Spin spinning={isLoading}>

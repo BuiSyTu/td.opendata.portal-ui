@@ -1,3 +1,4 @@
+export * from './bannerConfig'
 export * from './category'
 export * from './citizen'
 export * from './dashboard'

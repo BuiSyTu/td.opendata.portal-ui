@@ -71,19 +71,18 @@ const Account = () => {
         <div className={cx('wrapper')}>
             <div className={cx('card p-10 p-lg-15 w-750px')}>
                 <form
-                    className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
+                    className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
                     noValidate
                     onSubmit={formik.handleSubmit}
                 >
-                    <div className='mb-10 text-center'>
-                        <h1 className='text-dark mb3'>Thông tin tài khoản</h1>
+                    <div className="mb-10 text-center">
+                        <h1 className="text-dark mb3">Thông tin tài khoản</h1>
                     </div>
 
-                    {/* begin::Form group */}
-                    <div className='fv-row mb-10 d-flex justify-content-between align-items-center'>
-                        <label className='form-label fs-5 fw-bolder text-dark'>Họ tên</label>
+                    <div className="fv-row mb-10 d-flex justify-content-between align-items-center">
+                        <label className="form-label fs-5 fw-bolder text-dark">Họ tên</label>
                         <input
-                            placeholder='Họ và tên'
+                            placeholder="Họ và tên"
                             {...formik.getFieldProps('fullName')}
                             className={cx(
                                 'form-control form-control-lg form-control-solid w-500px',
@@ -92,19 +91,17 @@ const Account = () => {
                                     'is-valid': formik.touched.fullName && !formik.errors.fullName,
                                 }
                             )}
-                            name='fullName'
-                            autoComplete='off'
+                            name="fullName"
+                            autoComplete="off"
                         />
 
                     </div>
-                    {/* end::Form group */}
 
-                    {/* begin::Form group */}
-                    <div className='fv-row mb-10 d-flex justify-content-between align-items-center'>
-                        <label className='form-label fs-5 fw-bolder text-dark'>Địa chỉ</label>
+                    <div className="fv-row mb-10 d-flex justify-content-between align-items-center">
+                        <label className="form-label fs-5 fw-bolder text-dark">Địa chỉ</label>
                         <input
                             {...formik.getFieldProps('address')}
-                            placeholder='Nhập địa chỉ (số nhà, tổ, thôn, xóm)'
+                            placeholder="Nhập địa chỉ (số nhà, tổ, thôn, xóm)"
                             className={cx(
                                 'form-control form-control-lg form-control-solid w-500px',
                                 { 'is-invalid': formik.touched.address && formik.errors.address },
@@ -112,14 +109,12 @@ const Account = () => {
                                     'is-valid': formik.touched.address && !formik.errors.address,
                                 }
                             )}
-                            name='address'
-                            autoComplete='off'
+                            name="address"
+                            autoComplete="off"
                         />
 
                     </div>
-                    {/* end::Form group */}
 
-                    {/* begin::Form group */}
                     <div className='fv-row mb-10 d-flex justify-content-between align-items-center'>
                         <label className='form-label fs-5 fw-bolder text-dark'>Số điện thoại</label>
                         <input
@@ -137,9 +132,7 @@ const Account = () => {
                         />
 
                     </div>
-                    {/* end::Form group */}
 
-                    {/* begin::Form group */}
                     <div className='fv-row mb-10 d-flex justify-content-between align-items-center'>
                         <label className='form-label fs-5 fw-bolder text-dark'>Email</label>
                         <input
@@ -157,7 +150,6 @@ const Account = () => {
                         />
 
                     </div>
-                    {/* end::Form group */}
 
                     <button
                         type='submit'

@@ -1,85 +1,41 @@
 import './MasterLayout.scss'
 
-import React, { useEffect, useState } from 'react'
-import Carousel from 'react-multi-carousel'
-import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, Link } from 'react-router-dom'
-import { Menu } from 'antd'
-import { Nav, Navbar } from 'react-bootstrap-v5'
-import Particles from 'react-tsparticles'
 import Tippy from '@tippyjs/react/headless'
+import { Menu } from 'antd'
 import classnames from 'classnames/bind'
+import React, { useEffect, useState } from 'react'
+import { Nav, Navbar } from 'react-bootstrap-v5'
+import { useSelector } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom'
 
 import { checkIsActive, toAbsoluteUrl } from 'src/_metronic/helpers'
 
+import AccountItem from 'src/components/AccountItem'
+import { Wrapper as PopperWrapper } from 'src/components/Popper'
+import { RootState } from 'src/setup'
+import { MenuComponent } from 'src/_metronic/assets/ts/components'
 import { Content } from 'src/_metronic/layout/components/Content'
 import { DefaultTitleCustom } from 'src/_metronic/layout/components/header/page-title/DefaultTitleCustom'
-import { MenuComponent } from 'src/_metronic/assets/ts/components'
-import { PageDataProvider } from 'src/_metronic/layout/core'
 import { ScrollTop } from 'src/_metronic/layout/components/ScrollTop'
-import { categoryApi } from 'src/app/apis'
-import { setCategoryId } from 'src/setup/redux/dataset/Slice'
-import { Wrapper as PopperWrapper } from 'src/components/Popper'
-import AccountItem from 'src/components/AccountItem'
+import { PageDataProvider } from 'src/_metronic/layout/core'
+import Banner from './Banner'
 import { Footer } from './Footer'
-import { RootState } from 'src/setup'
 
 interface MasterLayoutProps {
   children?: any,
 }
 
 const MasterLayout: React.FC<MasterLayoutProps> = ({ children }) => {
-  const dispatch = useDispatch()
   const accessToken = useSelector((state: RootState) => state.global.accessToken)
   const userProfile: any = useSelector((state: RootState) => state.global.userProfile)
 
-  const [listCategory, setListCategory] = useState([])
-  const [inputValue, setInputValue] = useState('')
-
   const location = useLocation()
   const { pathname } = location
-
-
-  const responseCarousel = {
-    desktop: {
-      breakpoint: {
-        max: 3000,
-        min: 1024
-      },
-      items: 7,
-      partialVisibilityGutter: 40
-    },
-    mobile: {
-      breakpoint: {
-        max: 464,
-        min: 0
-      },
-      items: 2,
-      partialVisibilityGutter: 30
-    },
-    tablet: {
-      breakpoint: {
-        max: 1024,
-        min: 464
-      },
-      items: 4,
-      partialVisibilityGutter: 30
-    }
-  }
 
   useEffect(() => {
     setTimeout(() => {
       MenuComponent.reinitialization()
     }, 500)
-  }, [])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await categoryApi.getAll()
-      setListCategory(res?.data ?? [])
-    }
-
-    fetchData()
   }, [])
 
   useEffect(() => {
@@ -92,10 +48,6 @@ const MasterLayout: React.FC<MasterLayoutProps> = ({ children }) => {
 
   const onClickNavbar = (e: any) => {
     setCurrentNavbar(e.key)
-  }
-
-  const handleClickCategory = (value: any) => {
-    dispatch(setCategoryId(value))
   }
 
   return (
@@ -243,108 +195,13 @@ const MasterLayout: React.FC<MasterLayoutProps> = ({ children }) => {
             </div>
             {/*end::Container*/}
           </div>
-          {/*end::Header*/}
-          {/* begin:: Banner */}
-          {checkIsActive(pathname, '/home') ?
-            <div className='main-banner' style={{ backgroundImage: `url(${toAbsoluteUrl('media/images/bg-slide.png')})` }}>
-              <div className='container'>
-                <div className='form-search'>
-                  <div className='form-search-text text-center'>
-                    {/* <h2 className='text-uppercase text-white'>Cổng dữ liệu mở</h2> */}
-                    <p>Cung cấp thông tin, công bố dữ liệu mở qua nền tảng web, tin nhắn SMS, Zalo và API</p>
-                    <p>Cho phép cá nhân, tổ chức chia sẻ dữ liệu đến cộng đồng</p>
-                  </div>
-                  <div className='form-search-input mb-5 mb-md-8'>
-                    <div className='input-group mb-5'>
-                      <input
-                        type='text'
-                        className='form-control'
-                        placeholder='Bạn muốn tìm kiếm dữ liệu gì ?'
-                        aria-label='Bạn muốn tìm kiếm dữ liệu gì ?'
-                        aria-describedby='search-addon2'
-                        onChange={(event) => { setInputValue(event?.target?.value ?? '') }}
-                      />
-                      <Link
-                        to={`/du-lieu?search=${inputValue}`}
-                        className='btn btn-search input-group-text'
-                        id='search-addon2'>
-                        <span className='fa fa-search'></span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className='group-catergory'>
-                  <Carousel
-                    additionalTransfrom={0}
-                    arrows={false}
-                    autoPlay
-                    autoPlaySpeed={6000}
-                    centerMode={false}
-                    draggable={false}
-                    focusOnSelect={false}
-                    infinite
-                    keyBoardControl={false}
-                    minimumTouchDrag={80}
-                    renderButtonGroupOutside={false}
-                    renderDotsOutside={false}
-                    responsive={responseCarousel}
-                    showDots={true}
-                    slidesToSlide={1}
-                    swipeable
-                  >
-                    {listCategory.map((i: any) => (
-                      <div
-                        className='item-category text-center'
-                        key={i.id}
-                        onClick={() => handleClickCategory(i.id)}
-                        title={i?.name ?? ''}
-                      >
-                        <div className='item-category_thumb'>
-                          <Link to={`/Du-lieu/${i.id}`} key={`link-${i.id}`}>
-                            <img src={i.imageUrl
-                              ? `${process.env.REACT_APP_FILE_URL}/${i.imageUrl}`
-                              : ''}
-                              alt='' />
-                          </Link>
-                        </div>
-                      </div>
-                    )
-                    )}
-                  </Carousel>
-                </div>
-              </div>
-              <div className='star-parallax'>
 
-                <Particles
-                  id='bannerParticles'
-                  options={{
-                    fpsLimit: 60,
-                    particles: {
-                      links: {
-                        enable: true,
-                        distance: 100
-                      },
-                      move: {
-                        enable: true,
-                        speed: 2,
-                        outModes: {
-                          default: 'bounce'
-                        }
-                      },
-                      size: {
-                        value: 3
-                      }
-                    }
-                  }}
-                />
+          {checkIsActive(pathname, '/home') ? (
+            <Banner />
+          ) : (
+            <></>
+          )}
 
-                <div id='stars'></div>
-                <div id='stars2'></div>
-                <div id='stars3'></div>
-              </div>
-            </div>
-            : ''}
-          {/* end:: Banner */}
           <div className={classnames('wrapper-content', {
             'py-0': checkIsActive(pathname, '/home'),
           })}>

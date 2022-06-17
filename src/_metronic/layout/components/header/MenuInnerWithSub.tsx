@@ -1,9 +1,9 @@
-import React, {useRef, useEffect} from 'react'
-import {useLocation} from 'react-router'
+import React, { useRef, useEffect } from 'react'
+import { useLocation } from 'react-router'
 import classnames from 'classnames'
-import {checkIsActive, KTSVG} from '../../../helpers'
+import { checkIsActive, KTSVG } from '../../../helpers'
 
-type Props = {
+interface MenuInnerWithSubProps {
   to: string
   title: string
   icon?: string
@@ -15,7 +15,7 @@ type Props = {
   isMega?: boolean
 }
 
-const MenuInnerWithSub: React.FC<Props> = ({
+const MenuInnerWithSub: React.FC<MenuInnerWithSubProps> = ({
   children,
   to,
   title,
@@ -28,7 +28,7 @@ const MenuInnerWithSub: React.FC<Props> = ({
   isMega = false,
 }) => {
   const menuItemRef = useRef<HTMLDivElement>(null)
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
 
   useEffect(() => {
     if (menuItemRef.current && menuTrigger && menuPlacement) {
@@ -79,4 +79,4 @@ const MenuInnerWithSub: React.FC<Props> = ({
   )
 }
 
-export {MenuInnerWithSub}
+export { MenuInnerWithSub }
