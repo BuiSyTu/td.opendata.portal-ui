@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
 import { Col, Divider, Image, Input, Menu, Row, Select, Table, Typography } from 'antd'
 import { Link, useHistory, useLocation, useParams } from 'react-router-dom'
@@ -13,11 +12,13 @@ import { toAbsoluteUrl } from 'src/_metronic/helpers'
 import { PageTitle } from 'src/_metronic/layout/core'
 import useDebounce from 'src/app/hooks/useDebounce'
 
-const { Option } = Select;
-const { Search } = Input;
-const { Text } = Typography;
+const { Option } = Select
+const { Search } = Input
+const { Text } = Typography
 
 const cx = classNames.bind(styles)
+console.log({ styles })
+console.log({ cx })
 
 const DataList = () => {
   const location = useLocation()
@@ -36,7 +37,7 @@ const DataList = () => {
     return params.get('search') ?? ''
   })
   const [loading, setLoading] = useState(false)
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(1)
   const [total, setTotal] = useState(0)
   const [skip, setSkip] = useState(0)
   const [top, setTop] = useState(10)
@@ -174,7 +175,7 @@ const DataList = () => {
   }
 
   const handleShowTotal = (total: number, range: any) => {
-    return `${range[0]}-${range[1]} của ${total} dữ liệu`;
+    return `${range[0]}-${range[1]} của ${total} dữ liệu`
   }
 
   return (
@@ -206,13 +207,13 @@ const DataList = () => {
       <Divider />
       <Row gutter={[30, 20]} justify='center' style={{ marginBottom: 30 }} >
         <Col xl={6} lg={6} md={24} xs={24}  >
-          <div className={cx('menu')}>
+          <div className={cx('menu-wrapper')}>
             <div className={cx('menu-header')}>
               <Text className={cx('menu-header-text')}>Nhóm danh mục</Text>
             </div>
             <div>
               <Menu
-                className={cx('menu-item')}
+                className={cx('menu-list')}
                 defaultSelectedKeys={['0']}
                 selectedKeys={[`${categoryId}`]}
                 mode='inline'
@@ -225,10 +226,11 @@ const DataList = () => {
                       className={cx('menu-item-icon')}
                       height={50}
                       width={50}
+                      wrapperClassName={cx('me-2')}
                       preview={false}
                     />
                   }
-                  className={cx('menu-item-text')}
+                  className={cx('menu-item')}
                 >
                   Tất cả
                   <Link
@@ -247,10 +249,11 @@ const DataList = () => {
                           className={cx('menu-item-icon')}
                           height={50}
                           width={50}
+                          wrapperClassName={cx('me-2')}
                           preview={false}
                         />
                       }
-                      className={cx('menu-item-text')}
+                      className={cx('menu-item')}
                     >
                       {i.name}
                       <Link

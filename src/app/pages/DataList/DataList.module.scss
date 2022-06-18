@@ -13,7 +13,7 @@
     }
 }
 
-.menu {
+.menu-wrapper {
     background-color: #fff;
     border-radius: 5;
     border-color: #BDBDBD;
@@ -32,16 +32,11 @@
         }
     }
 
-    .menu-item {
+    .menu-list {
         margin-bottom: 0;
         margin-top: 0 !important;
 
-        .menu-item-icon {
-            resize: both;
-            display: inherit;
-        }
-
-        .menu-item-text {
+        .menu-item {
             height: auto;
             font-weight: 600;
             padding-top: 10px;

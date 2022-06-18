@@ -1,10 +1,10 @@
-import {KTSVG, checkIsActive} from '../../../helpers'
-
-import {Link} from 'react-router-dom'
 import React from 'react'
+import { useLocation } from 'react-router'
+import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import {useLayout} from '../../core'
-import {useLocation} from 'react-router'
+
+import { KTSVG, checkIsActive } from '../../../helpers'
+import { useLayout } from '../../core'
 
 type Props = {
   to: string
@@ -22,14 +22,14 @@ const AsideMenuItem: React.FC<Props> = ({
   fontIcon,
   hasBullet = false,
 }) => {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
   const isActive = checkIsActive(pathname, to)
-  const {config} = useLayout()
-  const {aside} = config
+  const { config } = useLayout()
+  const { aside } = config
 
   return (
     <div className='menu-item'>
-      <Link className={classnames('menu-link without-sub', {active: isActive})} to={to}>
+      <Link className={classnames('menu-link without-sub', { active: isActive })} to={to}>
         {hasBullet && (
           <span className='menu-bullet'>
             <span className='bullet bullet-dot'></span>
@@ -48,4 +48,4 @@ const AsideMenuItem: React.FC<Props> = ({
   )
 }
 
-export {AsideMenuItem}
+export { AsideMenuItem }
