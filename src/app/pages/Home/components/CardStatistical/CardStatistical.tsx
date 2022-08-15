@@ -1,13 +1,13 @@
-import styles from './CardStatistical.module.scss';
+import styles from './CardStatistical.module.scss'
 
-import { useEffect, useState } from 'react';
-import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react'
+import classNames from 'classnames/bind'
 
-import { dashboardApi, datasetApi } from 'src/app/apis';
-import { toAbsoluteUrl } from 'src/_metronic/helpers';
-import CardColumnChart from '../CardColumnChart';
-import CardPieChart from '../CardPieChart';
-import WidgetStatistic from '../WidgetStatistic';
+import { dashboardApi, datasetApi } from 'src/app/apis'
+import { toAbsoluteUrl } from 'src/_metronic/helpers'
+import CardColumnChart from '../CardColumnChart'
+import CardPieChart from '../CardPieChart'
+import WidgetStatistic from '../WidgetStatistic'
 
 const cx = classNames.bind(styles)
 
@@ -98,11 +98,9 @@ const CardStatistical = () => {
   }, [])
 
   return (
-    <div
-      className={cx('section-statistical')}
-      style={{ backgroundImage: `url(${toAbsoluteUrl('/media/images/bg-graphics.png')})` }}>
+    <div className={cx('section-statistical')}>
       <div className="container">
-        <h4 className={cx('title', 'fs-1', 'fw-bold')}>
+        <h4 className={cx('title')}>
           <img src={toAbsoluteUrl('/media/images/analytics.png')} className="h-40px me-3" alt="" />
           Thống kê
         </h4>

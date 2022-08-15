@@ -1,10 +1,10 @@
 import styles from './CardMostView.module.scss'
 
 import React, { useEffect, useState } from 'react'
-import moment from 'moment';
-import classNames from 'classnames/bind';
+import moment from 'moment'
+import classNames from 'classnames/bind'
 import Carousel from 'react-multi-carousel'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 import { datasetApi } from 'src/app/apis'
 import { toAbsoluteUrl } from 'src/_metronic/helpers'
@@ -42,9 +42,7 @@ const CardMostViewedDatas = () => {
   }
 
   return (
-    <div
-      className={cx('section-mostview')}
-      style={{ backgroundImage: `url(${toAbsoluteUrl('media/images/bg-graphics.png')})` }}>
+    <div className={cx('section-mostview')} >
       <div className="container">
         <div className={cx('card', 'card-mostview-data', 'bg-transparent')}>
           <div className='card-body p-0'>
@@ -104,12 +102,12 @@ const CardMostViewedDatas = () => {
                 {listMostViewData.map((i: any) => (
                   <div
                     className={cx(
-                      'item-mostview-data',
+                      'item-mostview-wrapper',
                       'bg-body shadow-sm mx-3'
                     )}
                     key={i.id}
                   >
-                    <div className={cx('item-mostview-data_header')}>
+                    <div className={cx('item-mostview-header')}>
                       <img
                         src={i?.category?.imageUrl
                           ? `${process.env.REACT_APP_FILE_URL}/${i?.category?.imageUrl}`
@@ -117,14 +115,12 @@ const CardMostViewedDatas = () => {
                         alt='' />
                       <span>{i?.name}</span>
                     </div>
-                    <div className={cx('item-mostview-data_content')}>
-                      <Link to='/Du-lieu-chi-tiet'>
-                        {i?.description ?? 'Xem thêm mô tả ...'}
-                      </Link>
+                    <div className={cx('item-mostview-content')}>
+                      {i?.description ?? 'Xem thêm mô tả ...'}
                     </div>
-                    <div className={cx('item-mostview-data_footer')}>
+                    <div className={cx('item-mostview-footer')}>
                       <div className={cx('row', 'row-viewcount')}>
-                        <div className={cx('col-auto', 'col-views')}>
+                        <div className={cx('col-auto')}>
                           <span className='far fa-eye'></span> {i?.view ?? 0} lượt xem
                         </div>
                         <div className={cx('col', 'col-date')}>
@@ -132,7 +128,8 @@ const CardMostViewedDatas = () => {
                             ? moment(i?.createdOn).format('DD/MM/YYYY')
                             : i.lastModifiedOn
                               ? moment(i?.lastModifiedOn).format('DD/MM/YYYY')
-                              : ''}<span className='far fa-clock'></span>
+                              : ''}
+                          <span className='far fa-clock'></span>
                         </div>
                       </div>
                       <div className={cx('row-bottom', 'row')}>
@@ -146,7 +143,7 @@ const CardMostViewedDatas = () => {
                           </Link>
                         </div>
                         <div className='col text-end'>
-                          <span className={cx('badge', 'badge-info', 'ms-1')} title='WEB'>
+                          <span className={cx('badge')} title='WEB'>
                             <i className='fab fa-internet-explorer fa-fw'></i>
                           </span>
                         </div>
